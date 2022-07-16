@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import * as React from "react";
+
+import ControlMenu from "./components/controlMenu";
+import SingleCountry from "./components/singleCountry/index";
 
 function App() {
+  const [buttonValue, setButtonValue] = React.useState("single country");
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>🏳️‍🌈Flags of inequality🏳️‍🌈</h1>
+      <ControlMenu
+        buttonValue={buttonValue}
+        setButtonValue={setButtonValue}
+      ></ControlMenu>
+      <div style={{ margin: "2%" }}>
+        {" "}
+        {buttonValue === "single country" ? (
+          <SingleCountry></SingleCountry>
+        ) : null}
+      </div>
     </div>
   );
 }
