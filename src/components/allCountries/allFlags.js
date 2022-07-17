@@ -1,12 +1,12 @@
-import { countryFilter } from "../../utils/countryFilter";
+import { yearFilter } from "../../utils/yearFilter";
 import { BarStack } from "@visx/shape";
 import { Group } from "@visx/group";
 import { scaleLinear, scaleOrdinal, scaleBand } from "@visx/scale";
 import flagsData from "../../data/rainbow.json";
 
-export default function Flag(props) {
-  const data = countryFilter(flagsData, props.country);
-  const getCountry = (d) => d.country;
+export default function AllFlags(props) {
+  const data = yearFilter(flagsData, props.year);
+  const getYear = (d) => d.year;
 
   const width_ = window.screen.width / 7;
   const height_ = width_ / 2;
@@ -42,16 +42,16 @@ export default function Flag(props) {
   });
 
   return (
-    <div style={{ display: "flex", justifyContent: "center" }}>
-      {data.map((country) => (
-        <div>
-          <p>{country.year}</p>
+    <div>
+      {data.map((year) => (
+        <div style={{ display: "inline-block" }}>
+          <p>{year.country}</p>
           <svg style={{ paddingLeft: "5px" }} width={width_} height={height_}>
             <Group>
               <BarStack
-                data={[country]}
+                data={[year]}
                 keys={keys}
-                x={getCountry}
+                x={getYear}
                 xScale={widthScale}
                 yScale={rankingScale}
                 color={colorScale}

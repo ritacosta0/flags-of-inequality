@@ -3,6 +3,7 @@ import * as React from "react";
 
 import ControlMenu from "./components/controlMenu";
 import SingleCountry from "./components/singleCountry/index";
+import AllCountries from "./components/allCountries/index";
 
 function App() {
   const [buttonValue, setButtonValue] = React.useState("single country");
@@ -18,7 +19,9 @@ function App() {
         {" "}
         {buttonValue === "single country" ? (
           <SingleCountry></SingleCountry>
-        ) : null}
+        ) : (
+          <AllCountries></AllCountries>
+        )}
       </div>
     </div>
   );
