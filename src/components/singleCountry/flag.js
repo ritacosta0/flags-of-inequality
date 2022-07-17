@@ -45,34 +45,36 @@ export default function Flag(props) {
     <div style={{ display: "flex", justifyContent: "center" }}>
       {data.map((country) => (
         <div>
-          <p>{country.year}</p>
-          <svg style={{ paddingLeft: "5px" }} width={width_} height={height_}>
-            <Group>
-              <BarStack
-                data={[country]}
-                keys={keys}
-                x={getCountry}
-                xScale={widthScale}
-                yScale={rankingScale}
-                color={colorScale}
-              >
-                {(barStacks) =>
-                  barStacks.map((barStack) =>
-                    barStack.bars.map((bar) => (
-                      <rect
-                        key={`bar-stack-${barStack.index}-${bar.index}`}
-                        x={bar.x}
-                        y={bar.y}
-                        height={bar.height}
-                        width={width_}
-                        fill={bar.color}
-                      />
-                    ))
-                  )
-                }
-              </BarStack>
-            </Group>
-          </svg>
+          <div>
+            <svg style={{ paddingLeft: "5px" }} width={width_} height={height_}>
+              <Group>
+                <BarStack
+                  data={[country]}
+                  keys={keys}
+                  x={getCountry}
+                  xScale={widthScale}
+                  yScale={rankingScale}
+                  color={colorScale}
+                >
+                  {(barStacks) =>
+                    barStacks.map((barStack) =>
+                      barStack.bars.map((bar) => (
+                        <rect
+                          key={`bar-stack-${barStack.index}-${bar.index}`}
+                          x={bar.x}
+                          y={bar.y}
+                          height={bar.height}
+                          width={width_}
+                          fill={bar.color}
+                        />
+                      ))
+                    )
+                  }
+                </BarStack>
+              </Group>
+            </svg>
+            <p>{country.year}</p>
+          </div>
         </div>
       ))}
     </div>

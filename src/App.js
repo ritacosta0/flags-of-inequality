@@ -11,17 +11,12 @@ function App() {
   return (
     <div className="App">
       <h1>🏳️‍🌈Flags of inequality🏳️‍🌈</h1>
-      <ControlMenu
+      {/* <ControlMenu
         buttonValue={buttonValue}
         setButtonValue={setButtonValue}
-      ></ControlMenu>
+      ></ControlMenu> */}
       <div style={{ margin: "2%" }}>
-        {" "}
-        {buttonValue === "single country" ? (
-          <SingleCountry></SingleCountry>
-        ) : (
-          <AllCountries></AllCountries>
-        )}
+        <AllCountries></AllCountries>
       </div>
     </div>
   );
