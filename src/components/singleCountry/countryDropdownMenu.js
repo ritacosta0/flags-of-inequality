@@ -1,16 +1,15 @@
-import { countryList } from "../../utils/countryList";
-import flagsData from "../../data/rainbow.json";
 import Box from "@mui/material/Box";
+import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+
+import { countriesList } from "../../data";
 
 export default function CountryDropdownMenu(props) {
   const handleChange = (event) => {
     props.setCountry(event.target.value);
   };
-  const countryArray = countryList(flagsData);
 
   return (
     <Box sx={{ minWidth: 120 }}>
@@ -23,7 +22,7 @@ export default function CountryDropdownMenu(props) {
           label="Country"
           onChange={handleChange}
         >
-          {countryArray.map((country) => (
+          {countriesList.map((country) => (
             <MenuItem value={country}>{country}</MenuItem>
           ))}
         </Select>

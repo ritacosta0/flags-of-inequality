@@ -7,11 +7,8 @@ export default function SingleCountry() {
 
   return (
     <>
-      <CountryDropdownMenu
-        country={country}
-        setCountry={setCountry}
-      ></CountryDropdownMenu>
-      <Flag country={country}></Flag>
+      <CountryDropdownMenu country={country} setCountry={setCountry} />
+      <Flag country={country} />
     </>
   );
 }

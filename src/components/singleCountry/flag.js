@@ -1,39 +1,32 @@
-import { countryFilter } from "../../utils/countryFilter";
-import { BarStack } from "@visx/shape";
 import { Group } from "@visx/group";
-import { scaleLinear, scaleOrdinal, scaleBand } from "@visx/scale";
-import flagsData from "../../data/rainbow.json";
+import { scaleLinear, scaleOrdinal } from "@visx/scale";
+import { BarStack } from "@visx/shape";
+import React, { useMemo } from "react";
+
+import { CATEGORIES_ORDERED_LIST, RAINBOW_COLORS } from "../../constants";
+import { getData } from "../../data";
 
 export default function Flag(props) {
-  const data = countryFilter(flagsData, props.country);
+  const data = useMemo(
+    () =>
+      getData({
+        countries: [props.country],
+        years: [2021, 2022],
+        CATEGORIES_ORDERED_LIST,
+      }),
+    [props.country]
+  );
   const getCountry = (d) => d.country;
 
   const width_ = window.screen.width / 7;
   const height_ = width_ / 2;
 
-  const keys = [
-    "asylum",
-    "civil_space",
-    "equality",
-    "hate",
-    "family",
-    "gender_rec",
-  ];
-  const colors = [
-    "#86007D",
-    "#0000F9",
-    "#008018",
-    "#FFFF41",
-    "#FFA52C",
-    "#FF0018",
-  ];
-
   const colorScale = scaleOrdinal({
-    domain: keys,
-    range: colors,
+    domain: CATEGORIES_ORDERED_LIST,
+    range: RAINBOW_COLORS,
   });
   const rankingScale = scaleLinear({
-    domain: [0, 600],
+    domain: [0, 6],
     range: [height_, 0],
   });
   const widthScale = scaleLinear({
@@ -43,38 +36,36 @@ export default function Flag(props) {
 
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
-      {data.map((country) => (
-        <div>
-          <div>
-            <svg style={{ paddingLeft: "5px" }} width={width_} height={height_}>
-              <Group>
-                <BarStack
-                  data={[country]}
-                  keys={keys}
-                  x={getCountry}
-                  xScale={widthScale}
-                  yScale={rankingScale}
-                  color={colorScale}
-                >
-                  {(barStacks) =>
-                    barStacks.map((barStack) =>
-                      barStack.bars.map((bar) => (
-                        <rect
-                          key={`bar-stack-${barStack.index}-${bar.index}`}
-                          x={bar.x}
-                          y={bar.y}
-                          height={bar.height}
-                          width={width_}
-                          fill={bar.color}
-                        />
-                      ))
-                    )
-                  }
-                </BarStack>
-              </Group>
-            </svg>
-            <p>{country.year}</p>
-          </div>
+      {data.map((country, index) => (
+        <div key={index}>
+          <svg style={{ paddingLeft: "5px" }} width={width_} height={height_}>
+            <Group>
+              <BarStack
+                data={[country]}
+                keys={CATEGORIES_ORDERED_LIST}
+                x={getCountry}
+                xScale={widthScale}
+                yScale={rankingScale}
+                color={colorScale}
+              >
+                {(barStacks) =>
+                  barStacks.map((barStack) =>
+                    barStack.bars.map((bar) => (
+                      <rect
+                        key={`bar-stack-${barStack.index}-${bar.index}`}
+                        x={bar.x}
+                        y={bar.y}
+                        height={bar.height}
+                        width={width_}
+                        fill={bar.color}
+                      />
+                    ))
+                  )
+                }
+              </BarStack>
+            </Group>
+          </svg>
+          <p>{country.year}</p>
         </div>
       ))}
     </div>

@@ -1,14 +1,15 @@
-import * as React from "react";
-import YearDropdownMenu from "./yearDropdownMenu";
+import React from "react";
+
 import AllFlags from "./allFlags";
+import YearDropdownMenu from "./yearDropdownMenu";
 
 export default function AllCountries() {
-  const [year, setYear] = React.useState("2021");
+  const [year, setYear] = React.useState(2021);
 
   return (
     <>
-      <YearDropdownMenu year={year} setYear={setYear}></YearDropdownMenu>
-      <AllFlags year={year}></AllFlags>
+      <YearDropdownMenu year={year} setYear={setYear} />
+      <AllFlags year={year} />
     </>
   );
 }

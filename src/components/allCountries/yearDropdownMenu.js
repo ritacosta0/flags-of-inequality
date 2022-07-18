@@ -1,22 +1,20 @@
-import { yearList } from "../../utils/yearList";
-import flagsData from "../../data/rainbow.json";
-import Box from "@mui/material/Box";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import Button from "@mui/material/Button";
-import Stack from "@mui/material/Stack";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import SortIcon from "@mui/icons-material/Sort";
 import SortByAlphaIcon from "@mui/icons-material/SortByAlpha";
-import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
-import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import Stack from "@mui/material/Stack";
 
-export default function YearDropdownMenu(props) {
+import { yearsList } from "../../data";
+
+export default function YearDropdownMenu({ year, setYear }) {
   const handleChange = (event) => {
-    props.setYear(event.target.value);
+    setYear(event.target.value);
   };
-  const yearArray = yearList(flagsData);
 
   return (
     <>
@@ -26,12 +24,14 @@ export default function YearDropdownMenu(props) {
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
-            value={props.year}
+            value={year}
             label="Country"
             onChange={handleChange}
           >
-            {yearArray.map((year) => (
-              <MenuItem value={year}>{year}</MenuItem>
+            {yearsList.map((year, index) => (
+              <MenuItem key={index} value={year}>
+                {year}
+              </MenuItem>
             ))}
           </Select>
         </FormControl>
@@ -43,7 +43,7 @@ export default function YearDropdownMenu(props) {
           startIcon={
             <>
               <SortIcon />
-              <ArrowDownwardIcon></ArrowDownwardIcon>
+              <ArrowDownwardIcon />
             </>
           }
         >
@@ -55,7 +55,7 @@ export default function YearDropdownMenu(props) {
           startIcon={
             <>
               <SortByAlphaIcon />
-              <ArrowDownwardIcon></ArrowDownwardIcon>
+              <ArrowDownwardIcon />
             </>
           }
         >
