@@ -4,7 +4,7 @@ import AllFlags from "./allFlags";
 import YearDropdownMenu from "./yearDropdownMenu";
 
 export default function AllCountries() {
-  const [year, setYear] = React.useState(2021);
+  const [year, setYear] = React.useState(2022);
 
   return (
     <>

@@ -78,14 +78,14 @@ export default function AllFlags({ year }) {
             </svg>
           </Button>
           <p>{year.country}</p>
-          <Dialog open={open} onClose={handleClose}>
-            <DialogTitle id="alert-dialog-title">{country}</DialogTitle>
-            <DialogContent>
-              <Flag country={country}></Flag>
-            </DialogContent>
-          </Dialog>
         </div>
       ))}
+      <Dialog open={open} onClose={handleClose} fullWidth maxWidth="xl">
+        <DialogTitle id="alert-dialog-title">{country}</DialogTitle>
+        <DialogContent>
+          <Flag country={country}></Flag>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
