@@ -6,20 +6,34 @@ import { Group } from "@visx/group";
 import { scaleLinear, scaleOrdinal } from "@visx/scale";
 import { BarStack } from "@visx/shape";
 import React, { useMemo, useState } from "react";
+import { sort, descending, ascending } from "d3-array";
 
 import { CATEGORIES_ORDERED_LIST, RAINBOW_COLORS } from "../../constants";
 import { getData } from "../../data";
 import Flag from "../singleCountry/flag";
 
-export default function AllFlags({ year }) {
+export default function AllFlags({
+  year,
+  orderRanking,
+  orderAlphabetical,
+  sortDict,
+}) {
   const [open, setOpen] = useState(false);
   const [country, setCountry] = useState(null);
-
-  const data = useMemo(() => getData({ years: [year] }), [year]);
 
   const handleClose = () => {
     setOpen(false);
   };
+
+  const data = useMemo(() => getData({ years: [year] }), [year]);
+
+  const orderedData = data
+    .slice()
+    .sort((a, b) =>
+      sortDict.ascending == true
+        ? ascending(a[sortDict.type], b[sortDict.type])
+        : descending(a[sortDict.type], b[sortDict.type])
+    );
 
   const getYear = (d) => d.year;
 
@@ -41,7 +55,7 @@ export default function AllFlags({ year }) {
 
   return (
     <div>
-      {data.map((year, index) => (
+      {orderedData.map((year, index) => (
         <div key={index} style={{ display: "inline-block" }}>
           <Button
             onClick={() => {
