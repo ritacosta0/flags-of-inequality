@@ -1,4 +1,5 @@
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import SortIcon from "@mui/icons-material/Sort";
 import SortByAlphaIcon from "@mui/icons-material/SortByAlpha";
 import Box from "@mui/material/Box";
@@ -11,10 +12,27 @@ import Stack from "@mui/material/Stack";
 
 import { yearsList } from "../../data";
 
-export default function YearDropdownMenu({ year, setYear }) {
+export default function YearDropdownMenu({
+  year,
+  setYear,
+  setOrderRanking,
+  setOrderAlphabetical,
+  orderRanking,
+  orderAlphabetical,
+  setSortDict,
+}) {
   const handleChange = (event) => {
     setYear(event.target.value);
   };
+  const handleClickAlphabetical = () => {
+    setOrderAlphabetical(!orderAlphabetical);
+    setSortDict({ type: "country", ascending: !orderAlphabetical });
+  };
+  const handleClickRanking = () => {
+    setOrderRanking(!orderRanking);
+    setSortDict({ type: "hate", ascending: !orderRanking });
+  };
+  console.log(orderAlphabetical);
 
   return (
     <>
@@ -38,24 +56,34 @@ export default function YearDropdownMenu({ year, setYear }) {
       </Box>
       <Stack direction="row" spacing={2}>
         <Button
+          onClick={handleClickRanking}
           variant="outlined"
           size="small"
           startIcon={
             <>
               <SortIcon />
-              <ArrowDownwardIcon />
+              {orderRanking == true ? (
+                <ArrowUpwardIcon />
+              ) : (
+                <ArrowDownwardIcon />
+              )}
             </>
           }
         >
           Sort by global ranking
         </Button>
         <Button
+          onClick={handleClickAlphabetical}
           variant="outlined"
           size="small"
           startIcon={
             <>
               <SortByAlphaIcon />
-              <ArrowDownwardIcon />
+              {orderAlphabetical == true ? (
+                <ArrowUpwardIcon />
+              ) : (
+                <ArrowDownwardIcon />
+              )}{" "}
             </>
           }
         >
