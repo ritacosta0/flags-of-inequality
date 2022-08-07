@@ -7,6 +7,7 @@ import data2020 from "./rainbow_2020_with_percentages.json";
 import data2021 from "./rainbow_2021_with_percentages.json";
 import data2022 from "./rainbow_2022_with_percentages.json";
 import { CATEGORIES } from "../constants";
+import { ascending, descending } from "d3-array";
 
 import {
   groupBy,
@@ -92,13 +93,21 @@ When no filter is passed, all values are returned. Examples:
 for all countries.
 - getData() returns full dataset.
  */
-export const getData = ({ countries, years, keys }) => {
-  const filteredData = wideData.filter((d) =>
+export const getData = ({ countries, years, keys, sortingParams }) => {
+  let transformedData = wideData.filter((d) =>
     filterContext(d, countries, years)
   );
-  if (isUndefined(keys)) return filteredData;
+  if (!isUndefined(sortingParams)) {
+    transformedData.sort((a, b) =>
+      sortingParams.ascending
+        ? ascending(a[sortingParams.type], b[sortingParams.type])
+        : descending(a[sortingParams.type], b[sortingParams.type])
+    );
+  }
 
-  return tidy(filteredData, select(["country", "year", ...keys]));
+  if (isUndefined(keys)) return transformedData;
+
+  return tidy(transformedData, select(["country", "year", ...keys]));
 };
 
 export const getCategoryDetailData = ({ countries, years, category }) => {
