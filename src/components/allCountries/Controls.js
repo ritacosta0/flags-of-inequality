@@ -12,7 +12,7 @@ import Stack from "@mui/material/Stack";
 
 import { yearsList } from "../../data";
 
-export default function YearDropdownMenu({
+export default function Controls({
   year,
   setYear,
   setOrderRanking,
@@ -35,9 +35,9 @@ export default function YearDropdownMenu({
   console.log(orderAlphabetical);
 
   return (
-    <>
-      <Box sx={{ minWidth: 120 }}>
-        <FormControl>
+    <Stack direction="row" spacing={4} my={4}>
+      <Box>
+        <FormControl size="small">
           <InputLabel id="demo-simple-select-label">Year</InputLabel>
           <Select
             labelId="demo-simple-select-label"
@@ -62,11 +62,7 @@ export default function YearDropdownMenu({
           startIcon={
             <>
               <SortIcon />
-              {orderRanking == true ? (
-                <ArrowUpwardIcon />
-              ) : (
-                <ArrowDownwardIcon />
-              )}
+              {orderRanking ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />}
             </>
           }
         >
@@ -79,7 +75,7 @@ export default function YearDropdownMenu({
           startIcon={
             <>
               <SortByAlphaIcon />
-              {orderAlphabetical == true ? (
+              {orderAlphabetical ? (
                 <ArrowUpwardIcon />
               ) : (
                 <ArrowDownwardIcon />
@@ -90,6 +86,6 @@ export default function YearDropdownMenu({
           Sort alphabetically
         </Button>
       </Stack>
-    </>
+    </Stack>
   );
 }

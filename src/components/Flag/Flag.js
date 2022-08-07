@@ -3,9 +3,9 @@ import { Group } from "@visx/group";
 import { BarStack } from "@visx/shape";
 import { scaleLinear, scaleOrdinal } from "@visx/scale";
 
-import { getData } from "../data";
-import { useChartDimensions } from "../hooks/useChartDimensions";
-import { CATEGORIES_ORDERED_LIST, RAINBOW_COLORS } from "../constants";
+import { getData } from "../../data";
+import { useChartDimensions } from "../../hooks/useChartDimensions";
+import { CATEGORIES_ORDERED_LIST, RAINBOW_COLORS } from "../../constants";
 
 export default function Flag({ country, year }) {
   const [chartWrapper, dimensions] = useChartDimensions({});
@@ -23,7 +23,7 @@ export default function Flag({ country, year }) {
   const yScale = useMemo(
     () =>
       scaleLinear({
-        domain: [0, 7],
+        domain: [0, 7], // 7 stripes in the flag
         range: [dimensions.boundedHeight, 0],
       }),
     [dimensions.boundedHeight]
@@ -44,9 +44,17 @@ export default function Flag({ country, year }) {
   });
 
   return (
-    <div ref={chartWrapper} style={{ height: 400 }}>
+    <div ref={chartWrapper} style={{ width: "100%", height: "100%" }}>
       <svg width={dimensions.width} height={dimensions.height}>
         <Group top={dimensions.marginTop} left={dimensions.marginLeft}>
+          <rect
+            x={0}
+            y={0}
+            height={dimensions.boundedHeight}
+            width={dimensions.boundedWidth}
+            className=" stroke-slate-400"
+            fill="transparent"
+          />
           <BarStack
             data={data}
             keys={CATEGORIES_ORDERED_LIST}
@@ -57,9 +65,10 @@ export default function Flag({ country, year }) {
           >
             {(stacks) =>
               stacks.map((stack) =>
-                stack.bars.map((bar) => (
+                stack.bars.map((bar, index) => (
                   <rect
-                    x={bar.x}
+                    key={index}
+                    x={0}
                     y={bar.y}
                     height={bar.height}
                     width={dimensions.boundedWidth}

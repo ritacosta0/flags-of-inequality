@@ -1,105 +1,65 @@
 import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
-import { Group } from "@visx/group";
-import { scaleLinear, scaleOrdinal } from "@visx/scale";
-import { BarStack } from "@visx/shape";
+import Box from "@mui/material/Box";
 import React, { useMemo, useState } from "react";
-import { sort, descending, ascending } from "d3-array";
+import Flag from "../Flag/Flag";
 
-import { CATEGORIES_ORDERED_LIST, RAINBOW_COLORS } from "../../constants";
 import { getData } from "../../data";
-import Flag from "../singleCountry/flag";
+import { useFlagDimensions } from "../../hooks/useFlagDimensions";
+import { Dialog } from "../Dialog";
+import { useMediaQuery } from "@mui/material";
 
-export default function AllFlags({
-  year,
-  orderRanking,
-  orderAlphabetical,
-  sortDict,
-}) {
+export default function AllFlags({ year, sortDict }) {
   const [open, setOpen] = useState(false);
   const [country, setCountry] = useState(null);
+  const [flagsContainer, flagDimensions] = useFlagDimensions();
+  const isSmallScreen =
+    flagsContainer.current && flagsContainer.current.clientWidth < 400;
+
+  console.log(isSmallScreen);
 
   const handleClose = () => {
     setOpen(false);
   };
 
-  const data = useMemo(() => getData({ years: [year] }), [year]);
+  const data = useMemo(
+    () => getData({ years: [year], sortingParams: sortDict }),
+    [year, sortDict]
+  );
 
-  const orderedData = data
-    .slice()
-    .sort((a, b) =>
-      sortDict.ascending == true
-        ? ascending(a[sortDict.type], b[sortDict.type])
-        : descending(a[sortDict.type], b[sortDict.type])
-    );
-
-  const getYear = (d) => d.year;
-
-  const width_ = window.screen.width / 7;
-  const height_ = width_ / 2;
-
-  const colorScale = scaleOrdinal({
-    domain: CATEGORIES_ORDERED_LIST,
-    range: RAINBOW_COLORS,
-  });
-  const rankingScale = scaleLinear({
-    domain: [0, 6],
-    range: [height_, 0],
-  });
-  const widthScale = scaleLinear({
-    domain: [0, 700],
-    nice: true,
-  });
+  const countries = data.map((d) => d.country);
 
   return (
-    <div>
-      {orderedData.map((year, index) => (
-        <div key={index} style={{ display: "inline-block" }}>
-          <Button
-            onClick={() => {
-              setOpen(true);
-              setCountry(year.country);
-            }}
-          >
-            <svg width={width_} height={height_}>
-              <Group>
-                <BarStack
-                  data={[year]}
-                  keys={CATEGORIES_ORDERED_LIST}
-                  x={getYear}
-                  xScale={widthScale}
-                  yScale={rankingScale}
-                  color={colorScale}
-                >
-                  {(barStacks) =>
-                    barStacks.map((barStack) =>
-                      barStack.bars.map((bar) => (
-                        <rect
-                          key={`bar-stack-${barStack.index}-${bar.index}`}
-                          x={bar.x}
-                          y={bar.y}
-                          height={bar.height}
-                          width={width_}
-                          fill={bar.color}
-                        />
-                      ))
-                    )
-                  }
-                </BarStack>
-              </Group>
-            </svg>
-          </Button>
-          <p>{year.country}</p>
-        </div>
-      ))}
-      <Dialog open={open} onClose={handleClose} fullWidth maxWidth="xl">
-        <DialogTitle id="alert-dialog-title">{country}</DialogTitle>
-        <DialogContent>
-          <Flag country={country}></Flag>
-        </DialogContent>
-      </Dialog>
+    <div
+      className="flex flex-row flex-wrap justify-center gap-4"
+      ref={flagsContainer}
+    >
+      {countries.map((country, index) => {
+        return (
+          <div key={index}>
+            <Button
+              onClick={() => {
+                setOpen(true);
+                setCountry(country);
+              }}
+            >
+              <Box
+                sx={{
+                  ...flagDimensions,
+                }}
+              >
+                <Flag country={country} year={year} />
+              </Box>
+            </Button>
+            <p>{country}</p>
+          </div>
+        );
+      })}
+      <Dialog
+        country={country}
+        open={open}
+        onClose={handleClose}
+        isSmallScreen={isSmallScreen}
+      />
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import React from "react";
 
 import AllFlags from "./allFlags";
-import YearDropdownMenu from "./yearDropdownMenu";
+import Controls from "./Controls";
 
 export default function AllCountries() {
   const [year, setYear] = React.useState(2022);
@@ -14,7 +14,7 @@ export default function AllCountries() {
 
   return (
     <>
-      <YearDropdownMenu
+      <Controls
         year={year}
         setYear={setYear}
         orderRanking={orderRanking}
