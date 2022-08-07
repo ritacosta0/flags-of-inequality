@@ -1,14 +1,21 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import { Group } from "@visx/group";
 import { BarStack } from "@visx/shape";
 import { scaleLinear, scaleOrdinal } from "@visx/scale";
+import { localPoint } from "@visx/event";
+import { motion } from "framer-motion";
 
 import { getData } from "../../data";
 import { useChartDimensions } from "../../hooks/useChartDimensions";
 import { CATEGORIES_ORDERED_LIST, RAINBOW_COLORS } from "../../constants";
+import Annotation from "./Annotation";
+import { isNull } from "lodash";
 
 export default function Flag({ country, year }) {
-  const [chartWrapper, dimensions] = useChartDimensions({});
+  const [chartWrapper, dimensions] = useChartDimensions({ marginBottom: 5 });
+  const [pointerPosition, setPointerPosition] = useState(null);
+  const [hoveredStripe, setHoveredStripe] = useState(null);
+  const svgRef = useRef();
 
   const data = useMemo(
     () =>
@@ -45,8 +52,14 @@ export default function Flag({ country, year }) {
 
   return (
     <div ref={chartWrapper} style={{ width: "100%", height: "100%" }}>
-      <svg width={dimensions.width} height={dimensions.height}>
-        <Group top={dimensions.marginTop} left={dimensions.marginLeft}>
+      <svg width={dimensions.width} height={dimensions.height} ref={svgRef}>
+        <Group
+          top={dimensions.marginTop}
+          left={dimensions.marginLeft}
+          onMouseMove={(event) =>
+            setPointerPosition(localPoint(svgRef.current, event))
+          }
+        >
           <rect
             x={0}
             y={0}
@@ -66,18 +79,38 @@ export default function Flag({ country, year }) {
             {(stacks) =>
               stacks.map((stack) =>
                 stack.bars.map((bar, index) => (
-                  <rect
+                  <motion.rect
                     key={index}
                     x={0}
                     y={bar.y}
                     height={bar.height}
                     width={dimensions.boundedWidth}
-                    fill={bar.color}
+                    initial={{
+                      fillOpacity: 1,
+                    }}
+                    animate={{
+                      fill: bar.color,
+                      fillOpacity:
+                        bar.key === hoveredStripe || isNull(hoveredStripe)
+                          ? 1
+                          : 0.7,
+                    }}
+                    onMouseEnter={() => setHoveredStripe(bar.key)}
+                    onMouseLeave={() => setHoveredStripe(null)}
                   />
                 ))
               )
             }
           </BarStack>
+          {hoveredStripe && pointerPosition && (
+            <Annotation
+              dimensions={dimensions}
+              pointerPosition={pointerPosition}
+              value={data[0][hoveredStripe]}
+              label={hoveredStripe}
+              color={colorScale(hoveredStripe)}
+            />
+          )}
         </Group>
       </svg>
     </div>

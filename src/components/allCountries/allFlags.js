@@ -1,12 +1,12 @@
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import React, { useMemo, useState } from "react";
-import Flag from "../Flag/Flag";
+import { flag } from "country-emoji";
 
+import Flag from "../Flag/Flag";
 import { getData } from "../../data";
 import { useFlagDimensions } from "../../hooks/useFlagDimensions";
 import { Dialog } from "../Dialog";
-import { useMediaQuery } from "@mui/material";
 
 export default function AllFlags({ year, sortDict }) {
   const [open, setOpen] = useState(false);
@@ -14,8 +14,6 @@ export default function AllFlags({ year, sortDict }) {
   const [flagsContainer, flagDimensions] = useFlagDimensions();
   const isSmallScreen =
     flagsContainer.current && flagsContainer.current.clientWidth < 400;
-
-  console.log(isSmallScreen);
 
   const handleClose = () => {
     setOpen(false);
@@ -35,22 +33,22 @@ export default function AllFlags({ year, sortDict }) {
     >
       {countries.map((country, index) => {
         return (
-          <div key={index}>
-            <Button
+          <div key={index} className="mt-4">
+            <Box
               onClick={() => {
                 setOpen(true);
                 setCountry(country);
               }}
+              sx={{
+                ...flagDimensions,
+                cursor: "pointer",
+              }}
             >
-              <Box
-                sx={{
-                  ...flagDimensions,
-                }}
-              >
-                <Flag country={country} year={year} />
-              </Box>
-            </Button>
-            <p>{country}</p>
+              <Flag country={country} year={year} />
+            </Box>
+            <h3 className="font-medium text-slate-800">{`${
+              flag(country) || ""
+            } ${country}`}</h3>
           </div>
         );
       })}

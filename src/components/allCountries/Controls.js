@@ -32,7 +32,6 @@ export default function Controls({
     setOrderRanking(!orderRanking);
     setSortDict({ type: "hate", ascending: !orderRanking });
   };
-  console.log(orderAlphabetical);
 
   return (
     <Stack direction="row" spacing={4} my={4}>

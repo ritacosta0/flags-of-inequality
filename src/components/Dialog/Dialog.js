@@ -3,7 +3,6 @@ import DialogMUI from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import React, { useMemo } from "react";
-import Stack from "@mui/material/Stack";
 
 import { getData } from "../../data";
 import { useFlagDimensions } from "../../hooks/useFlagDimensions";
