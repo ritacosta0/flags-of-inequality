@@ -30,7 +30,7 @@ export default function Flag({ country, year }) {
   const yScale = useMemo(
     () =>
       scaleLinear({
-        domain: [0, 7], // 7 stripes in the flag
+        domain: [0, 6], // 7 stripes in the flag
         range: [dimensions.boundedHeight, 0],
       }),
     [dimensions.boundedHeight]
