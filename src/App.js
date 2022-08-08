@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import AllCountries from "./components/allCountries/index";
+import Intro from "./components/intro";
 
 function App() {
   return (
