@@ -52,6 +52,7 @@ export default function AllFlags({
     domain: [0, 700],
     nice: true,
   });
+  console.log(colorScale("equality"));
 
   return (
     <div>
