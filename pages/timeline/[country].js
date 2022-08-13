@@ -8,21 +8,19 @@ import { useFlagDimensions } from "../../hooks/useFlagDimensions";
 import { Flag } from "../../components/Flag";
 
 export default function Timeline() {
-  const [isVertical, setIsVertical] = useState(false);
-
-  useEffect(() => {
-    setIsVertical(window.innerWidth < 400);
-  }, []);
-
   const router = useRouter();
   const { country } = router.query;
+  const [isVertical, setIsVertical] = useState(false);
   const data = useMemo(() => getData({ countries: [country] }), [country]);
   const years = data.map((d) => d.year).sort();
   const [flagsContainer, flagDimensions] = useFlagDimensions(
     isVertical ? 1 : years.length
   );
 
-  console.log(isVertical);
+  useEffect(() => {
+    setIsVertical(window.innerWidth < 400);
+  }, []);
+
   return (
     <div className="mt-4">
       <h2 className="text-3xl font-medium text-slate-800 ">{`${
