@@ -9,6 +9,7 @@ import { Flag } from "../components/Flag";
 import { getData } from "../data";
 import { useFlagDimensions } from "../hooks/useFlagDimensions";
 import { Intro } from "../components/Intro";
+import { Methodology } from "../components/Methodology";
 
 function Home() {
   const [year, setYear] = useState(2022);
@@ -64,6 +65,7 @@ function Home() {
           );
         })}
       </div>
+      <Methodology />
     </>
   );
 }
