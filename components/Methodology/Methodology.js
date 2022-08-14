@@ -1,14 +1,11 @@
 function Methodology() {
   return (
     <>
-      <div className="mt-10">
-        <hr></hr>
-      </div>
-      <div className="text-center mt-6 mb-10 ">
-        <h3 className="text-2xl font-bold">Methodology</h3>
+      <hr className="mt-10 border-slate-600"></hr>
+      <div className="mt-6 mb-10 text-center ">
+        <h3 className="my-4 text-2xl font-bold">Methodology</h3>
         <div className="flex items-center justify-center">
-          {" "}
-          <div className="text-xs w-7/12 text-justify">
+          <div className="w-7/12 text-xs text-justify">
             <p>
               The data in this project comes from ILGA-Europe's yearly Rainbow
               Index. Because data is not currently made available in a

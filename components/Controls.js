@@ -34,7 +34,7 @@ export default function Controls({
   };
 
   return (
-    <Stack direction="row" spacing={4} my={4}>
+    <Stack direction="row" flexWrap={true} spacing={4} my={4}>
       <Box>
         <FormControl size="small">
           <InputLabel id="demo-simple-select-label">Year</InputLabel>

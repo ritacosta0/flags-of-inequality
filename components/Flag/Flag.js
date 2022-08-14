@@ -65,8 +65,7 @@ export default function Flag({ country, year, isInteractive = false }) {
             y={0}
             height={dimensions.boundedHeight}
             width={dimensions.boundedWidth}
-            className=" stroke-slate-400"
-            fill="transparent"
+            className="fill-slate-900"
           />
           <BarStack
             data={data}
@@ -104,6 +103,13 @@ export default function Flag({ country, year, isInteractive = false }) {
               )
             }
           </BarStack>
+          <rect
+            x={0}
+            y={0}
+            height={dimensions.boundedHeight}
+            width={dimensions.boundedWidth}
+            className=" stroke-slate-300 fill-transparent"
+          />
           {isInteractive && hoveredStripe && pointerPosition && (
             <Annotation
               dimensions={dimensions}
