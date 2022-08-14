@@ -6,7 +6,7 @@ import { RAINBOW_COLORS } from "../../constants";
 import { Steps } from "./steps";
 import { isNull } from "lodash";
 import { Flag } from "../Flag";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 function Intro() {
   const [currentStepIndex, setCurrentStepIndex] = useState(null);
@@ -15,8 +15,6 @@ function Intro() {
   const onStepEnter = ({ data }) => {
     setCurrentStepIndex(data);
   };
-
-  console.log(currentStepIndex);
 
   return (
     <div>
@@ -27,57 +25,75 @@ function Intro() {
         disregarded by state regulations.
       </p>
       <ArrowDownwardIcon />
-      <div className="mt-[20vh]">
+      <div className="mt-[20vh] w-3/4 mx-auto">
         <div className="sticky top-10">
           <div ref={flagsContainer} className="z-0 mx-4 my-6 ">
-            {isNull(currentStepIndex) ||
-              (currentStepIndex < 8 && (
-                <svg
-                  width={flagDimensions.width}
-                  height={flagDimensions.height}
+            <AnimatePresence>
+              (
+              <svg width={flagDimensions.width} height={flagDimensions.height}>
+                {currentStepIndex < 7 &&
+                  RAINBOW_COLORS.reverse().map((color, index) => (
+                    <motion.rect
+                      key={index}
+                      width={flagDimensions.width}
+                      height={flagDimensions.height / 6}
+                      y={(flagDimensions.height / 6) * index}
+                      fill={color}
+                      animate={{
+                        fillOpacity:
+                          isNull(currentStepIndex) ||
+                          currentStepIndex === 0 ||
+                          currentStepIndex - 1 === index
+                            ? 1
+                            : 0.5,
+                      }}
+                      exit={{ fillOpacity: 0 }}
+                      transition={{ ease: "easeOut" }}
+                    />
+                  ))}
+
+                {currentStepIndex >= 7 && currentStepIndex < 10 && (
+                  <g>
+                    <motion.rect
+                      width={flagDimensions.width}
+                      height={flagDimensions.height}
+                      className="stroke-2 stroke-slate-700 fill-transparent"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ ease: "easeOut" }}
+                    />
+                  </g>
+                )}
+              </svg>
+              )
+              {currentStepIndex === 8 && (
+                <motion.div
+                  className="absolute top-0 "
+                  key={"malta-intro"}
+                  style={flagDimensions}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ ease: "easeOut" }}
                 >
-                  {isNull(currentStepIndex) ||
-                    ([0, 1, 2, 3, 4, 5, 6].includes(currentStepIndex) && (
-                      <g>
-                        {RAINBOW_COLORS.reverse().map((color, index) => (
-                          <rect
-                            key={index}
-                            width={flagDimensions.width}
-                            height={flagDimensions.height / 6}
-                            y={(flagDimensions.height / 6) * index}
-                            fill={color}
-                            fillOpacity={
-                              isNull(currentStepIndex) ||
-                              currentStepIndex === 0 ||
-                              currentStepIndex - 1 === index
-                                ? 1
-                                : 0.5
-                            }
-                          />
-                        ))}
-                      </g>
-                    ))}
-                  {currentStepIndex === 7 && (
-                    <g>
-                      <rect
-                        width={flagDimensions.width}
-                        height={flagDimensions.height}
-                        className="stroke-2 stroke-slate-700 fill-transparent"
-                      />
-                    </g>
-                  )}
-                </svg>
-              ))}
-            {currentStepIndex === 8 && (
-              <div style={flagDimensions}>
-                <Flag country={"Malta"} year={2022} isInteractive={false} />
-              </div>
-            )}
-            {currentStepIndex === 9 && (
-              <div style={flagDimensions}>
-                <Flag country={"Russia"} year={2022} isInteractive={false} />
-              </div>
-            )}
+                  <Flag country={"Malta"} year={2022} isInteractive={false} />
+                </motion.div>
+              )}
+              {currentStepIndex === 9 && (
+                <motion.div
+                  className="absolute top-0 "
+                  key={"russia-intro"}
+                  style={flagDimensions}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ ease: "easeOut" }}
+                >
+                  <Flag country={"Russia"} year={2022} isInteractive={false} />
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </div>
         <Scrollama onStepEnter={onStepEnter} offset={0.5}>

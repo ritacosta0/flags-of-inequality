@@ -1,7 +1,10 @@
 import { RAINBOW_COLORS } from "../../constants";
 
 const Highlight = ({ color, children }) => (
-  <span className="mx-1 text-white" style={{ backgroundColor: color }}>
+  <span
+    className="text-white text-xs font-semibold mx-1 px-2.5 py-0.5 rounded"
+    style={{ backgroundColor: color }}
+  >
     {children}
   </span>
 );
@@ -27,8 +30,9 @@ export const Steps = [
     index: 1,
     content: (
       <span>
-        In our metaphor, purple represents the "Asylum" category. This looks at
-        how LGBTQ+ asylum seekers are treated in each country.
+        In our metaphor, <Highlight color={RAINBOW_COLORS[0]}>purple</Highlight>{" "}
+        represents the "Asylum" category. This looks at how LGBTQ+ asylum
+        seekers are treated in each country.
       </span>
     ),
   },
@@ -36,9 +40,10 @@ export const Steps = [
     index: 2,
     content: (
       <span>
-        With blue, we encode the "Civil society space" category. It covers the
-        ability for organizations to safely operate; the organization of public
-        events; freedom of expression; and funding laws.
+        With <Highlight color={RAINBOW_COLORS[1]}>blue</Highlight>, we encode
+        the "Civil society space" category. It covers the ability for
+        organizations to safely operate; the organization of public events;
+        freedom of expression; and funding laws.
       </span>
     ),
   },
@@ -46,11 +51,11 @@ export const Steps = [
     index: 3,
     content: (
       <span>
-        The green covers the protection of "Equality and non-discrimination". It
-        encompasses the constitutional protection of rights such as
-        non-discrimination based on sexual orientation, right to employment,
-        access to goods and services, access to healthcare and education, among
-        others.
+        The <Highlight color={RAINBOW_COLORS[2]}>green</Highlight> covers the
+        protection of "Equality and non-discrimination". It encompasses the
+        constitutional protection of rights such as non-discrimination based on
+        sexual orientation, right to employment, access to goods and services,
+        access to healthcare and education, among others.
       </span>
     ),
   },
@@ -58,8 +63,8 @@ export const Steps = [
     index: 4,
     content: (
       <span>
-        Yellow depicts the protection (or lack of) against hate crime and hate
-        speech.
+        <Highlight color={RAINBOW_COLORS[3]}>yellow</Highlight> depicts the
+        protection (or lack of) against hate crime and hate speech.
       </span>
     ),
   },
@@ -67,8 +72,9 @@ export const Steps = [
     index: 5,
     content: (
       <span>
-        Orange covers the recognition of LGBTQ+ families by assessing if there
-        are rights such as marriage equality or joint adoption, for example.
+        <Highlight color={RAINBOW_COLORS[4]}>orange</Highlight> covers the
+        recognition of LGBTQ+ families by assessing if there are rights such as
+        marriage equality or joint adoption, for example.
       </span>
     ),
   },
@@ -76,10 +82,11 @@ export const Steps = [
     index: 6,
     content: (
       <span>
-        And lastly, red represents "Legal gender recognition" and "Intersex
-        bodily integrity". Up until 2022, this used to be a single category but
-        was split in two this year. For consistency among years, we decided to
-        keep these categories together.
+        And lastly, <Highlight color={RAINBOW_COLORS[5]}>red</Highlight>{" "}
+        represents "Legal gender recognition" and "Intersex bodily integrity".
+        Up until 2022, this used to be a single category but was split in two
+        this year. For consistency among years, we decided to keep these
+        categories together.
       </span>
     ),
   },
