@@ -8,6 +8,11 @@ export default function Header() {
   const titleWrapper = useRef();
   const title = useRef();
   const [titleWidth, setTitleWidth] = useState(0);
+  const [isLargeScreen, setIsLargeScreen] = useState(true);
+
+  useEffect(() => {
+    setIsLargeScreen(window.innerWidth > 700);
+  }, []);
 
   useEffect(() => {
     setTitleWidth(titleWrapper.current?.clientWidth);
@@ -33,12 +38,14 @@ export default function Header() {
 
     animate();
     title.current = svg;
-  }, [title]);
+  }, [title, isLargeScreen]);
+
+  console.log(title);
 
   return (
     <div className="flex flex-col justify-center h-screen ">
-      <div className="w-8/12 mx-auto " ref={titleWrapper}>
-        <svg width={titleWidth} height={"100%"} ref={title}>
+      <div className="w-10/12 mx-auto md:w-8/12" ref={titleWrapper}>
+        <svg width={titleWidth} className="h-[30vh]" ref={title}>
           <defs>
             <linearGradient id="rainbow">
               {RAINBOW_COLORS.reverse().map((color, index) => (
@@ -57,12 +64,14 @@ export default function Header() {
               stroke="white"
               strokeWidth={2}
               strokeOpacity={0.3}
+              isLargeScreen={isLargeScreen}
             />
             <TextPath
               width={title}
               fill="transparent"
               stroke="url(#rainbow)"
               strokeWidth={2}
+              isLargeScreen={isLargeScreen}
             />
           </g>
 

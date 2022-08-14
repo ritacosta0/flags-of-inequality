@@ -93,7 +93,7 @@ function Intro() {
             </AnimatePresence>
           </div>
         </div>
-        <Scrollama onStepEnter={onStepEnter} offset={0.5}>
+        <Scrollama onStepEnter={onStepEnter} offset={0.9}>
           {Steps.map((step) => (
             <Step data={step.index} key={step.index}>
               <motion.div
@@ -104,7 +104,7 @@ function Intro() {
                 exit={{ opacity: 0 }}
                 transition={{ ease: "easeOut" }}
               >
-                <div className="relative max-w-2xl p-6 mx-auto bg-white border border-gray-200 rounded-lg shadow-md text-slate-800 h-fit">
+                <div className="relative max-w-2xl p-6 mx-auto bg-white border border-gray-200 rounded-md shadow-md text-slate-800 h-fit">
                   {step.content}
                 </div>
               </motion.div>
