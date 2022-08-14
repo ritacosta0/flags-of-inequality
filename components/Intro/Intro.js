@@ -57,7 +57,7 @@ function Intro() {
                     <motion.rect
                       width={flagDimensions.width}
                       height={flagDimensions.height}
-                      className="stroke-2 stroke-slate-700 fill-transparent"
+                      className="stroke-2 stroke-slate-300 fill-slate-900"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
