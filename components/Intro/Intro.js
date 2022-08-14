@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Scrollama, Step } from "react-scrollama";
-import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import { useFlagDimensions } from "../../hooks/useFlagDimensions";
 import { RAINBOW_COLORS } from "../../constants";
 import { Steps } from "./steps";
 import { isNull } from "lodash";
 import { Flag } from "../Flag";
 import { AnimatePresence, motion } from "framer-motion";
+import Header from "../Header";
 
 function Intro() {
   const [currentStepIndex, setCurrentStepIndex] = useState(null);
@@ -17,27 +17,24 @@ function Intro() {
   };
 
   return (
-    <div>
-      <p>
-        If countries had equal rights for their LGBTQ+ citizens, this
-        visualization would not exist. We make use of the rainbow flag to
-        portray to what extent different dimensions of queer life are
-        disregarded by state regulations.
-      </p>
-      <ArrowDownwardIcon />
+    <div className="w-3/4 mx-auto mt-10">
+      <Header />
       <div className="mt-[20vh] w-3/4 mx-auto">
-        <div className="sticky top-10">
+        <div className="sticky top-1/4">
           <div ref={flagsContainer} className="z-0 mx-4 my-6 ">
             <AnimatePresence>
               (
-              <svg width={flagDimensions.width} height={flagDimensions.height}>
+              <svg
+                width={flagDimensions.width}
+                height={flagDimensions.height + 1}
+              >
                 {currentStepIndex < 7 &&
                   RAINBOW_COLORS.map((color, index) => (
                     <motion.rect
                       key={index}
                       width={flagDimensions.width}
                       height={flagDimensions.height / 6}
-                      y={(flagDimensions.height / 6) * (5 - index)}
+                      y={(flagDimensions.height / 6) * (5 - index) + 1}
                       fill={color}
                       animate={{
                         fillOpacity:
@@ -45,7 +42,7 @@ function Intro() {
                           currentStepIndex === 0 ||
                           currentStepIndex - 1 === index
                             ? 1
-                            : 0.5,
+                            : 0.3,
                       }}
                       exit={{ fillOpacity: 0 }}
                       transition={{ ease: "easeOut" }}
@@ -100,12 +97,14 @@ function Intro() {
           {Steps.map((step) => (
             <Step data={step.index} key={step.index}>
               <motion.div
-                className="h-[100vh] mt-[30vh]"
+                className="h-screen mt-[50vh]"
                 animate={{
                   opacity: step.index === currentStepIndex ? 1 : 0.4,
                 }}
+                exit={{ opacity: 0 }}
+                transition={{ ease: "easeOut" }}
               >
-                <div className="relative max-w-2xl p-6 mx-auto bg-white border border-gray-200 rounded-lg shadow-md h-fit">
+                <div className="relative max-w-2xl p-6 mx-auto bg-white border border-gray-200 rounded-lg shadow-md text-slate-800 h-fit">
                   {step.content}
                 </div>
               </motion.div>

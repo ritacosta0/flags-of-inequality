@@ -58,7 +58,7 @@ function Home() {
                 </motion.div>
               </Link>
 
-              <h3 className="font-medium text-slate-800">{`${
+              <h3 className="font-medium">{`${
                 flag(country) || ""
               } ${country}`}</h3>
             </motion.div>

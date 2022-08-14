@@ -18,9 +18,9 @@ export const CATEGORIES_ORDERED_LIST = [
 ];
 
 export const RAINBOW_COLORS = [
-  "#956CEE",
-  "#2E9FD5",
-  "#2CB770",
+  "#8849B3",
+  "#2F4AB7",
+  "#12A77B",
   "#F8D92B",
   "#FFA43F",
   "#E94A40",
