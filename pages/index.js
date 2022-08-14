@@ -8,6 +8,7 @@ import Controls from "../components/Controls";
 import { Flag } from "../components/Flag";
 import { getData } from "../data";
 import { useFlagDimensions } from "../hooks/useFlagDimensions";
+import { Intro } from "../components/Intro";
 
 function Home() {
   const [year, setYear] = useState(2022);
@@ -27,6 +28,7 @@ function Home() {
 
   return (
     <>
+      <Intro />
       <Controls
         year={year}
         setYear={setYear}
