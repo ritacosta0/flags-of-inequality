@@ -12,7 +12,7 @@ import Annotation from "./Annotation";
 import { isNull } from "lodash";
 
 export default function Flag({ country, year }) {
-  const [chartWrapper, dimensions] = useChartDimensions({ marginBottom: 5 });
+  const [chartWrapper, dimensions] = useChartDimensions({ marginBottom: 0 });
   const [pointerPosition, setPointerPosition] = useState(null);
   const [hoveredStripe, setHoveredStripe] = useState(null);
   const svgRef = useRef();

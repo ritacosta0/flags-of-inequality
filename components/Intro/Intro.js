@@ -32,12 +32,12 @@ function Intro() {
               (
               <svg width={flagDimensions.width} height={flagDimensions.height}>
                 {currentStepIndex < 7 &&
-                  RAINBOW_COLORS.reverse().map((color, index) => (
+                  RAINBOW_COLORS.map((color, index) => (
                     <motion.rect
                       key={index}
                       width={flagDimensions.width}
                       height={flagDimensions.height / 6}
-                      y={(flagDimensions.height / 6) * index}
+                      y={(flagDimensions.height / 6) * (5 - index)}
                       fill={color}
                       animate={{
                         fillOpacity:
