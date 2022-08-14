@@ -10,7 +10,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import Stack from "@mui/material/Stack";
 
-import { yearsList } from "../../data";
+import { yearsList } from "../data";
 
 export default function Controls({
   year,
