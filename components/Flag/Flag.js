@@ -11,7 +11,7 @@ import { CATEGORIES_ORDERED_LIST, RAINBOW_COLORS } from "../../constants";
 import Annotation from "./Annotation";
 import { isNull } from "lodash";
 
-export default function Flag({ country, year }) {
+export default function Flag({ country, year, isInteractive = false }) {
   const [chartWrapper, dimensions] = useChartDimensions({ marginBottom: 0 });
   const [pointerPosition, setPointerPosition] = useState(null);
   const [hoveredStripe, setHoveredStripe] = useState(null);
@@ -91,7 +91,9 @@ export default function Flag({ country, year }) {
                     animate={{
                       fill: bar.color,
                       fillOpacity:
-                        bar.key === hoveredStripe || isNull(hoveredStripe)
+                        bar.key === hoveredStripe ||
+                        isNull(hoveredStripe) ||
+                        !isInteractive
                           ? 1
                           : 0.7,
                     }}
@@ -102,7 +104,7 @@ export default function Flag({ country, year }) {
               )
             }
           </BarStack>
-          {hoveredStripe && pointerPosition && (
+          {isInteractive && hoveredStripe && pointerPosition && (
             <Annotation
               dimensions={dimensions}
               pointerPosition={pointerPosition}
