@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import React, { useMemo, useState, useEffect } from "react";
+import LinkIcon from "@mui/icons-material/Link";
 import Box from "@mui/material/Box";
 import { flag } from "country-emoji";
 
@@ -20,8 +21,16 @@ export default function Timeline() {
   );
 
   useEffect(() => {
-    setIsVertical(window.innerWidth < 400);
+    const handleResize = () => {
+      setIsVertical(window.innerWidth < 400);
+    };
+    window.addEventListener("resize", handleResize);
+    // Call handler right away so state gets updated with initial window size
+    handleResize();
+    // Remove event listener on cleanup
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
+  console.log(isVertical);
 
   return (
     <div className={`w-full mx-auto ${isVertical ? "mt-4" : "mt-[30vh]"}`}>
@@ -33,8 +42,16 @@ export default function Timeline() {
       <h2 className="mt-8 text-4xl font-medium ">{`${
         flag(country) || ""
       } ${country}`}</h2>
+      <div className="my-4 cursor-pointer text-slate-400 hover:text-slate-300">
+        <a>
+          <LinkIcon />
+          <span className="ml-1 ">{`Read more on Rainbow Data 2022`}</span>
+        </a>
+      </div>
       <div
-        className={`flex ${isVertical ? "flex-col" : "flex-row"}  gap-4 mt-10`}
+        className={`flex ${
+          isVertical ? "flex-col-reverse" : "flex-row"
+        }  gap-4 mt-10`}
         ref={flagsContainer}
       >
         {years.map((year) => (
