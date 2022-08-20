@@ -1,7 +1,7 @@
 import React from "react";
 
-export default function TextPath(props) {
-  if (props.isLargeScreen) {
+export default function TextPath({ isLargeScreen, ...props }) {
+  if (isLargeScreen) {
     return (
       <svg
         width={props.width}
