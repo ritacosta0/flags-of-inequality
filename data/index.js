@@ -66,6 +66,7 @@ const wideData = tidy(
     ["country", "year", "category"],
     summarize({
       value: first("category_percentage"),
+      ranking: first("ranking"),
     })
   ),
   mutate({

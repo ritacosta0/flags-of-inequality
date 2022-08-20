@@ -16,7 +16,7 @@ function Home() {
   const [orderAlphabetical, setOrderAlphabetical] = useState(true);
   const [orderRanking, setOrderRanking] = useState(true);
   const [sortDict, setSortDict] = useState({
-    type: "alphabetical",
+    type: "ranking",
     ascending: true,
   });
   const [flagsContainer, flagDimensions] = useFlagDimensions();
@@ -25,6 +25,7 @@ function Home() {
     () => getData({ years: [year], sortingParams: sortDict }),
     [year, sortDict]
   );
+
   const countries = data.map((d) => d.country);
 
   return (

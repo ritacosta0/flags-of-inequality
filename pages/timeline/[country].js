@@ -30,7 +30,6 @@ export default function Timeline() {
     // Remove event listener on cleanup
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-  console.log(isVertical);
 
   return (
     <div className={`w-full mx-auto ${isVertical ? "mt-4" : "mt-[30vh]"}`}>

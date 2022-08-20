@@ -81,7 +81,7 @@ export default function Controls({
   };
   const handleClickRanking = () => {
     setOrderRanking(!orderRanking);
-    setSortDict({ type: "hate", ascending: !orderRanking });
+    setSortDict({ type: "ranking", ascending: !orderRanking });
   };
 
   return (
