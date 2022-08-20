@@ -13,7 +13,7 @@ export default function Header() {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsLargeScreen(window.innerWidth > 700);
+      setIsLargeScreen(window.innerWidth > 860);
       setTitleWidth(titleWrapper.current?.clientWidth);
     };
     window.addEventListener("resize", handleResize);
@@ -47,8 +47,8 @@ export default function Header() {
 
   return (
     <div className="flex flex-col justify-center h-screen ">
-      <div className="w-10/12 mx-auto md:w-8/12" ref={titleWrapper}>
-        <svg width={titleWidth} className="h-[30vh]" ref={title}>
+      <div className="w-full mx-auto xl:w-10/12" ref={titleWrapper}>
+        <svg width={titleWidth} className="h-[20vh]" ref={title}>
           <defs>
             <linearGradient id="rainbow">
               {RAINBOW_COLORS.reverse().map((color, index) => (
@@ -60,7 +60,7 @@ export default function Header() {
               ))}
             </linearGradient>
           </defs>
-          <g transform={`translate(0,${titleWidth * 0.1})`}>
+          <g transform={`translate(0,${titleWidth * 0})`}>
             <TextPath
               width={title}
               fill="transparent"

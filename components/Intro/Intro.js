@@ -17,9 +17,9 @@ function Intro() {
   };
 
   return (
-    <div className="w-3/4 mx-auto mt-10">
+    <div className="w-10/12 mx-auto mt-10 lg:w-3/4">
       <Header />
-      <div className="mt-[20vh] w-3/4 mx-auto">
+      <div className="mt-[20vh] w-full">
         <div className="sticky top-1/4">
           <div ref={flagsContainer} className="z-0 mx-4 my-6 ">
             <AnimatePresence>
