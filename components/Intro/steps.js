@@ -101,7 +101,7 @@ export const Steps = [
     content: (
       <span>
         In the ideal flag, all the segments would be equally sized and
-        completely fill the area represented by this black border.
+        completely fill the area represented by this white border.
         Unfortunately, no country has achieved full equality yet, so no flag is
         complete.
       </span>
@@ -113,8 +113,10 @@ export const Steps = [
       <span>
         Take <span className="font-bold">Malta</span> for example. It is one of
         the countries which is constantly on the top of the ranking. But because
-        it is lacking in some areas on "Equality and non-discrimination" and
-        "Intersex bodily integrity" its flag is still incomplete.
+        it is lacking in some areas on{" "}
+        <span className="font-bold">Equality and non-discrimination</span> and
+        <span className="font-bold">Intersex bodily integrity</span> its flag is
+        still incomplete.
       </span>
     ),
   },
