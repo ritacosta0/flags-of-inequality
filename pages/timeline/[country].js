@@ -10,6 +10,12 @@ import { Flag } from "../../components/Flag";
 import Link from "next/link";
 import { ArrowBack } from "@mui/icons-material";
 
+const nth = (n) => {
+  return `${n}${
+    ["st", "nd", "rd"][((((n + 90) % 100) - 10) % 10) - 1] || "th"
+  }`;
+};
+
 export default function Timeline() {
   const router = useRouter();
   const { country } = router.query;
@@ -72,7 +78,12 @@ export default function Timeline() {
             >
               <Flag country={country} year={year} />
             </Box>
-            <h3>{year}</h3>
+            <div className="flex gap-2">
+              <h3> {year}</h3>
+              <h3 className="text-slate-400">{` | ${nth(
+                data.find((d) => d.year === year)?.ranking
+              )}`}</h3>
+            </div>
           </div>
         ))}
       </div>
