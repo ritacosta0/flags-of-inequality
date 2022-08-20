@@ -98,6 +98,7 @@ function Intro() {
             <Step data={step.index} key={step.index}>
               <motion.div
                 className="h-screen mt-[50vh] z-20"
+                initial={false}
                 animate={{
                   opacity: step.index === currentStepIndex ? 1 : 0.4,
                 }}

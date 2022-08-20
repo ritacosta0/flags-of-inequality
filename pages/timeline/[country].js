@@ -9,6 +9,7 @@ import { useFlagDimensions } from "../../hooks/useFlagDimensions";
 import { Flag } from "../../components/Flag";
 import Link from "next/link";
 import { ArrowBack } from "@mui/icons-material";
+import { nth } from "../../utils";
 
 export default function Timeline() {
   const router = useRouter();
@@ -20,6 +21,8 @@ export default function Timeline() {
     isVertical ? 1 : years.length
   );
 
+  const url = data.find((d) => d.year === 2022)?.url;
+
   useEffect(() => {
     const handleResize = () => {
       setIsVertical(window.innerWidth < 400);
@@ -30,7 +33,6 @@ export default function Timeline() {
     // Remove event listener on cleanup
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-  console.log(isVertical);
 
   return (
     <div className={`w-full mx-auto ${isVertical ? "mt-4" : "mt-[30vh]"}`}>
@@ -43,7 +45,7 @@ export default function Timeline() {
         flag(country) || ""
       } ${country}`}</h2>
       <div className="my-4 cursor-pointer text-slate-400 hover:text-slate-300">
-        <a>
+        <a href={url}>
           <LinkIcon />
           <span className="ml-1 ">{`Read more on Rainbow Data 2022`}</span>
         </a>
@@ -71,7 +73,12 @@ export default function Timeline() {
             >
               <Flag country={country} year={year} />
             </Box>
-            <h3>{year}</h3>
+            <div className="flex gap-2">
+              <h3> {year}</h3>
+              <h3 className="text-slate-400">{` | ${nth(
+                data.find((d) => d.year === year)?.ranking
+              )}`}</h3>
+            </div>
           </div>
         ))}
       </div>
