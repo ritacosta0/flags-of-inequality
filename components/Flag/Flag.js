@@ -1,6 +1,6 @@
 import React, { useMemo, useRef, useState } from "react";
 import { Group } from "@visx/group";
-import { BarStack } from "@visx/shape";
+import { BarStack, Line } from "@visx/shape";
 import { scaleLinear, scaleOrdinal } from "@visx/scale";
 import { localPoint } from "@visx/event";
 import { motion } from "framer-motion";
@@ -11,7 +11,7 @@ import { CATEGORIES_ORDERED_LIST, RAINBOW_COLORS } from "../../constants";
 import Annotation from "./Annotation";
 import { isNull } from "lodash";
 
-export default function Flag({ country, year, isInteractive = false }) {
+export default function Flag({ country, year, isInteractive = true }) {
   const [chartWrapper, dimensions] = useChartDimensions({ marginBottom: 0 });
   const [pointerPosition, setPointerPosition] = useState(null);
   const [hoveredStripe, setHoveredStripe] = useState(null);
@@ -67,6 +67,7 @@ export default function Flag({ country, year, isInteractive = false }) {
             width={dimensions.boundedWidth}
             className="fill-slate-900"
           />
+
           <BarStack
             data={data}
             keys={CATEGORIES_ORDERED_LIST}
@@ -98,17 +99,31 @@ export default function Flag({ country, year, isInteractive = false }) {
                     }}
                     onMouseEnter={() => setHoveredStripe(bar.key)}
                     onMouseLeave={() => setHoveredStripe(null)}
+                    className={isInteractive ? "cursor-pointer" : ""}
                   />
                 ))
               )
             }
           </BarStack>
-          <rect
-            x={0}
-            y={0}
-            height={dimensions.boundedHeight}
-            width={dimensions.boundedWidth}
-            className=" stroke-slate-300 fill-transparent"
+          <Line
+            from={{ x: 0, y: 0 }}
+            to={{ x: 0, y: dimensions.boundedHeight }}
+            className=" stroke-slate-300"
+          />
+          <Line
+            from={{ x: 0, y: dimensions.boundedHeight }}
+            to={{ x: dimensions.boundedWidth, y: dimensions.boundedHeight }}
+            className=" stroke-slate-300"
+          />
+          <Line
+            from={{ x: dimensions.boundedWidth, y: dimensions.boundedHeight }}
+            to={{ x: dimensions.boundedWidth, y: 0 }}
+            className=" stroke-slate-300"
+          />
+          <Line
+            from={{ x: dimensions.boundedWidth, y: 0 }}
+            to={{ x: 0, y: 0 }}
+            className=" stroke-slate-300"
           />
           {isInteractive && hoveredStripe && pointerPosition && (
             <Annotation

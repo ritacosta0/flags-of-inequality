@@ -11,11 +11,15 @@ export default function Header() {
   const [isLargeScreen, setIsLargeScreen] = useState(true);
 
   useEffect(() => {
-    setIsLargeScreen(window.innerWidth > 700);
-  }, []);
-
-  useEffect(() => {
-    setTitleWidth(titleWrapper.current?.clientWidth);
+    const handleResize = () => {
+      setIsLargeScreen(window.innerWidth > 700);
+      setTitleWidth(titleWrapper.current?.clientWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    // Call handler right away so state gets updated with initial window size
+    handleResize();
+    // Remove event listener on cleanup
+    return () => window.removeEventListener("resize", handleResize);
   }, [titleWrapper]);
 
   useEffect(() => {

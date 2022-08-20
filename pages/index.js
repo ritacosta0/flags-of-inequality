@@ -30,39 +30,41 @@ function Home() {
   return (
     <>
       <Intro />
-      <Controls
-        year={year}
-        setYear={setYear}
-        orderRanking={orderRanking}
-        setOrderRanking={setOrderRanking}
-        orderAlphabetical={orderAlphabetical}
-        setOrderAlphabetical={setOrderAlphabetical}
-        sortDict={sortDict}
-        setSortDict={setSortDict}
-      />
-      <div
-        className="flex flex-row flex-wrap justify-center gap-12"
-        ref={flagsContainer}
-      >
-        {countries.map((country) => {
-          return (
-            <motion.div key={country} className="mt-4" layout>
-              <Link href={`/timeline/${encodeURIComponent(country)}`}>
-                <motion.div
-                  style={{
-                    ...flagDimensions,
-                    cursor: "pointer",
-                  }}
-                >
-                  <Flag country={country} year={year} />
-                  <h3 className="font-medium">{`${
-                    flag(country) || ""
-                  } ${country}`}</h3>
-                </motion.div>
-              </Link>
-            </motion.div>
-          );
-        })}
+      <div id="flags" className="py-4">
+        <Controls
+          year={year}
+          setYear={setYear}
+          orderRanking={orderRanking}
+          setOrderRanking={setOrderRanking}
+          orderAlphabetical={orderAlphabetical}
+          setOrderAlphabetical={setOrderAlphabetical}
+          sortDict={sortDict}
+          setSortDict={setSortDict}
+        />
+        <div
+          className="flex flex-row flex-wrap justify-center gap-12"
+          ref={flagsContainer}
+        >
+          {countries.map((country) => {
+            return (
+              <motion.div key={country} className="mt-4" layout>
+                <Link href={`/timeline/${encodeURIComponent(country)}`}>
+                  <motion.div
+                    style={{
+                      ...flagDimensions,
+                      cursor: "pointer",
+                    }}
+                  >
+                    <Flag country={country} year={year} />
+                    <h3 className="font-medium">{`${
+                      flag(country) || ""
+                    } ${country}`}</h3>
+                  </motion.div>
+                </Link>
+              </motion.div>
+            );
+          })}
+        </div>
       </div>
       <Methodology />
     </>
