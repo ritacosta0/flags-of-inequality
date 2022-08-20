@@ -31,8 +31,8 @@ export const Steps = [
     content: (
       <span>
         In our metaphor, <Highlight color={RAINBOW_COLORS[0]}>purple</Highlight>{" "}
-        represents the "Asylum" category. This looks at how LGBTQ+ asylum
-        seekers are treated in each country.
+        represents the <span className="font-bold ">Asylum</span> category. This
+        looks at how LGBTQ+ asylum seekers are treated in each country.
       </span>
     ),
   },
@@ -41,9 +41,9 @@ export const Steps = [
     content: (
       <span>
         With <Highlight color={RAINBOW_COLORS[1]}>blue</Highlight>, we encode
-        the "Civil society space" category. It covers the ability for
-        organizations to safely operate; the organization of public events;
-        freedom of expression; and funding laws.
+        the <span className="font-bold ">Civil society space</span> category. It
+        covers the ability for organizations to safely operate; the organization
+        of public events; freedom of expression; and funding laws.
       </span>
     ),
   },
@@ -52,10 +52,12 @@ export const Steps = [
     content: (
       <span>
         The <Highlight color={RAINBOW_COLORS[2]}>green</Highlight> covers the
-        protection of "Equality and non-discrimination". It encompasses the
-        constitutional protection of rights such as non-discrimination based on
-        sexual orientation, right to employment, access to goods and services,
-        access to healthcare and education, among others.
+        protection of{" "}
+        <span className="font-bold ">Legal gender recognition</span> and{" "}
+        <span className="font-bold ">Intersex bodily integrity</span>. Up until
+        2022, this used to be a single category but was split in two this year.
+        For consistency among years, we decided to keep these categories
+        together.
       </span>
     ),
   },
@@ -64,7 +66,8 @@ export const Steps = [
     content: (
       <span>
         <Highlight color={RAINBOW_COLORS[3]}>yellow</Highlight> depicts the
-        protection (or lack of) against hate crime and hate speech.
+        protection (or lack of) against{" "}
+        <span className="font-bold">hate crime and hate speech</span>.
       </span>
     ),
   },
@@ -73,8 +76,9 @@ export const Steps = [
     content: (
       <span>
         <Highlight color={RAINBOW_COLORS[4]}>orange</Highlight> covers the
-        recognition of LGBTQ+ families by assessing if there are rights such as
-        marriage equality or joint adoption, for example.
+        recognition of <span className="font-bold">LGBTQ+ families</span> by
+        assessing if there are rights such as marriage equality or joint
+        adoption, for example.
       </span>
     ),
   },
@@ -83,10 +87,12 @@ export const Steps = [
     content: (
       <span>
         And lastly, <Highlight color={RAINBOW_COLORS[5]}>red</Highlight>{" "}
-        represents "Legal gender recognition" and "Intersex bodily integrity".
-        Up until 2022, this used to be a single category but was split in two
-        this year. For consistency among years, we decided to keep these
-        categories together.
+        represents{" "}
+        <span className="font-bold">Equality and non-discrimination</span>. It
+        encompasses the constitutional protection of rights such as
+        non-discrimination based on sexual orientation, right to employment,
+        access to goods and services, access to healthcare and education, among
+        others.
       </span>
     ),
   },
