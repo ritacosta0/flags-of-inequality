@@ -48,7 +48,7 @@ export default function Header() {
   return (
     <div className="flex flex-col justify-center h-screen ">
       <div className="w-full mx-auto xl:w-10/12" ref={titleWrapper}>
-        <svg width={titleWidth} className="h-[20vh]" ref={title}>
+        <svg width={titleWidth} className="h-[20vh]" ref={title} aria-hidden>
           <defs>
             <linearGradient id="rainbow">
               {RAINBOW_COLORS.reverse().map((color, index) => (
