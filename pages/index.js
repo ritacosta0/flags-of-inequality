@@ -10,6 +10,7 @@ import { getData } from "../data";
 import { useFlagDimensions } from "../hooks/useFlagDimensions";
 import { Intro } from "../components/Intro";
 import { Methodology } from "../components/Methodology";
+import { nth } from "../utils";
 
 function Home() {
   const [year, setYear] = useState(2022);
@@ -57,9 +58,16 @@ function Home() {
                     }}
                   >
                     <Flag country={country} year={year} />
-                    <h3 className="font-medium">{`${
-                      flag(country) || ""
-                    } ${country}`}</h3>
+                    <div className="flex gap-2">
+                      <h3 className="font-medium">
+                        {`${flag(country) || ""} ${country}`}{" "}
+                        <span className="text-slate-400">{` | ${nth(
+                          data.find(
+                            (d) => d.country === country && d.year === 2022
+                          )?.ranking
+                        )}`}</span>
+                      </h3>
+                    </div>
                   </motion.div>
                 </Link>
               </motion.div>

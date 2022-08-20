@@ -9,12 +9,7 @@ import { useFlagDimensions } from "../../hooks/useFlagDimensions";
 import { Flag } from "../../components/Flag";
 import Link from "next/link";
 import { ArrowBack } from "@mui/icons-material";
-
-const nth = (n) => {
-  return `${n}${
-    ["st", "nd", "rd"][((((n + 90) % 100) - 10) % 10) - 1] || "th"
-  }`;
-};
+import { nth } from "../../utils";
 
 export default function Timeline() {
   const router = useRouter();
