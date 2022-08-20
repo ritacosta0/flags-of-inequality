@@ -10,6 +10,7 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
+import MouseIcon from "@mui/icons-material/Mouse";
 import Stack from "@mui/material/Stack";
 
 import { yearsList } from "../data";
@@ -32,6 +33,7 @@ const YearsSlider = styled(Slider)(({ theme }) => ({
   },
   "& .MuiSlider-markLabel": {
     color: "#94a3b8",
+    transform: "translateX(-90%)",
   },
   "& .MuiSlider-markLabelActive": {
     color: "#f1f5f9",
@@ -83,65 +85,72 @@ export default function Controls({
   };
 
   return (
-    <Stack
-      direction="row"
-      flexWrap="wrap"
-      spacing={0}
-      my={4}
-      className="justify-center w-full mx-auto md:w-11/12 xl:justify-between"
-    >
-      <Stack direction="row" flexWrap="wrap">
-        <SortButton
-          className="w-full my-1 lg:w-fit"
-          onClick={handleClickRanking}
-          variant="outlined"
-          size="small"
-          startIcon={
-            <>
-              <SortIcon />
-              {orderRanking ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />}
-            </>
-          }
-        >
-          Sort by global ranking
-        </SortButton>
-        <SortButton
-          className="w-full my-1 lg:w-fit lg:ml-4"
-          onClick={handleClickAlphabetical}
-          variant="outlined"
-          size="small"
-          startIcon={
-            <>
-              <SortByAlphaIcon />
-              {orderAlphabetical ? (
-                <ArrowUpwardIcon />
-              ) : (
-                <ArrowDownwardIcon />
-              )}{" "}
-            </>
-          }
-        >
-          Sort alphabetically
-        </SortButton>
+    <div className="w-full mx-auto mt-6 mb-10 md:w-11/12">
+      <Stack
+        direction="row"
+        flexWrap="wrap"
+        spacing={0}
+        my={4}
+        className="justify-center xl:justify-between"
+      >
+        <Stack direction="row" flexWrap="wrap">
+          <SortButton
+            className="w-full my-1 lg:w-fit"
+            onClick={handleClickRanking}
+            variant="outlined"
+            size="small"
+            startIcon={
+              <>
+                <SortIcon />
+                {orderRanking ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />}
+              </>
+            }
+          >
+            Sort by global ranking
+          </SortButton>
+          <SortButton
+            className="w-full my-1 lg:w-fit lg:ml-4"
+            onClick={handleClickAlphabetical}
+            variant="outlined"
+            size="small"
+            startIcon={
+              <>
+                <SortByAlphaIcon />
+                {orderAlphabetical ? (
+                  <ArrowUpwardIcon />
+                ) : (
+                  <ArrowDownwardIcon />
+                )}{" "}
+              </>
+            }
+          >
+            Sort alphabetically
+          </SortButton>
+        </Stack>
+        <Box className="w-full lg:w-1/2 xl:w-1/3">
+          <YearsSlider
+            min={2015}
+            value={year}
+            max={2022}
+            step={1}
+            track={false}
+            marks={yearsList.sort().map((value) => ({
+              value,
+              label:
+                isLargeScreen ||
+                [min(yearsList), max(yearsList), year].includes(value)
+                  ? value
+                  : null,
+            }))}
+            onChange={handleChange}
+          />
+        </Box>
       </Stack>
-      <Box className="w-full lg:w-1/2 xl:w-1/3">
-        <YearsSlider
-          min={2015}
-          value={year}
-          max={2022}
-          step={1}
-          track={false}
-          marks={yearsList.sort().map((value) => ({
-            value,
-            label:
-              isLargeScreen ||
-              [min(yearsList), max(yearsList), year].includes(value)
-                ? value
-                : null,
-          }))}
-          onChange={handleChange}
-        />
-      </Box>
-    </Stack>
+      <div className="flex flex-row justify-center gap-2 -mt-6 text-xs align-middle xl:justify-end text-slate-400 ">
+        Use the slider to select a year or
+        <MouseIcon fontSize="small" />
+        click on a flag to see how that it has changed over the years.
+      </div>
+    </div>
   );
 }
