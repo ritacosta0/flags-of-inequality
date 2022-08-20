@@ -111,10 +111,10 @@ export const Steps = [
     index: 8,
     content: (
       <span>
-        Take Malta for example. It is one of the countries which is constantly
-        on the top of the ranking. But because it is lacking in some areas on
-        "Equality and non-discrimination" and "Intersex bodily integrity" its
-        flag is still incomplete.
+        Take <span className="font-bold">Malta</span> for example. It is one of
+        the countries which is constantly on the top of the ranking. But because
+        it is lacking in some areas on "Equality and non-discrimination" and
+        "Intersex bodily integrity" its flag is still incomplete.
       </span>
     ),
   },
@@ -122,8 +122,9 @@ export const Steps = [
     index: 9,
     content: (
       <span>
-        On the other side of the spectrum, there are countries like Russia,
-        still a long way from full equality.
+        On the other side of the spectrum, there are countries like{" "}
+        <span className="font-bold">Russia</span>, still a long way from full
+        equality.
       </span>
     ),
   },

@@ -19,7 +19,7 @@ function Intro() {
   return (
     <div className="w-10/12 mx-auto mt-10 lg:w-3/4">
       <Header />
-      <div className="mt-[20vh] w-full">
+      <div className="mt-[20vh] lg:w-8/12 mx-auto">
         <div className="sticky top-1/4">
           <div ref={flagsContainer} className="z-0 mx-4 my-6 ">
             <AnimatePresence>
@@ -97,12 +97,12 @@ function Intro() {
           {Steps.map((step) => (
             <Step data={step.index} key={step.index}>
               <motion.div
-                className="h-screen mt-[50vh]"
+                className="h-screen mt-[50vh] z-20"
                 animate={{
                   opacity: step.index === currentStepIndex ? 1 : 0.4,
                 }}
                 exit={{ opacity: 0 }}
-                transition={{ ease: "easeOut" }}
+                transition={{ duration: 0.1 }}
               >
                 <div className="relative max-w-2xl p-6 mx-auto bg-white border border-gray-200 rounded-md shadow-md text-slate-800 h-fit">
                   {step.content}

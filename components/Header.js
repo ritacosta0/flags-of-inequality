@@ -89,7 +89,7 @@ export default function Header() {
         </svg>
       </div>
       <h1 className="sr-only">Flags of Inequality</h1>
-      <p className="mt-10 text-lg text-center text-slate-300">
+      <p className="mt-10 text-sm text-center md:text-base lg:text-lg text-slate-300">
         <span className="font-bold">
           If countries had equal rights for their LGBTQ+ citizens, this
           visualization would not exist
