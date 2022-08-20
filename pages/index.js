@@ -41,7 +41,7 @@ function Home() {
         setSortDict={setSortDict}
       />
       <div
-        className="flex flex-row flex-wrap justify-center gap-4"
+        className="flex flex-row flex-wrap justify-center gap-12"
         ref={flagsContainer}
       >
         {countries.map((country) => {
@@ -55,12 +55,11 @@ function Home() {
                   }}
                 >
                   <Flag country={country} year={year} />
+                  <h3 className="font-medium">{`${
+                    flag(country) || ""
+                  } ${country}`}</h3>
                 </motion.div>
               </Link>
-
-              <h3 className="font-medium">{`${
-                flag(country) || ""
-              } ${country}`}</h3>
             </motion.div>
           );
         })}

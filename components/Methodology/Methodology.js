@@ -1,7 +1,7 @@
 function Methodology() {
   return (
     <>
-      <hr className="mt-10 border-slate-600"></hr>
+      <hr className="mt-20 border-slate-600"></hr>
       <div className="mt-6 mb-10 text-center ">
         <h3 className="my-4 text-2xl font-medium">Methodology</h3>
         <div className="flex items-center justify-center">

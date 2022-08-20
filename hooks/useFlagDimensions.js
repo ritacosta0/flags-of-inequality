@@ -8,10 +8,11 @@ const flagsPerRowBreakpoints = {
 };
 
 const GOLDEN_RATIO = 1.618;
+const FLAG_SPACING = 8;
 
 const getFlagWidth = (containerWidth, flagsPerRow) => {
   const calculateWidth = (flagCount) =>
-    Math.floor((containerWidth - (flagCount - 1) * 4) / flagCount);
+    Math.floor((containerWidth - (flagCount - 1) * FLAG_SPACING) / flagCount);
 
   if (flagsPerRow) {
     return calculateWidth(flagsPerRow);
