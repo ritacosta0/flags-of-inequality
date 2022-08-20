@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import SortIcon from "@mui/icons-material/Sort";
@@ -14,6 +15,7 @@ import Stack from "@mui/material/Stack";
 import { yearsList } from "../data";
 import { range } from "lodash";
 import { styled } from "@mui/material/styles";
+import { max, min } from "d3-array";
 
 const YearsSlider = styled(Slider)(({ theme }) => ({
   color: "#cbd5e1",
@@ -63,6 +65,11 @@ export default function Controls({
   orderAlphabetical,
   setSortDict,
 }) {
+  const [isLargeScreen, setIsLargeScreen] = useState(false);
+  useEffect(() => {
+    setIsLargeScreen(window.innerWidth > 700);
+  }, []);
+
   const handleChange = (event) => {
     setYear(event.target.value);
   };
@@ -78,14 +85,14 @@ export default function Controls({
   return (
     <Stack
       direction="row"
-      flexWrap={true}
-      justifyContent="space-between"
-      spacing={4}
+      flexWrap="wrap"
+      spacing={0}
       my={4}
-      className="w-11/12 mx-auto"
+      className="justify-center w-full mx-auto md:w-11/12 xl:justify-between"
     >
-      <Stack direction="row" spacing={2}>
+      <Stack direction="row" flexWrap="wrap">
         <SortButton
+          className="w-full my-1 lg:w-fit"
           onClick={handleClickRanking}
           variant="outlined"
           size="small"
@@ -99,6 +106,7 @@ export default function Controls({
           Sort by global ranking
         </SortButton>
         <SortButton
+          className="w-full my-1 lg:w-fit lg:ml-4"
           onClick={handleClickAlphabetical}
           variant="outlined"
           size="small"
@@ -116,13 +124,20 @@ export default function Controls({
           Sort alphabetically
         </SortButton>
       </Stack>
-      <Box className="w-1/3">
+      <Box className="w-full lg:w-1/2 xl:w-1/3">
         <YearsSlider
           min={2015}
           max={2022}
           step={1}
           track={false}
-          marks={yearsList.sort().map((value) => ({ label: value, value }))}
+          marks={yearsList.sort().map((value) => ({
+            value,
+            label:
+              isLargeScreen ||
+              [min(yearsList), max(yearsList), year].includes(value)
+                ? value
+                : null,
+          }))}
           onChange={handleChange}
         />
       </Box>
