@@ -127,6 +127,7 @@ export default function Controls({
       <Box className="w-full lg:w-1/2 xl:w-1/3">
         <YearsSlider
           min={2015}
+          value={year}
           max={2022}
           step={1}
           track={false}
