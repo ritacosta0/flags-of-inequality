@@ -40,8 +40,6 @@ export default function Header() {
     title.current = svg;
   }, [title, isLargeScreen]);
 
-  console.log(title);
-
   return (
     <div className="flex flex-col justify-center h-screen ">
       <div className="w-10/12 mx-auto md:w-8/12" ref={titleWrapper}>

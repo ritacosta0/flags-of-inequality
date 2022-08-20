@@ -17,7 +17,6 @@ export default function TextPath(props) {
       </svg>
     );
   }
-  console.log("small screen");
   return (
     <svg
       width={props.width}
