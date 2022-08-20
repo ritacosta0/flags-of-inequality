@@ -3,6 +3,7 @@ import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import * as Warp from "warpjs";
 import TextPath from "./TextPath";
 import { RAINBOW_COLORS } from "../constants";
+import { Text } from "@visx/text";
 
 export default function Header() {
   const titleWrapper = useRef();
@@ -76,18 +77,18 @@ export default function Header() {
               isLargeScreen={isLargeScreen}
             />
           </g>
-
-          {/* <Text
+          <Text
             y={10}
             width={titleWidth}
             scaleToFit={true}
             verticalAnchor="start"
-            fill="white"
+            fill="transparent"
           >
             Flags of Inequality
-          </Text> */}
+          </Text>
         </svg>
       </div>
+      <h1 className="sr-only">Flags of Inequality</h1>
       <p className="mt-10 text-lg text-center text-slate-300">
         <span className="font-bold">
           If countries had equal rights for their LGBTQ+ citizens, this
