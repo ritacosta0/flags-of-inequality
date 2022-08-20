@@ -6,6 +6,8 @@ import { flag } from "country-emoji";
 import { getData } from "../../data";
 import { useFlagDimensions } from "../../hooks/useFlagDimensions";
 import { Flag } from "../../components/Flag";
+import Link from "next/link";
+import { ArrowBack } from "@mui/icons-material";
 
 export default function Timeline() {
   const router = useRouter();
@@ -22,14 +24,17 @@ export default function Timeline() {
   }, []);
 
   return (
-    <div className="mt-4">
-      <h2 className="text-3xl font-medium text-slate-800 ">{`${
+    <div className={`w-full mx-auto ${isVertical ? "mt-4" : "mt-[30vh]"}`}>
+      <Link href="/#flags">
+        <span className="font-medium cursor-pointer text-slate-300 hover:text-slate-100">
+          <ArrowBack /> Back
+        </span>
+      </Link>
+      <h2 className="mt-8 text-4xl font-medium ">{`${
         flag(country) || ""
       } ${country}`}</h2>
       <div
-        className={`flex ${
-          isVertical ? "flex-col" : "flex-row"
-        }  w-10/12 gap-4 mt-4`}
+        className={`flex ${isVertical ? "flex-col" : "flex-row"}  gap-4 mt-10`}
         ref={flagsContainer}
       >
         {years.map((year) => (
