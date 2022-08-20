@@ -59,7 +59,7 @@ function Home() {
                   >
                     <Flag country={country} year={year} />
                     <div className="flex gap-2">
-                      <h3 className="font-medium">
+                      <h3 className="font-medium" aria-hidden>
                         {`${flag(country) || ""} ${country}`}{" "}
                         <span className="text-slate-400">{` | ${nth(
                           data.find(

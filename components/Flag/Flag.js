@@ -52,7 +52,24 @@ export default function Flag({ country, year, isInteractive = true }) {
 
   return (
     <div ref={chartWrapper} style={{ width: "100%", height: "100%" }}>
-      <svg width={dimensions.width} height={dimensions.height} ref={svgRef}>
+      <svg
+        width={dimensions.width}
+        height={dimensions.height}
+        ref={svgRef}
+        tabIndex={1}
+        aria-label={`Flag of ${
+          data[0].country
+        }. The coverage of LGBTQ+ rights is at ${
+          (data[0].asylum +
+            data[0].civil +
+            data[0].equality +
+            data[0].family +
+            data[0].gender +
+            data[0].hate +
+            (data[0].year == 2022 ? data[0].intersex : 0)) *
+          100
+        } out of 600 possible points.`}
+      >
         <Group
           top={dimensions.marginTop}
           left={dimensions.marginLeft}
@@ -99,7 +116,11 @@ export default function Flag({ country, year, isInteractive = true }) {
                     }}
                     onMouseEnter={() => setHoveredStripe(bar.key)}
                     onMouseLeave={() => setHoveredStripe(null)}
+                    onKeyDown={() => setHoveredStripe(bar.key)}
+                    onKeyUp={() => setHoveredStripe(null)}
                     className={isInteractive ? "cursor-pointer" : ""}
+                    tabIndex={1}
+                    aria-label={bar.key + data[0][hoveredStripe] * 100 + "%"}
                   />
                 ))
               )
