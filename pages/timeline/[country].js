@@ -20,6 +20,8 @@ export default function Timeline() {
     isVertical ? 1 : years.length
   );
 
+  const url = data.find((d) => d.year === 2022)?.url;
+
   useEffect(() => {
     const handleResize = () => {
       setIsVertical(window.innerWidth < 400);
@@ -42,7 +44,7 @@ export default function Timeline() {
         flag(country) || ""
       } ${country}`}</h2>
       <div className="my-4 cursor-pointer text-slate-400 hover:text-slate-300">
-        <a>
+        <a href={url}>
           <LinkIcon />
           <span className="ml-1 ">{`Read more on Rainbow Data 2022`}</span>
         </a>
