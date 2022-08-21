@@ -63,8 +63,7 @@ export default function Flag({
             data[0].equality +
             data[0].family +
             data[0].gender +
-            data[0].hate +
-            (data[0].year == 2022 ? data[0].intersex : 0)) *
+            data[0].hate) *
             100
         )} out of 600 possible points.`
       : `${data[0].country}. The coverage of LGBTQ+ rights is at ${Math.round(
@@ -73,8 +72,7 @@ export default function Flag({
             data[0].equality +
             data[0].family +
             data[0].gender +
-            data[0].hate +
-            (data[0].year == 2022 ? data[0].intersex : 0)) *
+            data[0].hate) *
             100
         )} out of 600 possible points.`;
 
@@ -142,8 +140,13 @@ export default function Flag({
                         }}
                         onMouseEnter={() => setHoveredStripe(bar.key)}
                         onMouseLeave={() => setHoveredStripe(null)}
-                        aria-label={bar.key + " " + data[0][hoveredStripe]}
                         className={isInteractive ? "cursor-pointer" : ""}
+                        aria-label={
+                          bar.key +
+                          " " +
+                          Math.round(data[0][bar.key] * 100) +
+                          "%"
+                        }
                       />
                     </Tippy>
                   ))
