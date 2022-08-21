@@ -13,7 +13,12 @@ import { getData } from "../../data";
 import { useChartDimensions } from "../../hooks/useChartDimensions";
 import Annotation from "./Annotation";
 
-export default function Flag({ country, year, isInteractive = true }) {
+export default function Flag({
+  country,
+  year,
+  isTimeline,
+  isInteractive = true,
+}) {
   const [chartWrapper, dimensions] = useChartDimensions({ marginBottom: 0 });
   const [hoveredStripe, setHoveredStripe] = useState(null);
 
@@ -50,9 +55,38 @@ export default function Flag({ country, year, isInteractive = true }) {
     range: RAINBOW_COLORS,
   });
 
+  const flagDescription =
+    isTimeline == "true"
+      ? `In ${data[0].year}, the coverage of LGBTQ+ rights is at ${Math.round(
+          (data[0].asylum +
+            data[0].civil +
+            data[0].equality +
+            data[0].family +
+            data[0].gender +
+            data[0].hate +
+            (data[0].year == 2022 ? data[0].intersex : 0)) *
+            100
+        )} out of 600 possible points.`
+      : `${data[0].country}. The coverage of LGBTQ+ rights is at ${Math.round(
+          (data[0].asylum +
+            data[0].civil +
+            data[0].equality +
+            data[0].family +
+            data[0].gender +
+            data[0].hate +
+            (data[0].year == 2022 ? data[0].intersex : 0)) *
+            100
+        )} out of 600 possible points.`;
+
   return (
     <div ref={chartWrapper} style={{ width: "100%", height: "100%" }}>
-      <svg width={dimensions.width} height={dimensions.height}>
+      <svg
+        width={dimensions.width}
+        height={dimensions.height}
+        tabIndex={0}
+        aria-label={flagDescription}
+        role={"button"}
+      >
         <Group top={dimensions.marginTop} left={dimensions.marginLeft}>
           <rect
             x={0}
@@ -107,6 +141,7 @@ export default function Flag({ country, year, isInteractive = true }) {
                       }}
                       onMouseEnter={() => setHoveredStripe(bar.key)}
                       onMouseLeave={() => setHoveredStripe(null)}
+                      aria-label={bar.key + " " + data[0][hoveredStripe]}
                       className={isInteractive ? "cursor-pointer" : ""}
                     />
                   </Tippy>
