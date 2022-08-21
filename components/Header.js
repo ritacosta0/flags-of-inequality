@@ -102,6 +102,9 @@ export default function Header() {
         . We make use of the rainbow flag to portray to what extent different
         dimensions of queer life are disregarded by state regulations.
       </p>
+      <p className="text-center text-sm m-5" tabIndex={0}>
+        By Rita Costa and Beatriz Malveiro
+      </p>
       <div className="mx-auto my-12 text-center">
         <ArrowDownwardIcon className=" fill-slate-400 animate-bounce" />
       </div>
