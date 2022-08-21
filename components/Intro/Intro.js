@@ -41,7 +41,7 @@ function Intro() {
                         fillOpacity:
                           isNull(currentStepIndex) ||
                           currentStepIndex === 0 ||
-                          currentStepIndex - 1 === index
+                          6 - currentStepIndex === index
                             ? 1
                             : 0.3,
                       }}

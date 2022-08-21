@@ -99,7 +99,7 @@ export default function Flag({
 
             <BarStack
               data={data}
-              keys={CATEGORIES_ORDERED_LIST}
+              keys={CATEGORIES_ORDERED_LIST.slice().reverse()}
               x={(d) => d.country}
               xScale={xScale}
               yScale={yScale}
