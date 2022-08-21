@@ -66,7 +66,7 @@ function Home() {
                         {`${flag(country) || ""} ${country}`}{" "}
                         <span className="text-slate-400">{` | ${nth(
                           data.find(
-                            (d) => d.country === country && d.year === 2022
+                            (d) => d.country === country && d.year === year
                           )?.ranking
                         )}`}</span>
                       </h3>
