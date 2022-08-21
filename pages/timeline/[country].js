@@ -10,6 +10,7 @@ import { Flag } from "../../components/Flag";
 import Link from "next/link";
 import { ArrowBack } from "@mui/icons-material";
 import { nth } from "../../utils";
+import Head from "next/head";
 
 export default function Timeline() {
   const router = useRouter();
@@ -36,6 +37,9 @@ export default function Timeline() {
 
   return (
     <div className={`w-full mx-auto ${isVertical ? "mt-4" : "mt-[30vh]"}`}>
+      <Head>
+        <title>{`${country} - Flags of Inequality`}</title>
+      </Head>
       <Link href="/#flags">
         <span
           className="font-medium cursor-pointer text-slate-300 hover:text-slate-100"
