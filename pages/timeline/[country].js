@@ -38,7 +38,7 @@ export default function Timeline() {
   return (
     <div className={`w-full mx-auto ${isVertical ? "mt-4" : "mt-[30vh]"}`}>
       <Head>
-        <title>{`${country} - Flags of Inequality`}</title>
+        <title>{`${country ?? "Loading"} - Flags of Inequality`}</title>
       </Head>
       <Link href="/#flags">
         <span
