@@ -29,6 +29,7 @@ function Intro() {
                 height={flagDimensions.height + 1}
               >
                 {currentStepIndex < 7 &&
+                  flagDimensions.height > 0 &&
                   RAINBOW_COLORS.map((color, index) => (
                     <motion.rect
                       key={index}

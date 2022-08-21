@@ -98,7 +98,7 @@ export default function Header() {
         dimensions of queer life are disregarded by state regulations.
       </p>
       <div className="mx-auto my-12 text-center">
-        <ArrowDownwardIcon className=" fill-slate-400" />
+        <ArrowDownwardIcon className=" fill-slate-400 animate-bounce" />
       </div>
     </div>
   );

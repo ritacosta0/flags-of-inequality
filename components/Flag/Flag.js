@@ -80,97 +80,99 @@ export default function Flag({
 
   return (
     <div ref={chartWrapper} style={{ width: "100%", height: "100%" }}>
-      <svg
-        width={dimensions.width}
-        height={dimensions.height}
-        tabIndex={0}
-        aria-label={flagDescription}
-        role={"button"}
-      >
-        <Group top={dimensions.marginTop} left={dimensions.marginLeft}>
-          <rect
-            x={0}
-            y={0}
-            height={dimensions.boundedHeight}
-            width={dimensions.boundedWidth}
-            className="fill-slate-900"
-          />
+      {dimensions.height > 0 && (
+        <svg
+          width={dimensions.width}
+          height={dimensions.height}
+          tabIndex={0}
+          aria-label={flagDescription}
+          role={"button"}
+        >
+          <Group top={dimensions.marginTop} left={dimensions.marginLeft}>
+            <rect
+              x={0}
+              y={0}
+              height={dimensions.boundedHeight}
+              width={dimensions.boundedWidth}
+              className="fill-slate-900"
+            />
 
-          <BarStack
-            data={data}
-            keys={CATEGORIES_ORDERED_LIST}
-            x={(d) => d.country}
-            xScale={xScale}
-            yScale={yScale}
-            color={colorScale}
-          >
-            {(stacks) =>
-              stacks.map((stack) =>
-                stack.bars.map((bar, index) => (
-                  <Tippy
-                    key={index}
-                    offset={[0, -45]}
-                    placement="right"
-                    animation="shift-away"
-                    duration={100}
-                    content={
-                      isInteractive ? (
-                        <Annotation
-                          color={colorScale(bar.key)}
-                          value={data[0][bar.key]}
-                        />
-                      ) : null
-                    }
-                  >
-                    <motion.rect
-                      x={0}
-                      y={bar.y}
-                      height={bar.height}
-                      width={dimensions.boundedWidth}
-                      initial={{
-                        fillOpacity: 1,
-                      }}
-                      animate={{
-                        fill: bar.color,
-                        fillOpacity:
-                          bar.key === hoveredStripe ||
-                          isNull(hoveredStripe) ||
-                          !isInteractive
-                            ? 1
-                            : 0.7,
-                      }}
-                      onMouseEnter={() => setHoveredStripe(bar.key)}
-                      onMouseLeave={() => setHoveredStripe(null)}
-                      aria-label={bar.key + " " + data[0][hoveredStripe]}
-                      className={isInteractive ? "cursor-pointer" : ""}
-                    />
-                  </Tippy>
-                ))
-              )
-            }
-          </BarStack>
-          <Line
-            from={{ x: 0, y: 0 }}
-            to={{ x: 0, y: dimensions.boundedHeight }}
-            className=" stroke-slate-300"
-          />
-          <Line
-            from={{ x: 0, y: dimensions.boundedHeight }}
-            to={{ x: dimensions.boundedWidth, y: dimensions.boundedHeight }}
-            className=" stroke-slate-300"
-          />
-          <Line
-            from={{ x: dimensions.boundedWidth, y: dimensions.boundedHeight }}
-            to={{ x: dimensions.boundedWidth, y: 0 }}
-            className=" stroke-slate-300"
-          />
-          <Line
-            from={{ x: dimensions.boundedWidth, y: 0 }}
-            to={{ x: 0, y: 0 }}
-            className=" stroke-slate-300"
-          />
-        </Group>
-      </svg>
+            <BarStack
+              data={data}
+              keys={CATEGORIES_ORDERED_LIST}
+              x={(d) => d.country}
+              xScale={xScale}
+              yScale={yScale}
+              color={colorScale}
+            >
+              {(stacks) =>
+                stacks.map((stack) =>
+                  stack.bars.map((bar, index) => (
+                    <Tippy
+                      key={index}
+                      offset={[0, -45]}
+                      placement="right"
+                      animation="shift-away"
+                      duration={100}
+                      content={
+                        isInteractive ? (
+                          <Annotation
+                            color={colorScale(bar.key)}
+                            value={data[0][bar.key]}
+                          />
+                        ) : null
+                      }
+                    >
+                      <motion.rect
+                        x={0}
+                        y={bar.y}
+                        height={bar.height}
+                        width={dimensions.boundedWidth}
+                        initial={{
+                          fillOpacity: 1,
+                        }}
+                        animate={{
+                          fill: bar.color,
+                          fillOpacity:
+                            bar.key === hoveredStripe ||
+                            isNull(hoveredStripe) ||
+                            !isInteractive
+                              ? 1
+                              : 0.7,
+                        }}
+                        onMouseEnter={() => setHoveredStripe(bar.key)}
+                        onMouseLeave={() => setHoveredStripe(null)}
+                        aria-label={bar.key + " " + data[0][hoveredStripe]}
+                        className={isInteractive ? "cursor-pointer" : ""}
+                      />
+                    </Tippy>
+                  ))
+                )
+              }
+            </BarStack>
+            <Line
+              from={{ x: 0, y: 0 }}
+              to={{ x: 0, y: dimensions.boundedHeight }}
+              className=" stroke-slate-300"
+            />
+            <Line
+              from={{ x: 0, y: dimensions.boundedHeight }}
+              to={{ x: dimensions.boundedWidth, y: dimensions.boundedHeight }}
+              className=" stroke-slate-300"
+            />
+            <Line
+              from={{ x: dimensions.boundedWidth, y: dimensions.boundedHeight }}
+              to={{ x: dimensions.boundedWidth, y: 0 }}
+              className=" stroke-slate-300"
+            />
+            <Line
+              from={{ x: dimensions.boundedWidth, y: 0 }}
+              to={{ x: 0, y: 0 }}
+              className=" stroke-slate-300"
+            />
+          </Group>
+        </svg>
+      )}
     </div>
   );
 }
