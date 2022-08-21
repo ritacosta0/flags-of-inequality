@@ -46,6 +46,9 @@ function Home() {
         <div
           className="flex flex-row flex-wrap justify-center gap-12"
           ref={flagsContainer}
+          aria-label={`Showing data from ${year}. Countries are sort ${
+            sortDict.type == "country" ? "alphabetically" : "by global ranking"
+          } and in ${sortDict.ascending ? "ascending" : "descending"} order.`}
         >
           {countries.map((country) => {
             return (
@@ -59,7 +62,7 @@ function Home() {
                   >
                     <Flag country={country} year={year} />
                     <div className="flex gap-2">
-                      <h3 className="font-medium">
+                      <h3 className="font-medium" aria-hidden>
                         {`${flag(country) || ""} ${country}`}{" "}
                         <span className="text-slate-400">{` | ${nth(
                           data.find(

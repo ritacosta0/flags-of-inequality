@@ -37,13 +37,17 @@ export default function Timeline() {
   return (
     <div className={`w-full mx-auto ${isVertical ? "mt-4" : "mt-[30vh]"}`}>
       <Link href="/#flags">
-        <span className="font-medium cursor-pointer text-slate-300 hover:text-slate-100">
+        <span
+          className="font-medium cursor-pointer text-slate-300 hover:text-slate-100"
+          aria-label="Press to go back to main page."
+        >
           <ArrowBack /> Back
         </span>
       </Link>
-      <h2 className="mt-8 text-4xl font-medium ">{`${
+      <h2 className="mt-8 text-4xl font-medium " aria-hidden>{`${
         flag(country) || ""
       } ${country}`}</h2>
+      <h2 className="sr-only">{`Timeline of ${country} from 2015 to 2022`}</h2>
       <div className="my-4 cursor-pointer text-slate-400 hover:text-slate-300">
         <a href={url}>
           <LinkIcon />
@@ -71,10 +75,10 @@ export default function Timeline() {
                 ...flagDimensions,
               }}
             >
-              <Flag country={country} year={year} />
+              <Flag country={country} year={year} isTimeline={"true"} />
             </Box>
             <div className="flex gap-2">
-              <h3> {year}</h3>
+              <h3 aria-hidden> {year}</h3>
               <h3 className="text-slate-400">{` | ${nth(
                 data.find((d) => d.year === year)?.ranking
               )}`}</h3>

@@ -95,6 +95,9 @@ export default function Controls({
       >
         <Stack direction="row" flexWrap="wrap">
           <SortButton
+            aria-label={`Sort by global ranking in ${
+              !orderRanking ? "ascending" : "descending"
+            } order.`}
             className="w-full my-1 lg:w-fit"
             onClick={handleClickRanking}
             variant="outlined"
@@ -109,6 +112,9 @@ export default function Controls({
             Sort by global ranking
           </SortButton>
           <SortButton
+            aria-label={`Sort alphabetically in ${
+              !orderAlphabetical ? "ascending" : "descending"
+            } order.`}
             className="w-full my-1 lg:w-fit lg:ml-4"
             onClick={handleClickAlphabetical}
             variant="outlined"
@@ -129,6 +135,8 @@ export default function Controls({
         </Stack>
         <Box className="w-full lg:w-1/2 xl:w-1/3">
           <YearsSlider
+            aria-label={`Use this slider to select a year from 2015 to 2020 to explore.`}
+            getAriaValueText={() => year}
             min={2015}
             value={year}
             max={2022}
@@ -146,7 +154,10 @@ export default function Controls({
           />
         </Box>
       </Stack>
-      <div className="flex flex-row justify-center gap-2 -mt-6 text-xs align-middle xl:justify-end text-slate-400 ">
+      <div
+        className="flex flex-row justify-center gap-2 -mt-6 text-xs align-middle xl:justify-end text-slate-400 "
+        aria-hidden
+      >
         Use the slider to select a year or
         <MouseIcon fontSize="small" />
         click on a flag to see how that it has changed over the years.
