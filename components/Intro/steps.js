@@ -99,25 +99,35 @@ export const Steps = [
   {
     index: 7,
     content: (
-      <span>
-        In the ideal flag, all the segments would be equally sized and
-        completely fill the area represented by this white border.
-        Unfortunately, no country has achieved full equality yet, so no flag is
-        complete.
-      </span>
+      <>
+        <span aria-hidden>
+          In the ideal flag, all the segments would be equally sized and
+          completely fill the area represented by this white border.
+          Unfortunately, no country has achieved full equality yet, so no flag
+          is complete.
+        </span>
+        <span className="sr-only">
+          In the ideal flag, all the segments would be equally sized and
+          completely fill the area of the flag. Unfortunately, no country has
+          achieved full equality yet, so no flag is complete.
+        </span>
+      </>
     ),
   },
   {
     index: 8,
     content: (
-      <span>
-        Take <span className="font-bold">Malta</span> for example. It is one of
-        the countries which is constantly on the top of the ranking. But because
-        it is lacking in some areas on{" "}
-        <span className="font-bold">Equality and non-discrimination</span> and
-        <span className="font-bold">Intersex bodily integrity</span> its flag is
-        still incomplete.
-      </span>
+      <>
+        <span>
+          Take <span className="font-bold">Malta</span> for example. It is one
+          of the countries which is constantly on the top of the ranking and
+          very close from full coverage of their LGBTQ+ citizens. But because it
+          is lacking in some areas on{" "}
+          <span className="font-bold">Equality and non-discrimination</span> and
+          <span className="font-bold">Intersex bodily integrity</span> its flag
+          is still incomplete.
+        </span>
+      </>
     ),
   },
   {
@@ -125,8 +135,8 @@ export const Steps = [
     content: (
       <span>
         On the other side of the spectrum, there are countries like{" "}
-        <span className="font-bold">Russia</span>, still a long way from full
-        equality.
+        <span className="font-bold">Russia</span>, with a barely visible flag,
+        still a long way from full equality.
       </span>
     ),
   },
