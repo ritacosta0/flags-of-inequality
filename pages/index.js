@@ -46,6 +46,9 @@ function Home() {
         <div
           className="flex flex-row flex-wrap justify-center gap-12"
           ref={flagsContainer}
+          aria-label={`Showing data from ${year}. Countries are sort ${
+            sortDict.type == "country" ? "alphabetically" : "by global ranking"
+          } and in ${sortDict.ascending ? "ascending" : "descending"} order.`}
         >
           {countries.map((country) => {
             return (

@@ -11,7 +11,12 @@ import { CATEGORIES_ORDERED_LIST, RAINBOW_COLORS } from "../../constants";
 import Annotation from "./Annotation";
 import { isNull } from "lodash";
 
-export default function Flag({ country, year, isInteractive = true }) {
+export default function Flag({
+  country,
+  year,
+  isTimeline,
+  isInteractive = true,
+}) {
   const [chartWrapper, dimensions] = useChartDimensions({ marginBottom: 0 });
   const [pointerPosition, setPointerPosition] = useState(null);
   const [hoveredStripe, setHoveredStripe] = useState(null);
@@ -50,16 +55,9 @@ export default function Flag({ country, year, isInteractive = true }) {
     range: RAINBOW_COLORS,
   });
 
-  return (
-    <div ref={chartWrapper} style={{ width: "100%", height: "100%" }}>
-      <svg
-        width={dimensions.width}
-        height={dimensions.height}
-        ref={svgRef}
-        tabIndex={1}
-        aria-label={`Flag of ${
-          data[0].country
-        }. The coverage of LGBTQ+ rights is at ${
+  const flagDescription =
+    isTimeline == "true"
+      ? `In ${data[0].year}, the coverage of LGBTQ+ rights is at ${Math.round(
           (data[0].asylum +
             data[0].civil +
             data[0].equality +
@@ -67,8 +65,28 @@ export default function Flag({ country, year, isInteractive = true }) {
             data[0].gender +
             data[0].hate +
             (data[0].year == 2022 ? data[0].intersex : 0)) *
-          100
-        } out of 600 possible points.`}
+            100
+        )} out of 600 possible points.`
+      : `${data[0].country}. The coverage of LGBTQ+ rights is at ${Math.round(
+          (data[0].asylum +
+            data[0].civil +
+            data[0].equality +
+            data[0].family +
+            data[0].gender +
+            data[0].hate +
+            (data[0].year == 2022 ? data[0].intersex : 0)) *
+            100
+        )} out of 600 possible points.`;
+
+  return (
+    <div ref={chartWrapper} style={{ width: "100%", height: "100%" }}>
+      <svg
+        width={dimensions.width}
+        height={dimensions.height}
+        ref={svgRef}
+        tabIndex={0}
+        aria-label={flagDescription}
+        role={"button"}
       >
         <Group
           top={dimensions.marginTop}
@@ -116,11 +134,8 @@ export default function Flag({ country, year, isInteractive = true }) {
                     }}
                     onMouseEnter={() => setHoveredStripe(bar.key)}
                     onMouseLeave={() => setHoveredStripe(null)}
-                    onKeyDown={() => setHoveredStripe(bar.key)}
-                    onKeyUp={() => setHoveredStripe(null)}
                     className={isInteractive ? "cursor-pointer" : ""}
-                    tabIndex={1}
-                    aria-label={bar.key + data[0][hoveredStripe] * 100 + "%"}
+                    aria-label={bar.key + " " + data[0][hoveredStripe]}
                   />
                 ))
               )
