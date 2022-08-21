@@ -1,21 +1,21 @@
-import React, { useMemo, useRef, useState } from "react";
+import Tippy from "@tippyjs/react";
 import { Group } from "@visx/group";
-import { BarStack, Line } from "@visx/shape";
 import { scaleLinear, scaleOrdinal } from "@visx/scale";
-import { localPoint } from "@visx/event";
+import { BarStack, Line } from "@visx/shape";
 import { motion } from "framer-motion";
+import { isNull } from "lodash";
+import React, { useMemo, useState } from "react";
 
+import "tippy.js/animations/shift-away.css";
+
+import { CATEGORIES_ORDERED_LIST, RAINBOW_COLORS } from "../../constants";
 import { getData } from "../../data";
 import { useChartDimensions } from "../../hooks/useChartDimensions";
-import { CATEGORIES_ORDERED_LIST, RAINBOW_COLORS } from "../../constants";
 import Annotation from "./Annotation";
-import { isNull } from "lodash";
 
 export default function Flag({ country, year, isInteractive = true }) {
   const [chartWrapper, dimensions] = useChartDimensions({ marginBottom: 0 });
-  const [pointerPosition, setPointerPosition] = useState(null);
   const [hoveredStripe, setHoveredStripe] = useState(null);
-  const svgRef = useRef();
 
   const data = useMemo(
     () =>
@@ -30,7 +30,7 @@ export default function Flag({ country, year, isInteractive = true }) {
   const yScale = useMemo(
     () =>
       scaleLinear({
-        domain: [0, 6], // 7 stripes in the flag
+        domain: [0, 6], // 6 stripes in the flag
         range: [dimensions.boundedHeight, 0],
       }),
     [dimensions.boundedHeight]
@@ -52,14 +52,8 @@ export default function Flag({ country, year, isInteractive = true }) {
 
   return (
     <div ref={chartWrapper} style={{ width: "100%", height: "100%" }}>
-      <svg width={dimensions.width} height={dimensions.height} ref={svgRef}>
-        <Group
-          top={dimensions.marginTop}
-          left={dimensions.marginLeft}
-          onMouseMove={(event) =>
-            setPointerPosition(localPoint(svgRef.current, event))
-          }
-        >
+      <svg width={dimensions.width} height={dimensions.height}>
+        <Group top={dimensions.marginTop} left={dimensions.marginLeft}>
           <rect
             x={0}
             y={0}
@@ -79,28 +73,43 @@ export default function Flag({ country, year, isInteractive = true }) {
             {(stacks) =>
               stacks.map((stack) =>
                 stack.bars.map((bar, index) => (
-                  <motion.rect
+                  <Tippy
                     key={index}
-                    x={0}
-                    y={bar.y}
-                    height={bar.height}
-                    width={dimensions.boundedWidth}
-                    initial={{
-                      fillOpacity: 1,
-                    }}
-                    animate={{
-                      fill: bar.color,
-                      fillOpacity:
-                        bar.key === hoveredStripe ||
-                        isNull(hoveredStripe) ||
-                        !isInteractive
-                          ? 1
-                          : 0.7,
-                    }}
-                    onMouseEnter={() => setHoveredStripe(bar.key)}
-                    onMouseLeave={() => setHoveredStripe(null)}
-                    className={isInteractive ? "cursor-pointer" : ""}
-                  />
+                    offset={[0, -45]}
+                    placement="right"
+                    animation="shift-away"
+                    duration={100}
+                    content={
+                      isInteractive ? (
+                        <Annotation
+                          color={colorScale(bar.key)}
+                          value={data[0][bar.key]}
+                        />
+                      ) : null
+                    }
+                  >
+                    <motion.rect
+                      x={0}
+                      y={bar.y}
+                      height={bar.height}
+                      width={dimensions.boundedWidth}
+                      initial={{
+                        fillOpacity: 1,
+                      }}
+                      animate={{
+                        fill: bar.color,
+                        fillOpacity:
+                          bar.key === hoveredStripe ||
+                          isNull(hoveredStripe) ||
+                          !isInteractive
+                            ? 1
+                            : 0.7,
+                      }}
+                      onMouseEnter={() => setHoveredStripe(bar.key)}
+                      onMouseLeave={() => setHoveredStripe(null)}
+                      className={isInteractive ? "cursor-pointer" : ""}
+                    />
+                  </Tippy>
                 ))
               )
             }
@@ -125,15 +134,6 @@ export default function Flag({ country, year, isInteractive = true }) {
             to={{ x: 0, y: 0 }}
             className=" stroke-slate-300"
           />
-          {isInteractive && hoveredStripe && pointerPosition && (
-            <Annotation
-              dimensions={dimensions}
-              pointerPosition={pointerPosition}
-              value={data[0][hoveredStripe]}
-              label={hoveredStripe}
-              color={colorScale(hoveredStripe)}
-            />
-          )}
         </Group>
       </svg>
     </div>
