@@ -123,7 +123,7 @@ export const Steps = [
           of the countries which is constantly on the top of the ranking and
           very close from full coverage of their LGBTQ+ citizens. But because it
           is lacking in some areas on{" "}
-          <span className="font-bold">Equality and non-discrimination</span> and
+          <span className="font-bold">Equality and non-discrimination</span> and{" "}
           <span className="font-bold">Intersex bodily integrity</span> its flag
           is still incomplete.
         </span>
