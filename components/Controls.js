@@ -93,7 +93,7 @@ export default function Controls({
         my={4}
         className="justify-center xl:justify-between"
       >
-        <Stack direction="row" flexWrap="wrap">
+        <Stack direction="row" flexWrap="wrap" gap={1}>
           <SortButton
             aria-label={`Sort by global ranking in ${
               !orderRanking ? "ascending" : "descending"
@@ -115,7 +115,7 @@ export default function Controls({
             aria-label={`Sort alphabetically in ${
               !orderAlphabetical ? "ascending" : "descending"
             } order.`}
-            className="w-full my-1 lg:w-fit lg:ml-4"
+            className="w-full my-1 lg:w-fit"
             onClick={handleClickAlphabetical}
             variant="outlined"
             size="small"
