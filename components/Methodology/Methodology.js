@@ -24,6 +24,13 @@ function Methodology() {
           first set of information is used in the construction of the different
           flags, where the size is proportional to how accomplished the
           countries are in the promotion of equality for their LGBTQ+ community.
+          In 2022, Rainbow Data introduced "Intersex bodily integrity" as a
+          seventh category. Criteria covered in this category was previously
+          part of "Legal gender recognition and bodily integrity". To allow
+          comparison across different years, we merged the new category with
+          "Legal gender recognition" for the year 2022. To do so, we calculated
+          the weighted average of the two categories based on the number of
+          criteria covered by each.
         </p>
       </div>
     </div>
