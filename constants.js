@@ -17,6 +17,15 @@ export const CATEGORIES_ORDERED_LIST = [
   CATEGORIES.ASYLUM,
 ];
 
+export const CATEGORIES_FULL_NAME = [
+  "Equality and non-discrimination",
+  "Family",
+  "Hate crime and hate speech",
+  "Legal gender recognition & Intersex bodily integrity",
+  "Civil society space",
+  "Asylum",
+];
+
 export const RAINBOW_COLORS = [
   "#E94A40",
   "#FFA43F",

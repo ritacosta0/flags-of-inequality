@@ -10,6 +10,7 @@ import { getData } from "../data";
 import { useFlagDimensions } from "../hooks/useFlagDimensions";
 import { Intro } from "../components/Intro";
 import { Methodology } from "../components/Methodology";
+import Legend from "../components/Legend";
 import { nth } from "../utils";
 import Head from "next/head";
 
@@ -47,6 +48,7 @@ function Home() {
           sortDict={sortDict}
           setSortDict={setSortDict}
         />
+        <Legend></Legend>
         <div
           className="flex flex-row flex-wrap justify-center gap-12"
           ref={flagsContainer}
