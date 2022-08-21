@@ -30,27 +30,25 @@ function Intro() {
               >
                 {currentStepIndex < 7 &&
                   flagDimensions.height > 0 &&
-                  RAINBOW_COLORS.slice()
-                    .reverse()
-                    .map((color, index) => (
-                      <motion.rect
-                        key={color}
-                        width={flagDimensions.width}
-                        height={flagDimensions.height / 6}
-                        y={(flagDimensions.height / 6) * index}
-                        fill={color}
-                        animate={{
-                          fillOpacity:
-                            isNull(currentStepIndex) ||
-                            currentStepIndex === 0 ||
-                            currentStepIndex - 1 === index
-                              ? 1
-                              : 0.3,
-                        }}
-                        exit={{ fillOpacity: 0 }}
-                        transition={{ ease: "easeOut" }}
-                      />
-                    ))}
+                  RAINBOW_COLORS.map((color, index) => (
+                    <motion.rect
+                      key={color}
+                      width={flagDimensions.width}
+                      height={flagDimensions.height / 6}
+                      y={(flagDimensions.height / 6) * index}
+                      fill={color}
+                      animate={{
+                        fillOpacity:
+                          isNull(currentStepIndex) ||
+                          currentStepIndex === 0 ||
+                          currentStepIndex - 1 === index
+                            ? 1
+                            : 0.3,
+                      }}
+                      exit={{ fillOpacity: 0 }}
+                      transition={{ ease: "easeOut" }}
+                    />
+                  ))}
 
                 {currentStepIndex >= 7 && currentStepIndex < 10 && (
                   <g>

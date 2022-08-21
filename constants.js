@@ -24,4 +24,4 @@ export const RAINBOW_COLORS = [
   "#F8D92B",
   "#FFA43F",
   "#E94A40",
-];
+].reverse();
