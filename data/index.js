@@ -76,7 +76,15 @@ const wideData = tidy(
   pivotWider({
     namesFrom: "category",
     valuesFrom: "value",
-  })
+  }),
+  mutate({
+    gender: (d) =>
+      !isUndefined(d.intersex)
+        ? // there are 4 intersex requirements and 13 gender requirements, 17 in total
+          Math.round(d.intersex * (4 / 17) + d.gender * (13 / 17) * 100) / 100
+        : d.gender,
+  }),
+  select(["-intersex"])
 );
 
 const filterContext = (datum, countries, years) => {

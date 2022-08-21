@@ -14,13 +14,13 @@ export const Steps = [
     index: 0,
     content: (
       <span>
-        First, let's learn how to interpret the flags. <br /> Each has six
-        colors: <Highlight color={RAINBOW_COLORS[0]}>purple</Highlight>,{" "}
-        <Highlight color={RAINBOW_COLORS[1]}>blue</Highlight>,
-        <Highlight color={RAINBOW_COLORS[2]}>green</Highlight>,
-        <Highlight color={RAINBOW_COLORS[3]}>yellow</Highlight>,
-        <Highlight color={RAINBOW_COLORS[4]}>orange</Highlight> and
-        <Highlight color={RAINBOW_COLORS[5]}>red</Highlight>. Every segment has
+        First, let&apos;s learn how to interpret the flags. <br /> Each has six
+        colors: <Highlight color={RAINBOW_COLORS[5]}>purple</Highlight>,{" "}
+        <Highlight color={RAINBOW_COLORS[4]}>blue</Highlight>,
+        <Highlight color={RAINBOW_COLORS[3]}>green</Highlight>,
+        <Highlight color={RAINBOW_COLORS[2]}>yellow</Highlight>,
+        <Highlight color={RAINBOW_COLORS[1]}>orange</Highlight> and
+        <Highlight color={RAINBOW_COLORS[0]}>red</Highlight>. Every segment has
         the same width and height. We match these to the categories that ILGA
         assesses in its reports.
       </span>
@@ -30,7 +30,7 @@ export const Steps = [
     index: 1,
     content: (
       <span>
-        In our metaphor, <Highlight color={RAINBOW_COLORS[0]}>purple</Highlight>{" "}
+        In our metaphor, <Highlight color={RAINBOW_COLORS[5]}>purple</Highlight>{" "}
         represents the <span className="font-bold ">Asylum</span> category. This
         looks at how LGBTQ+ asylum seekers are treated in each country.
       </span>
@@ -40,7 +40,7 @@ export const Steps = [
     index: 2,
     content: (
       <span>
-        With <Highlight color={RAINBOW_COLORS[1]}>blue</Highlight>, we encode
+        With <Highlight color={RAINBOW_COLORS[4]}>blue</Highlight>, we encode
         the <span className="font-bold ">Civil society space</span> category. It
         covers the ability for organizations to safely operate; the organization
         of public events; freedom of expression; and funding laws.
@@ -51,9 +51,9 @@ export const Steps = [
     index: 3,
     content: (
       <span>
-        The <Highlight color={RAINBOW_COLORS[2]}>green</Highlight> covers the
+        The <Highlight color={RAINBOW_COLORS[3]}>green</Highlight> covers the
         protection of{" "}
-        <span className="font-bold ">Legal gender recognition</span> and{" "}
+        <span className="font-bold">Legal gender recognition</span> and{" "}
         <span className="font-bold ">Intersex bodily integrity</span>. Up until
         2022, this used to be a single category but was split in two this year.
         For consistency among years, we decided to keep these categories
@@ -65,7 +65,7 @@ export const Steps = [
     index: 4,
     content: (
       <span>
-        <Highlight color={RAINBOW_COLORS[3]}>yellow</Highlight> depicts the
+        <Highlight color={RAINBOW_COLORS[2]}>yellow</Highlight> depicts the
         protection (or lack of) against{" "}
         <span className="font-bold">hate crime and hate speech</span>.
       </span>
@@ -75,7 +75,7 @@ export const Steps = [
     index: 5,
     content: (
       <span>
-        <Highlight color={RAINBOW_COLORS[4]}>orange</Highlight> covers the
+        <Highlight color={RAINBOW_COLORS[1]}>orange</Highlight> covers the
         recognition of <span className="font-bold">LGBTQ+ families</span> by
         assessing if there are rights such as marriage equality or joint
         adoption, for example.
@@ -86,7 +86,7 @@ export const Steps = [
     index: 6,
     content: (
       <span>
-        And lastly, <Highlight color={RAINBOW_COLORS[5]}>red</Highlight>{" "}
+        And lastly, <Highlight color={RAINBOW_COLORS[0]}>red</Highlight>{" "}
         represents{" "}
         <span className="font-bold">Equality and non-discrimination</span>. It
         encompasses the constitutional protection of rights such as
@@ -123,9 +123,20 @@ export const Steps = [
           of the countries which is constantly on the top of the ranking and
           very close from full coverage of their LGBTQ+ citizens. But because it
           is lacking in some areas on{" "}
-          <span className="font-bold">Equality and non-discrimination</span> and
-          <span className="font-bold">Intersex bodily integrity</span> its flag
-          is still incomplete.
+          <span
+            className="font-bold underline"
+            style={{ textDecorationColor: RAINBOW_COLORS[0] }}
+          >
+            Equality and non-discrimination
+          </span>{" "}
+          and{" "}
+          <span
+            className="font-bold underline"
+            style={{ textDecorationColor: RAINBOW_COLORS[3] }}
+          >
+            Intersex bodily integrity
+          </span>{" "}
+          its flag is still incomplete.
         </span>
       </>
     ),

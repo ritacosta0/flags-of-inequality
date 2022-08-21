@@ -11,6 +11,7 @@ import { useFlagDimensions } from "../hooks/useFlagDimensions";
 import { Intro } from "../components/Intro";
 import { Methodology } from "../components/Methodology";
 import { nth } from "../utils";
+import Head from "next/head";
 
 function Home() {
   const [year, setYear] = useState(2022);
@@ -31,6 +32,9 @@ function Home() {
 
   return (
     <>
+      <Head>
+        <title>Flags of Inequality</title>
+      </Head>
       <Intro />
       <div id="flags" className="py-4">
         <Controls
@@ -66,7 +70,7 @@ function Home() {
                         {`${flag(country) || ""} ${country}`}{" "}
                         <span className="text-slate-400">{` | ${nth(
                           data.find(
-                            (d) => d.country === country && d.year === 2022
+                            (d) => d.country === country && d.year === year
                           )?.ranking
                         )}`}</span>
                       </h3>

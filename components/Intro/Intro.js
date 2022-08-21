@@ -29,18 +29,19 @@ function Intro() {
                 height={flagDimensions.height + 1}
               >
                 {currentStepIndex < 7 &&
+                  flagDimensions.height > 0 &&
                   RAINBOW_COLORS.map((color, index) => (
                     <motion.rect
-                      key={index}
+                      key={color}
                       width={flagDimensions.width}
                       height={flagDimensions.height / 6}
-                      y={(flagDimensions.height / 6) * (5 - index) + 1}
+                      y={(flagDimensions.height / 6) * index}
                       fill={color}
                       animate={{
                         fillOpacity:
                           isNull(currentStepIndex) ||
                           currentStepIndex === 0 ||
-                          currentStepIndex - 1 === index
+                          6 - currentStepIndex === index
                             ? 1
                             : 0.3,
                       }}
