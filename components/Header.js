@@ -51,7 +51,7 @@ export default function Header() {
         <svg width={titleWidth} className="h-[20vh]" ref={title} aria-hidden>
           <defs>
             <linearGradient id="rainbow">
-              {RAINBOW_COLORS.reverse().map((color, index) => (
+              {RAINBOW_COLORS.map((color, index) => (
                 <stop
                   key={index}
                   offset={`${(100 / RAINBOW_COLORS.length) * index}%`}
