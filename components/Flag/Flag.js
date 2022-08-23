@@ -94,7 +94,10 @@ export default function Flag({
         )} out of 600 possible points.`;
 
   return (
-    <div ref={chartWrapper} style={{ width: "100%", height: "100%" }}>
+    <div
+      ref={chartWrapper}
+      style={{ width: "100%", height: "100%", overflow: "visible" }}
+    >
       {dimensions.height > 0 && (
         <svg
           width={dimensions.width}

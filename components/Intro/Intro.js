@@ -20,8 +20,8 @@ function Intro() {
     <div className="w-10/12 mx-auto mt-10 lg:w-3/4">
       <Header />
       <div className="mt-[20vh] lg:w-8/12 mx-auto">
-        <div className="sticky top-1/4">
-          <div ref={flagsContainer} className="z-0 mx-4 my-6 ">
+        <div className="sticky z-0 top-1/4 ">
+          <div ref={flagsContainer} className="mx-4 my-6 ">
             <AnimatePresence>
               (
               <svg
