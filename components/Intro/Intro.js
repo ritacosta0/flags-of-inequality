@@ -8,6 +8,8 @@ import { Flag } from "../Flag";
 import { AnimatePresence, motion } from "framer-motion";
 import Header from "../Header";
 
+import styles from "./Intro.module.css";
+
 function Intro() {
   const [currentStepIndex, setCurrentStepIndex] = useState(null);
   const [flagsContainer, flagDimensions] = useFlagDimensions(1);
@@ -98,7 +100,7 @@ function Intro() {
           {Steps.map((step) => (
             <Step data={step.index} key={step.index}>
               <motion.div
-                className="h-screen mt-[50vh] z-20"
+                className={`h-screen mt-[50vh] z-20 ${styles.fixZ}`}
                 initial={false}
                 animate={{
                   opacity: step.index === currentStepIndex ? 1 : 0.4,
