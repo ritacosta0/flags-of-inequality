@@ -50,7 +50,7 @@ function Home() {
         />
         <Legend></Legend>
         <div
-          className="flex flex-row flex-wrap justify-center gap-12"
+          className="flex flex-row flex-wrap justify-center gap-x-10 gap-y-20"
           ref={flagsContainer}
           aria-label={`Showing data from ${year}. Countries are sort ${
             sortDict.type == "country" ? "alphabetically" : "by global ranking"
@@ -68,7 +68,7 @@ function Home() {
                     }}
                   >
                     <Flag country={country} year={year} />
-                    <div className="flex gap-2">
+                    <div className="flex gap-2 mt-2">
                       <h3 className="font-medium" aria-hidden>
                         {`${flag(country) || ""} ${country}`}{" "}
                         <span className="text-slate-400">{` | ${nth(

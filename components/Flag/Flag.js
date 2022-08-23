@@ -1,7 +1,7 @@
 import Tippy from "@tippyjs/react";
 import { Group } from "@visx/group";
-import { scaleLinear, scaleOrdinal } from "@visx/scale";
-import { BarStack, Line } from "@visx/shape";
+import { scaleLinear, scaleBand, scaleOrdinal } from "@visx/scale";
+import { BarStack, BarStackHorizontal, Line } from "@visx/shape";
 import { motion } from "framer-motion";
 import { isNull } from "lodash";
 import React, { useMemo, useState } from "react";
@@ -18,9 +18,13 @@ export default function Flag({
   year,
   isTimeline,
   isInteractive = true,
+  orientation = "horizontal",
 }) {
   const [chartWrapper, dimensions] = useChartDimensions({ marginBottom: 0 });
   const [hoveredStripe, setHoveredStripe] = useState(null);
+
+  const FlagStripeStack =
+    orientation === "horizontal" ? BarStack : BarStackHorizontal;
 
   const data = useMemo(
     () =>
@@ -32,23 +36,36 @@ export default function Flag({
     [country, year]
   );
 
-  const yScale = useMemo(
-    () =>
-      scaleLinear({
-        domain: [0, 6], // 6 stripes in the flag
-        range: [dimensions.boundedHeight, 0],
-      }),
-    [dimensions.boundedHeight]
-  );
+  const flagScale = scaleBand({
+    domain: [data.map((d) => d.country)[0]],
+    range: [
+      0,
+      orientation === "horizontal"
+        ? dimensions.boundedWidth
+        : dimensions.boundedHeight,
+    ],
+  });
 
-  const xScale = useMemo(
-    () =>
-      scaleLinear({
-        domain: [0, 1],
-        range: [0, dimensions.boundedWidth],
-      }),
-    [dimensions.boundedWidth]
-  );
+  const stripeScale = scaleLinear({
+    domain: [0, 6], // 6 stripes in the flag
+    range:
+      orientation === "horizontal"
+        ? [dimensions.boundedHeight, 0]
+        : [0, dimensions.boundedWidth],
+  });
+
+  const stackProps =
+    orientation === "horizontal"
+      ? {
+          x: (d) => d.country,
+          xScale: flagScale,
+          yScale: stripeScale,
+        }
+      : {
+          y: (d) => d.country,
+          xScale: stripeScale,
+          yScale: flagScale,
+        };
 
   const colorScale = scaleOrdinal({
     domain: CATEGORIES_ORDERED_LIST,
@@ -95,13 +112,11 @@ export default function Flag({
               className="fill-slate-900"
             />
 
-            <BarStack
+            <FlagStripeStack
               data={data}
               keys={CATEGORIES_ORDERED_LIST.slice().reverse()}
-              x={(d) => d.country}
-              xScale={xScale}
-              yScale={yScale}
               color={colorScale}
+              {...stackProps}
             >
               {(stacks) =>
                 stacks.map((stack) =>
@@ -122,10 +137,10 @@ export default function Flag({
                       }
                     >
                       <motion.rect
-                        x={0}
+                        x={bar.x}
                         y={bar.y}
                         height={bar.height}
-                        width={dimensions.boundedWidth}
+                        width={bar.width}
                         initial={{
                           fillOpacity: 1,
                         }}
@@ -152,7 +167,7 @@ export default function Flag({
                   ))
                 )
               }
-            </BarStack>
+            </FlagStripeStack>
             <Line
               from={{ x: 0, y: 0 }}
               to={{ x: 0, y: dimensions.boundedHeight }}

@@ -94,7 +94,7 @@ function Intro() {
             </AnimatePresence>
           </div>
         </div>
-        <Scrollama onStepEnter={onStepEnter} offset={0.9}>
+        <Scrollama onStepEnter={onStepEnter} offset={1}>
           {Steps.map((step) => (
             <Step data={step.index} key={step.index}>
               <motion.div
