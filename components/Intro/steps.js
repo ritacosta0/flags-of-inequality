@@ -113,8 +113,8 @@ export const Steps = [
         <span>
           Take <span className="font-bold">Malta</span> for example. It is one
           of the countries which is constantly on the top of the ranking and
-          very close from full coverage of their LGBTQ+ citizens. But because it
-          is lacking in some areas on{" "}
+          very close to full coveraging the rights of their LGBTQ+ citizens. But
+          because it is lacking in some areas on{" "}
           <span
             className="font-bold underline"
             style={{ textDecorationColor: RAINBOW_COLORS[0] }}
