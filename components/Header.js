@@ -96,7 +96,7 @@ export default function Header() {
         tabIndex={0}
       >
         <span className="font-bold">
-          If countries had equal rights for their LGBTQ+ citizens, this
+          If countries had equal rights for their LGBTQ+ citizens this
           visualization would not exist
         </span>
         . We make use of the rainbow flag to portray to what extent different

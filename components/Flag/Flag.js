@@ -74,7 +74,7 @@ export default function Flag({
 
   const flagDescription =
     isTimeline == "true"
-      ? `In ${data[0].year}, the coverage of LGBTQ+ rights is at ${Math.round(
+      ? `In ${data[0].year}, the coverage of LGBTQ+ rights was at ${Math.round(
           (data[0].asylum +
             data[0].civil +
             data[0].equality +
@@ -82,8 +82,12 @@ export default function Flag({
             data[0].gender +
             data[0].hate) *
             100
-        )} out of 600 possible points.`
-      : `${data[0].country}. The coverage of LGBTQ+ rights is at ${Math.round(
+        )} out of 600 possible points. ${
+          data[0].ranking
+        } in the global ranking. `
+      : `${data[0].country}. ${
+          data[0].ranking
+        } in the global ranking. The coverage of LGBTQ+ rights is at ${Math.round(
           (data[0].asylum +
             data[0].civil +
             data[0].equality +

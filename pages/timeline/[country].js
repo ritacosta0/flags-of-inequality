@@ -45,11 +45,13 @@ export default function Timeline() {
         <span
           className="font-medium cursor-pointer text-slate-300 hover:text-slate-100"
           aria-label="Press to go back to main page."
+          tabIndex={0}
+          role={"button"}
         >
           <ArrowBack /> Back
         </span>
       </Link>
-      <h2 className="mt-8 text-4xl font-medium " aria-hidden>{`${
+      <h2 className="mt-8 text-4xl font-medium " tabIndex={0}>{`${
         flag(country) || ""
       } ${country}`}</h2>
       <h2 className="sr-only">{`Timeline of ${country} from 2015 to 2022`}</h2>
