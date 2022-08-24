@@ -1,13 +1,5 @@
 import { RAINBOW_COLORS } from "../../constants";
-
-const Highlight = ({ color, children }) => (
-  <span
-    className=" inline-block text-white text-xs font-semibold mx-1 px-2.5 py-0.5 rounded"
-    style={{ backgroundColor: color }}
-  >
-    {children}
-  </span>
-);
+import Highlight from "../Highlight";
 
 export const Steps = [
   {

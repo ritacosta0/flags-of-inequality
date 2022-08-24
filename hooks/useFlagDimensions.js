@@ -10,9 +10,13 @@ const flagsPerRowBreakpoints = {
 const GOLDEN_RATIO = 1.618;
 const FLAG_SPACING = 8;
 
-const getFlagWidth = (containerWidth, flagsPerRow) => {
+const getFlagWidth = (containerWidth, flagsPerRow, customWidthCalculation) => {
   const calculateWidth = (flagCount) =>
     Math.floor((containerWidth - (flagCount - 1) * FLAG_SPACING) / flagCount);
+
+  if (customWidthCalculation) {
+    return customWidthCalculation(containerWidth);
+  }
 
   if (flagsPerRow) {
     return calculateWidth(flagsPerRow);
@@ -29,7 +33,7 @@ const getFlagWidth = (containerWidth, flagsPerRow) => {
   return calculateWidth(flagsPerRowBreakpoints["default"]);
 };
 
-export const useFlagDimensions = (flagsPerRow) => {
+export const useFlagDimensions = (flagsPerRow, customWidthCalculation) => {
   const ref = useRef();
   const [width, changeWidth] = useState(0);
 
@@ -41,16 +45,21 @@ export const useFlagDimensions = (flagsPerRow) => {
       if (!entries.length) return;
 
       const entry = entries[0];
+      console.log(entry);
 
-      const flagWidth = getFlagWidth(entry.contentRect.width, flagsPerRow);
-
+      const flagWidth = getFlagWidth(
+        entry.contentRect.width,
+        flagsPerRow,
+        customWidthCalculation
+      );
+      console.log(flagWidth);
       if (width !== flagWidth) changeWidth(flagWidth);
     });
 
     resizeObserver.observe(element);
 
     return () => resizeObserver.unobserve(element);
-  }, []);
+  }, [flagsPerRow]);
 
   const newDimensions = {
     width,

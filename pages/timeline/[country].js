@@ -19,14 +19,15 @@ export default function Timeline() {
   const data = useMemo(() => getData({ countries: [country] }), [country]);
   const years = data.map((d) => d.year).sort();
   const [flagsContainer, flagDimensions] = useFlagDimensions(
-    isVertical ? 1 : years.length
+    isVertical ? 1 : years.length,
+    isVertical ? (containerWidth) => containerWidth * 0.8 : null
   );
 
   const url = data.find((d) => d.year === 2022)?.url;
 
   useEffect(() => {
     const handleResize = () => {
-      setIsVertical(window.innerWidth < 400);
+      setIsVertical(window.innerWidth < window.innerHeight);
     };
     window.addEventListener("resize", handleResize);
     // Call handler right away so state gets updated with initial window size
@@ -67,25 +68,34 @@ export default function Timeline() {
         {years.map((year) => (
           <div
             key={`${country}-${year}`}
-            className={`flex ${
-              isVertical ? "flex-row-reverse justify-end" : "flex-col"
-            } gap-4`}
-            style={isVertical ? { marginTop: "20%" } : {}}
+            className={`flex ${isVertical ? "flex-row" : "flex-col"} gap-4`}
           >
             <Box
-              /* This rotation doesn't work particularly well for the layout. @TODO: implement rotation prop on Flag. */
-              className={isVertical && "rotate-90"}
               sx={{
-                ...flagDimensions,
+                width: isVertical
+                  ? flagDimensions.height
+                  : flagDimensions.width,
+                height: isVertical
+                  ? flagDimensions.width
+                  : flagDimensions.height,
               }}
             >
-              <Flag country={country} year={year} isTimeline={"true"} />
+              <Flag
+                country={country}
+                year={year}
+                isTimeline={"true"}
+                orientation={isVertical ? "vertical" : "horizontal"}
+              />
             </Box>
-            <div className="flex gap-2">
-              <h3 aria-hidden> {year}</h3>
-              <h3 className="text-slate-400">{` | ${nth(
-                data.find((d) => d.year === year)?.ranking
-              )}`}</h3>
+            <div className="flex gap-2 ">
+              <h3 aria-hidden>
+                {" "}
+                {year}{" "}
+                <span className="text-slate-400">{` | ${nth(
+                  data.find((d) => d.year === year)?.ranking
+                )}`}</span>
+              </h3>
+              <h3></h3>
             </div>
           </div>
         ))}

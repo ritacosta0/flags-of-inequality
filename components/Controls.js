@@ -93,7 +93,7 @@ export default function Controls({
         my={4}
         className="justify-center xl:justify-between"
       >
-        <Stack direction="row" flexWrap="wrap">
+        <div className="flex flex-row flex-wrap gap-1 lg:gap-2">
           <SortButton
             aria-label={`Sort by global ranking in ${
               !orderRanking ? "ascending" : "descending"
@@ -132,7 +132,7 @@ export default function Controls({
           >
             Sort alphabetically
           </SortButton>
-        </Stack>
+        </div>
         <Box className="w-full lg:w-1/2 xl:w-1/3">
           <YearsSlider
             aria-label={`Use this slider to select a year from 2015 to 2020 to explore.`}

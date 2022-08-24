@@ -8,6 +8,8 @@ import { Flag } from "../Flag";
 import { AnimatePresence, motion } from "framer-motion";
 import Header from "../Header";
 
+import styles from "./Intro.module.css";
+
 function Intro() {
   const [currentStepIndex, setCurrentStepIndex] = useState(null);
   const [flagsContainer, flagDimensions] = useFlagDimensions(1);
@@ -20,8 +22,8 @@ function Intro() {
     <div className="w-10/12 mx-auto mt-10 lg:w-3/4">
       <Header />
       <div className="mt-[20vh] lg:w-8/12 mx-auto">
-        <div className="sticky top-1/4">
-          <div ref={flagsContainer} className="z-0 mx-4 my-6 ">
+        <div className="sticky z-0 top-1/4 ">
+          <div ref={flagsContainer} className="mx-4 my-6 ">
             <AnimatePresence>
               (
               <svg
@@ -94,11 +96,11 @@ function Intro() {
             </AnimatePresence>
           </div>
         </div>
-        <Scrollama onStepEnter={onStepEnter} offset={0.9}>
+        <Scrollama onStepEnter={onStepEnter} offset={1}>
           {Steps.map((step) => (
             <Step data={step.index} key={step.index}>
               <motion.div
-                className="h-screen mt-[50vh] z-20"
+                className={`h-screen mt-[50vh] z-20 ${styles.fixZ}`}
                 initial={false}
                 animate={{
                   opacity: step.index === currentStepIndex ? 1 : 0.4,
