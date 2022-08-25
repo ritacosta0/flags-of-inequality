@@ -2,6 +2,7 @@ import Tippy from "@tippyjs/react";
 import { Group } from "@visx/group";
 import { scaleLinear, scaleBand, scaleOrdinal } from "@visx/scale";
 import { BarStack, BarStackHorizontal, Line } from "@visx/shape";
+import { colord } from "colord";
 import { motion } from "framer-motion";
 import { isNull } from "lodash";
 import React, { useMemo, useState } from "react";
@@ -149,20 +150,28 @@ export default function Flag({
                         height={bar.height}
                         width={bar.width}
                         initial={{
-                          fillOpacity: 1,
+                          fillOpacity: 0.9,
                         }}
                         animate={{
                           fill: bar.color,
+                          stroke: null,
                           fillOpacity:
                             bar.key === hoveredStripe ||
                             isNull(hoveredStripe) ||
                             !isInteractive
                               ? 1
-                              : 0.7,
+                              : 0.75,
                         }}
+                        whileFocus={{
+                          stroke: colord(bar.color).darken(0.25).toHex(),
+                          strokeWidth: 3,
+                          strokeLinecap: "square",
+                          transition: { duration: 0.5 },
+                        }}
+                        style={{ outline: "none" }}
                         onMouseEnter={() => setHoveredStripe(bar.key)}
                         onMouseLeave={() => setHoveredStripe(null)}
-                        className={isInteractive ? "cursor-pointer" : ""}
+                        className={`${isInteractive ? "cursor-pointer" : ""}`}
                         aria-label={
                           bar.key +
                           " " +
