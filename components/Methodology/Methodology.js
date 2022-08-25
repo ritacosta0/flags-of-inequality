@@ -1,3 +1,5 @@
+import { RainbowLink } from "../RainbowLink";
+
 function Methodology() {
   return (
     <div className="mx-auto mt-20 mb-10 text-slate-400 ">
@@ -5,14 +7,11 @@ function Methodology() {
       <h3 className="my-6 text-2xl font-medium text-center">Methodology</h3>
       <div className="mx-auto text-xs text-justify lg:w-8/12">
         <p>
-          The data in this project comes from ILGA-Europe&apos;s yearly{" "}
-          <a
-            className="text-blue-400 underline hover:text-blue-300"
-            href="https://www.ilga-europe.org/rainbow-europe/"
-          >
+          The data in this project comes from ILGA-Europe&apos;s yearly
+          <RainbowLink href="https://www.ilga-europe.org/rainbow-europe/">
             Rainbow Index
-          </a>
-          . Because data is not currently made available in a manageable format,
+          </RainbowLink>
+          Because data is not currently made available in a manageable format,
           we scraped it from the website for the years between 2015 to 2022. All
           the raw data and the scrapper code is made available in the
           project&apos;s repository.

@@ -45,14 +45,12 @@ export const useFlagDimensions = (flagsPerRow, customWidthCalculation) => {
       if (!entries.length) return;
 
       const entry = entries[0];
-      console.log(entry);
 
       const flagWidth = getFlagWidth(
         entry.contentRect.width,
         flagsPerRow,
         customWidthCalculation
       );
-      console.log(flagWidth);
       if (width !== flagWidth) changeWidth(flagWidth);
     });
 

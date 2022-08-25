@@ -1,5 +1,15 @@
 import { RAINBOW_COLORS } from "../../constants";
 import Highlight from "../Highlight";
+import { flag } from "country-emoji";
+
+const Underline = ({ color, children }) => (
+  <span
+    className="mx-1 font-bold underline"
+    style={{ textDecorationColor: color }}
+  >
+    {children}
+  </span>
+);
 
 export const Steps = [
   {
@@ -13,8 +23,14 @@ export const Steps = [
         <Highlight color={RAINBOW_COLORS[2]}>yellow</Highlight>,
         <Highlight color={RAINBOW_COLORS[1]}>orange</Highlight> and
         <Highlight color={RAINBOW_COLORS[0]}>red</Highlight>. Every segment has
-        the same width and height. We match these to the categories that ILGA
-        assesses in its reports.
+        the same width and height. We match these to the categories that{" "}
+        <a
+          className="text-blue-600 underline hover:text-blue-500"
+          href="https://www.ilga-europe.org/rainbow-europe/"
+        >
+          ILGA assesses in its reports
+        </a>
+        .
       </span>
     ),
   },
@@ -23,8 +39,9 @@ export const Steps = [
     content: (
       <span>
         In our metaphor, <Highlight color={RAINBOW_COLORS[5]}>purple</Highlight>{" "}
-        represents the <span className="font-bold ">Asylum</span> category. This
-        looks at how LGBTQ+ asylum seekers are treated in each country.
+        represents the <Underline color={RAINBOW_COLORS[5]}>Asylum</Underline>{" "}
+        category. This looks at how LGBTQ+ asylum seekers are treated in each
+        country.
       </span>
     ),
   },
@@ -33,9 +50,9 @@ export const Steps = [
     content: (
       <span>
         With <Highlight color={RAINBOW_COLORS[4]}>blue</Highlight>, we encode
-        the <span className="font-bold ">Civil society space</span> category. It
-        covers the ability for organizations to safely operate; the organization
-        of public events; freedom of expression; and funding laws.
+        the <Underline color={RAINBOW_COLORS[4]}>Civil society space</Underline>
+        category. It covers the ability for organizations to safely operate; the
+        organization of public events; freedom of expression; and funding laws.
       </span>
     ),
   },
@@ -44,12 +61,17 @@ export const Steps = [
     content: (
       <span>
         The <Highlight color={RAINBOW_COLORS[3]}>green</Highlight> covers the
-        protection of{" "}
-        <span className="font-bold">Legal gender recognition</span> and{" "}
-        <span className="font-bold ">Intersex bodily integrity</span>. Up until
-        2022, this used to be a single category but was split in two this year.
-        For consistency among years, we decided to keep these categories
-        together.
+        protection of
+        <Underline color={RAINBOW_COLORS[3]}>
+          Legal gender recognition
+        </Underline>
+        and
+        <Underline color={RAINBOW_COLORS[3]}>
+          Intersex bodily integrity
+        </Underline>
+        . Up until 2022, this used to be a single category but was split in two
+        this year. For consistency among years, we decided to keep these
+        categories together.
       </span>
     ),
   },
@@ -58,8 +80,11 @@ export const Steps = [
     content: (
       <span>
         <Highlight color={RAINBOW_COLORS[2]}>yellow</Highlight> depicts the
-        protection (or lack of) against{" "}
-        <span className="font-bold">hate crime and hate speech</span>.
+        protection (or lack of) against
+        <Underline color={RAINBOW_COLORS[2]}>
+          hate crime and hate speech
+        </Underline>
+        .
       </span>
     ),
   },
@@ -68,7 +93,8 @@ export const Steps = [
     content: (
       <span>
         <Highlight color={RAINBOW_COLORS[1]}>orange</Highlight> covers the
-        recognition of <span className="font-bold">LGBTQ+ families</span> by
+        recognition of
+        <Underline color={RAINBOW_COLORS[1]}>LGBTQ+ families</Underline>by
         assessing if there are rights such as marriage equality or joint
         adoption, for example.
       </span>
@@ -80,8 +106,10 @@ export const Steps = [
       <span>
         And lastly, <Highlight color={RAINBOW_COLORS[0]}>red</Highlight>{" "}
         represents{" "}
-        <span className="font-bold">Equality and non-discrimination</span>. It
-        encompasses the constitutional protection of rights such as
+        <Underline color={RAINBOW_COLORS[0]}>
+          Equality and non-discrimination
+        </Underline>
+        . It encompasses the constitutional protection of rights such as
         non-discrimination based on sexual orientation, right to employment,
         access to goods and services, access to healthcare and education, among
         others.
@@ -111,24 +139,18 @@ export const Steps = [
     content: (
       <>
         <span>
-          Take <span className="font-bold">Malta</span> for example. It is one
-          of the countries which is constantly on the top of the ranking and
-          very close to full coveraging the rights of their LGBTQ+ citizens. But
-          because it is lacking in some areas on{" "}
-          <span
-            className="font-bold underline"
-            style={{ textDecorationColor: RAINBOW_COLORS[0] }}
-          >
+          Take <span className="font-bold">Malta</span> {flag("Malta")} for
+          example. It is one of the countries which is constantly on the top of
+          the ranking and very close to full coveraging the rights of their
+          LGBTQ+ citizens. But because it is lacking in some areas on
+          <Underline color={RAINBOW_COLORS[0]}>
             Equality and non-discrimination
-          </span>{" "}
-          and{" "}
-          <span
-            className="font-bold underline"
-            style={{ textDecorationColor: RAINBOW_COLORS[3] }}
-          >
+          </Underline>
+          and
+          <Underline color={RAINBOW_COLORS[3]}>
             Intersex bodily integrity
-          </span>{" "}
-          its flag is still incomplete.
+          </Underline>
+          , its flag is still incomplete.
         </span>
       </>
     ),
@@ -138,8 +160,8 @@ export const Steps = [
     content: (
       <span>
         On the other side of the spectrum, there are countries like{" "}
-        <span className="font-bold">Russia</span>, with a barely visible flag,
-        still a long way from full equality.
+        <span className="font-bold">Russia</span> {flag("Russia")}, with a
+        barely visible flag, still a long way from full equality.
       </span>
     ),
   },

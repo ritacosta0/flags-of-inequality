@@ -61,24 +61,26 @@ function Home() {
             return (
               <motion.div key={country} className="mt-4" layout>
                 <Link href={`/timeline/${encodeURIComponent(country)}`}>
-                  <motion.div
-                    style={{
-                      ...flagDimensions,
-                      cursor: "pointer",
-                    }}
-                  >
-                    <Flag country={country} year={year} />
-                    <div className="flex gap-2 mt-2">
-                      <h3 className="font-medium" aria-hidden>
-                        {`${flag(country) || ""} ${country}`}{" "}
-                        <span className="text-slate-400">{` | ${nth(
-                          data.find(
-                            (d) => d.country === country && d.year === year
-                          )?.ranking
-                        )}`}</span>
-                      </h3>
-                    </div>
-                  </motion.div>
+                  <a href={`/timeline/${encodeURIComponent(country)}`}>
+                    <motion.div
+                      style={{
+                        ...flagDimensions,
+                        cursor: "pointer",
+                      }}
+                    >
+                      <Flag country={country} year={year} />
+                      <div className="flex gap-2 mt-2">
+                        <h3 className="font-medium" aria-hidden>
+                          {`${flag(country) || ""} ${country}`}{" "}
+                          <span className="text-slate-400">{` | ${nth(
+                            data.find(
+                              (d) => d.country === country && d.year === year
+                            )?.ranking
+                          )}`}</span>
+                        </h3>
+                      </div>
+                    </motion.div>
+                  </a>
                 </Link>
               </motion.div>
             );

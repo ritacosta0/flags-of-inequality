@@ -11,6 +11,7 @@ import Link from "next/link";
 import { ArrowBack } from "@mui/icons-material";
 import { nth } from "../../utils";
 import Head from "next/head";
+import { RainbowLink } from "../../components/RainbowLink";
 
 export default function Timeline() {
   const router = useRouter();
@@ -42,24 +43,24 @@ export default function Timeline() {
         <title>{`${country ?? "Loading"} - Flags of Inequality`}</title>
       </Head>
       <Link href="/#flags">
-        <span
+        <a
+          role={"button"}
           className="font-medium cursor-pointer text-slate-300 hover:text-slate-100"
           aria-label="Press to go back to main page."
           tabIndex={0}
-          role={"button"}
         >
           <ArrowBack /> Back
-        </span>
+        </a>
       </Link>
       <h2 className="mt-8 text-4xl font-medium " tabIndex={0}>{`${
         flag(country) || ""
       } ${country}`}</h2>
       <h2 className="sr-only">{`Timeline of ${country} from 2015 to 2022`}</h2>
       <div className="my-4 cursor-pointer text-slate-400 hover:text-slate-300">
-        <a href={url}>
+        <RainbowLink href={url}>
           <LinkIcon />
           <span className="ml-1 ">{`Read more on Rainbow Data 2022`}</span>
-        </a>
+        </RainbowLink>
       </div>
       <div
         className={`flex ${
