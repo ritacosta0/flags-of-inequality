@@ -4,12 +4,19 @@ import * as Warp from "warpjs";
 import TextPath from "./TextPath";
 import { RAINBOW_COLORS } from "../constants";
 import { Text } from "@visx/text";
+import { useIntersection } from "react-use";
+import { isNull, isUndefined } from "lodash";
 
 export default function Header() {
   const titleWrapper = useRef();
   const title = useRef();
   const [titleWidth, setTitleWidth] = useState(0);
   const [isLargeScreen, setIsLargeScreen] = useState(true);
+  const intersection = useIntersection(titleWrapper, {
+    root: null,
+    rootMargin: "0px",
+    threshold: 1,
+  });
 
   useEffect(() => {
     const handleResize = () => {
@@ -25,6 +32,7 @@ export default function Header() {
 
   useEffect(() => {
     const svg = title.current;
+    if (isUndefined(svg) || isNull(svg)) return;
     const warp = new Warp(svg);
 
     warp.interpolate(2);
@@ -43,50 +51,52 @@ export default function Header() {
 
     animate();
     title.current = svg;
-  }, [title, isLargeScreen]);
+  }, [title, isLargeScreen, intersection]);
 
   return (
     <div className="flex flex-col justify-center h-screen ">
       <div className="w-full mx-auto xl:w-10/12" ref={titleWrapper}>
-        <svg width={titleWidth} className="h-[20vh]" ref={title} aria-hidden>
-          <defs>
-            <linearGradient id="rainbow">
-              {RAINBOW_COLORS.map((color, index) => (
-                <stop
-                  key={index}
-                  offset={`${(100 / RAINBOW_COLORS.length) * index}%`}
-                  stopColor={color}
-                />
-              ))}
-            </linearGradient>
-          </defs>
-          <g transform={`translate(0,${titleWidth * 0})`}>
-            <TextPath
-              width={title}
+        {intersection?.isIntersecting && (
+          <svg width={titleWidth} className="h-[20vh]" ref={title} aria-hidden>
+            <defs>
+              <linearGradient id="rainbow">
+                {RAINBOW_COLORS.map((color, index) => (
+                  <stop
+                    key={index}
+                    offset={`${(100 / RAINBOW_COLORS.length) * index}%`}
+                    stopColor={color}
+                  />
+                ))}
+              </linearGradient>
+            </defs>
+            <g transform={`translate(0,${titleWidth * 0})`}>
+              <TextPath
+                width={title}
+                fill="transparent"
+                stroke="white"
+                strokeWidth={2}
+                strokeOpacity={0.3}
+                isLargeScreen={isLargeScreen}
+              />
+              <TextPath
+                width={title}
+                fill="transparent"
+                stroke="url(#rainbow)"
+                strokeWidth={2}
+                isLargeScreen={isLargeScreen}
+              />
+            </g>
+            <Text
+              y={10}
+              width={titleWidth}
+              scaleToFit={true}
+              verticalAnchor="start"
               fill="transparent"
-              stroke="white"
-              strokeWidth={2}
-              strokeOpacity={0.3}
-              isLargeScreen={isLargeScreen}
-            />
-            <TextPath
-              width={title}
-              fill="transparent"
-              stroke="url(#rainbow)"
-              strokeWidth={2}
-              isLargeScreen={isLargeScreen}
-            />
-          </g>
-          <Text
-            y={10}
-            width={titleWidth}
-            scaleToFit={true}
-            verticalAnchor="start"
-            fill="transparent"
-          >
-            Flags of Inequality
-          </Text>
-        </svg>
+            >
+              Flags of Inequality
+            </Text>
+          </svg>
+        )}
       </div>
       <h1 className="sr-only" tabIndex={0}>
         Flags of Inequality

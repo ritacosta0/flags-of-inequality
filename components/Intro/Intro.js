@@ -106,7 +106,7 @@ function Intro() {
                   opacity: step.index === currentStepIndex ? 1 : 0.4,
                 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.1 }}
+                transition={{ duration: 0.5 }}
               >
                 <div
                   className="relative max-w-2xl p-6 mx-auto bg-white border border-gray-200 rounded-md shadow-md text-slate-800 h-fit"
