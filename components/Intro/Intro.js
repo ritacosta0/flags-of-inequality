@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Scrollama, Step } from "react-scrollama";
 import { useFlagDimensions } from "../../hooks/useFlagDimensions";
 import { RAINBOW_COLORS } from "../../constants";
@@ -96,6 +96,7 @@ function Intro() {
             </AnimatePresence>
           </div>
         </div>
+
         <Scrollama onStepEnter={onStepEnter} offset={1}>
           {Steps.map((step) => (
             <Step data={step.index} key={step.index}>
