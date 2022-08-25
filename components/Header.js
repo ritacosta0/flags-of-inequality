@@ -6,6 +6,7 @@ import { RAINBOW_COLORS } from "../constants";
 import { Text } from "@visx/text";
 import { useIntersection } from "react-use";
 import { isNull, isUndefined } from "lodash";
+import { RainbowLink } from "./RainbowLink";
 
 export default function Header() {
   const titleWrapper = useRef();
@@ -113,7 +114,14 @@ export default function Header() {
         dimensions of queer life are disregarded by state regulations.
       </p>
       <p className="m-5 text-sm text-center text-slate-300" tabIndex={0}>
-        By Rita Costa and Beatriz Malveiro
+        By
+        <RainbowLink href="https://twitter.com/_ritacosta_">
+          Rita Costa
+        </RainbowLink>
+        and
+        <RainbowLink href="https://twitter.com/biased_bia">
+          Beatriz Malveiro
+        </RainbowLink>
       </p>
       <div className="mx-auto my-12 text-center">
         <ArrowDownwardIcon className=" fill-slate-400 animate-bounce" />
