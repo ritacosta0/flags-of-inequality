@@ -19,11 +19,21 @@ export default function Document() {
         {/* Open Graph */}
         <meta
           property="og:url"
-          content={"www.flagsofinequality.com"}
+          content={"www.flags-of-inequality.com"}
           key="ogurl"
         />
-        <meta property="og:image" content={""} key="ogimage" />
-        <meta property="og:site_name" content={""} key="ogsitename" />
+        <meta
+          property="og:image"
+          content={
+            "https://github.com/ritacosta0/flags-of-inequality/blob/main/assets/preview.png"
+          }
+          key="ogimage"
+        />
+        <meta
+          property="og:site_name"
+          content={"Flags of Inequality"}
+          key="ogsitename"
+        />
         <meta
           property="og:title"
           content={"Flags of Inequality"}
