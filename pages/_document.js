@@ -25,7 +25,7 @@ export default function Document() {
         <meta
           property="og:image"
           content={
-            "https://github.com/ritacosta0/flags-of-inequality/blob/main/assets/preview.png"
+            "https://raw.githubusercontent.com/ritacosta0/flags-of-inequality/main/assets/preview.png"
           }
           key="ogimage"
         />

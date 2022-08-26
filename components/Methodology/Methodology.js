@@ -14,7 +14,9 @@ function Methodology() {
           Because data is not currently made available in a manageable format,
           we scraped it from the website for the years between 2015 to 2022. All
           the raw data and the scrapper code is made available in the
-          project&apos;s repository.
+          <RainbowLink href="https://github.com/ritacosta0/flags-of-inequality">
+            project&apos;s repository.
+          </RainbowLink>
         </p>
         <p>
           We collected the rating that ILGA provides for each category for each
