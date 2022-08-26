@@ -12,6 +12,14 @@ export default function Document() {
         {/* Twitter */}
         <meta name="twitter:card" content="summary" key="twcard" />
         <meta
+          name="twitter:image"
+          content="https://raw.githubusercontent.com/ritacosta0/flags-of-inequality/main/assets/preview.png"
+        />
+        <meta
+          name="twitter:description"
+          content="A visualization of the rainbow flag to portray to what extent different dimensions of queer life are disregarded by state regulations."
+        />
+        <meta
           name="twitter:image:alt"
           content="Webpage showing a rainbow per country in a grid, some stripes are smaller or non-existent"
         />
@@ -24,9 +32,7 @@ export default function Document() {
         />
         <meta
           property="og:image"
-          content={
-            "https://raw.githubusercontent.com/ritacosta0/flags-of-inequality/main/assets/preview.png"
-          }
+          content="https://raw.githubusercontent.com/ritacosta0/flags-of-inequality/main/assets/preview.png"
           key="ogimage"
         />
         <meta
@@ -41,9 +47,7 @@ export default function Document() {
         />
         <meta
           property="og:description"
-          content={
-            "A visualization of the rainbow flag to portray to what extent different dimensions of queer life are disregarded by state regulations."
-          }
+          content="A visualization of the rainbow flag to portray to what extent different dimensions of queer life are disregarded by state regulations."
           key="ogdesc"
         />
       </Head>
