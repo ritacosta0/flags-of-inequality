@@ -27,7 +27,7 @@ export default function Document() {
         {/* Open Graph */}
         <meta
           property="og:url"
-          content={"www.flags-of-inequality.com"}
+          content={"https://www.flags-of-inequality.com"}
           key="ogurl"
         />
         <meta

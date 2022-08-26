@@ -1,6 +1,6 @@
 # Flags of Inequality
 
-[flags-of-inequality.com](www.flags-of-inequality.com)
+[flags-of-inequality.com](https://www.flags-of-inequality.com)
 
 **If countries had equal rights for their LGBTQ+ citizens this visualization would not exist**. We make use of the rainbow flag to portray to what extent different dimensions of queer life are disregarded by state regulations.Visualizing LGBTQ+ rights in Europe.
 
