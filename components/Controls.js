@@ -160,7 +160,7 @@ export default function Controls({
       >
         Use the slider to select a year or
         <MouseIcon fontSize="small" />
-        click on a flag to see how that it has changed over the years.
+        click on a flag to see how it has changed over the years.
       </div>
     </div>
   );
