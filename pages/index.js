@@ -58,7 +58,7 @@ function Home() {
               sortDict={sortDict}
               setSortDict={setSortDict}
             />
-            <Legend />
+            <Legend position="center" />
             <div
               className="flex flex-row flex-wrap justify-center gap-x-10 gap-y-20"
               ref={flagsContainer}

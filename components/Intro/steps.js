@@ -1,15 +1,7 @@
 import { RAINBOW_COLORS } from "../../constants";
 import Highlight from "../Highlight";
+import Underline from "../Underline";
 import { flag } from "country-emoji";
-
-const Underline = ({ color, children }) => (
-  <span
-    className="mx-1 font-bold underline"
-    style={{ textDecorationColor: color }}
-  >
-    {children}
-  </span>
-);
 
 export const Steps = [
   {
