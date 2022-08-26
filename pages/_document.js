@@ -10,7 +10,7 @@ export default function Document() {
         />
 
         {/* Twitter */}
-        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:image"
           content="https://raw.githubusercontent.com/ritacosta0/flags-of-inequality/main/assets/preview.png"
@@ -27,7 +27,7 @@ export default function Document() {
         {/* Open Graph */}
         <meta
           property="og:url"
-          content={"https://www.flags-of-inequality.com"}
+          content="https://www.flags-of-inequality.com"
           key="ogurl"
         />
         <meta
