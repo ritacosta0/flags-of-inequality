@@ -13,7 +13,7 @@ export default function Document() {
         <meta name="twitter:card" content="summary" key="twcard" />
         <meta
           name="twitter:image:alt"
-          content="Webpage showing a rainbow per country in a grid, some stripes of the flags are smaller or non-existent."
+          content="Webpage showing a rainbow per country in a grid, some stripes are smaller or non-existent"
         />
 
         {/* Open Graph */}
@@ -23,11 +23,7 @@ export default function Document() {
           key="ogurl"
         />
         <meta property="og:image" content={""} key="ogimage" />
-        <meta
-          property="og:site_name"
-          content={"Flags of Inequality"}
-          key="ogsitename"
-        />
+        <meta property="og:site_name" content={""} key="ogsitename" />
         <meta
           property="og:title"
           content={"Flags of Inequality"}
@@ -40,7 +36,6 @@ export default function Document() {
           }
           key="ogdesc"
         />
-        <meta property="og:type" content="article" />
       </Head>
       <body className="mt-12 mb-20 bg-slate-800 text-slate-50">
         <Main />
