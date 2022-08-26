@@ -12,6 +12,7 @@ import { ArrowBack } from "@mui/icons-material";
 import { nth } from "../../utils";
 import Head from "next/head";
 import { RainbowLink } from "../../components/RainbowLink";
+import Legend from "../../components/Legend";
 
 export default function Timeline() {
   const router = useRouter();
@@ -102,6 +103,9 @@ export default function Timeline() {
             </div>
           </div>
         ))}
+      </div>
+      <div className="mt-20">
+        <Legend position="start" />
       </div>
     </div>
   );
