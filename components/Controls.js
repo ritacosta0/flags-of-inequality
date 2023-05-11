@@ -139,7 +139,7 @@ export default function Controls({
             getAriaValueText={() => year}
             min={2015}
             value={year}
-            max={2022}
+            max={2023}
             step={1}
             track={false}
             marks={yearsList.sort().map((value) => ({

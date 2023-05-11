@@ -6,6 +6,8 @@ import data2019 from "./rainbow_2019_with_percentages.json";
 import data2020 from "./rainbow_2020_with_percentages.json";
 import data2021 from "./rainbow_2021_with_percentages.json";
 import data2022 from "./rainbow_2022_with_percentages.json";
+import data2023 from "./rainbow_2023_with_percentages.json";
+
 import { CATEGORIES } from "../constants";
 import { ascending, descending } from "d3-array";
 
@@ -58,6 +60,7 @@ export const data = [
   ...data2020,
   ...data2021,
   ...data2022,
+  ...data2023,
 ];
 
 const wideData = tidy(
