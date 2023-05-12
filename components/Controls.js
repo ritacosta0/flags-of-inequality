@@ -34,6 +34,10 @@ const YearsSlider = styled(Slider)(({ theme }) => ({
   "& .MuiSlider-markLabel": {
     color: "#94a3b8",
     transform: "translateX(-90%)",
+    fontSize: "0.65rem",
+    "@media (min-width: 768px)": {
+      fontSize: "0.875rem",
+    },
   },
   "& .MuiSlider-markLabelActive": {
     color: "#f1f5f9",
@@ -98,7 +102,7 @@ export default function Controls({
             aria-label={`Sort by global ranking in ${
               !orderRanking ? "ascending" : "descending"
             } order.`}
-            className="w-full my-1 lg:w-fit"
+            className="w-full py-2 my-1 text-left lg:w-fit h-fit"
             onClick={handleClickRanking}
             variant="outlined"
             size="small"
@@ -115,7 +119,7 @@ export default function Controls({
             aria-label={`Sort alphabetically in ${
               !orderAlphabetical ? "ascending" : "descending"
             } order.`}
-            className="w-full my-1 lg:w-fit lg:ml-4"
+            className="w-full py-2 my-1 text-left lg:w-fit lg:ml-4 h-fit"
             onClick={handleClickAlphabetical}
             variant="outlined"
             size="small"
@@ -155,12 +159,14 @@ export default function Controls({
         </Box>
       </Stack>
       <div
-        className="flex flex-row justify-center gap-2 -mt-6 text-xs align-middle xl:justify-end text-slate-400 "
+        className="flex flex-col items-center justify-center gap-2 -mt-6 text-xs align-middle md:flex-row xl:justify-end text-slate-400 "
         aria-hidden
       >
-        Use the slider to select a year or
-        <MouseIcon fontSize="small" />
-        click on a flag to see how it has changed over the years.
+        Use the slider to select a year and
+        <div className="flex items-center gap-2">
+          <MouseIcon fontSize="small" />
+          click on a flag to see how it has changed over the years.
+        </div>
       </div>
     </div>
   );
