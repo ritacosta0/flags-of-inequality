@@ -56,11 +56,11 @@ export default function Timeline() {
       <h2 className="mt-8 text-4xl font-medium " tabIndex={0}>{`${
         flag(country) || ""
       } ${country}`}</h2>
-      <h2 className="sr-only">{`Timeline of ${country} from 2015 to 2022`}</h2>
+      <h2 className="sr-only">{`Timeline of ${country} from 2015 to 2023`}</h2>
       <div className="my-4 cursor-pointer text-slate-400 hover:text-slate-300">
         <RainbowLink href={url}>
           <LinkIcon />
-          <span className="ml-1 ">{`Read more on Rainbow Data 2022`}</span>
+          <span className="ml-1 ">{`Read more on Rainbow Data 2023`}</span>
         </RainbowLink>
       </div>
       <div

@@ -135,7 +135,7 @@ export default function Controls({
         </div>
         <Box className="w-full lg:w-1/2 xl:w-1/3">
           <YearsSlider
-            aria-label={`Use this slider to select a year from 2015 to 2020 to explore.`}
+            aria-label={`Use this slider to select a year from 2015 to 2023 to explore.`}
             getAriaValueText={() => year}
             min={2015}
             value={year}
