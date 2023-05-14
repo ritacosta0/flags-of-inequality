@@ -1,22 +1,22 @@
-import React, { useState, useMemo, useEffect } from "react";
-import { motion } from "framer-motion";
 import { flag } from "country-emoji";
+import { motion } from "framer-motion";
 import Link from "next/link";
+import React, { useEffect, useMemo, useState } from "react";
 
+import Head from "next/head";
 import Controls from "../components/Controls";
 import { Flag } from "../components/Flag";
+import { Intro } from "../components/Intro";
+import Legend from "../components/Legend";
+import MessageUnsupportedBrowser from "../components/MessageUnsupportedBrowser";
+import { Methodology } from "../components/Methodology";
 import { getData } from "../data";
 import { useFlagDimensions } from "../hooks/useFlagDimensions";
-import { Intro } from "../components/Intro";
-import { Methodology } from "../components/Methodology";
-import Legend from "../components/Legend";
 import { nth } from "../utils";
-import Head from "next/head";
-import MessageUnsupportedBrowser from "../components/MessageUnsupportedBrowser";
 
 function Home() {
   const [isSamsungBrowser, setIsSamsungBrowser] = useState(false);
-  const [year, setYear] = useState(2022);
+  const [year, setYear] = useState(2023);
   const [orderAlphabetical, setOrderAlphabetical] = useState(true);
   const [orderRanking, setOrderRanking] = useState(true);
   const [sortDict, setSortDict] = useState({

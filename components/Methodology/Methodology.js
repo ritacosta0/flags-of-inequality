@@ -12,7 +12,7 @@ function Methodology() {
             Rainbow Index
           </RainbowLink>
           Because data is not currently made available in a manageable format,
-          we scraped it from the website for the years between 2015 to 2022. All
+          we scraped it from the website for the years between 2015 to 2023. All
           the raw data and the scrapper code is made available in the
           <RainbowLink href="https://github.com/ritacosta0/flags-of-inequality">
             project&apos;s repository.
@@ -30,8 +30,8 @@ function Methodology() {
           previously part of &quot;Legal gender recognition and bodily
           integrity&quot;. To allow comparison across different years, we merged
           the new category with &quot;Legal gender recognition&quot; for the
-          year 2022. To do so, we calculated the weighted average of the two
-          categories based on the number of criteria covered by each.
+          years 2022 and 2023. To do so, we calculated the weighted average of
+          the two categories based on the number of criteria covered by each.
         </p>
       </div>
     </div>

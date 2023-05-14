@@ -77,7 +77,7 @@ function Intro() {
                   exit={{ opacity: 0 }}
                   transition={{ ease: "easeOut" }}
                 >
-                  <Flag country={"Malta"} year={2022} isInteractive={false} />
+                  <Flag country={"Malta"} year={2023} isInteractive={false} />
                 </motion.div>
               )}
               {currentStepIndex === 9 && (
@@ -90,7 +90,7 @@ function Intro() {
                   exit={{ opacity: 0 }}
                   transition={{ ease: "easeOut" }}
                 >
-                  <Flag country={"Russia"} year={2022} isInteractive={false} />
+                  <Flag country={"Russia"} year={2023} isInteractive={false} />
                 </motion.div>
               )}
             </AnimatePresence>
