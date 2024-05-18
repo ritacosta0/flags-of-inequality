@@ -25,7 +25,7 @@ export default function Timeline() {
     isVertical ? (containerWidth) => containerWidth * 0.8 : null
   );
 
-  const url = data.find((d) => d.year === 2022)?.url;
+  const url = data.find((d) => d.year === 2024)?.url;
 
   useEffect(() => {
     const handleResize = () => {
@@ -56,11 +56,11 @@ export default function Timeline() {
       <h2 className="mt-8 text-4xl font-medium " tabIndex={0}>{`${
         flag(country) || ""
       } ${country}`}</h2>
-      <h2 className="sr-only">{`Timeline of ${country} from 2015 to 2023`}</h2>
+      <h2 className="sr-only">{`Timeline of ${country} from 2015 to 2024`}</h2>
       <div className="my-4 cursor-pointer text-slate-400 hover:text-slate-300">
-        <RainbowLink href={url}>
+        <RainbowLink href={url} target="_blank">
           <LinkIcon />
-          <span className="ml-1 ">{`Read more on Rainbow Data 2023`}</span>
+          <span className="ml-1 ">{`Read more on Rainbow Data 2024`}</span>
         </RainbowLink>
       </div>
       <div
