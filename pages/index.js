@@ -16,7 +16,7 @@ import { nth } from "../utils";
 
 function Home() {
   const [isSamsungBrowser, setIsSamsungBrowser] = useState(false);
-  const [year, setYear] = useState(2023);
+  const [year, setYear] = useState(2024);
   const [orderAlphabetical, setOrderAlphabetical] = useState(true);
   const [orderRanking, setOrderRanking] = useState(true);
   const [sortDict, setSortDict] = useState({

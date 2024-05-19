@@ -7,6 +7,7 @@ import data2020 from "./rainbow_2020_with_percentages.json";
 import data2021 from "./rainbow_2021_with_percentages.json";
 import data2022 from "./rainbow_2022_with_percentages.json";
 import data2023 from "./rainbow_2023_with_percentages.json";
+import data2024 from "./rainbow_2024_with_percentages.json";
 
 import { CATEGORIES } from "../constants";
 import { ascending, descending } from "d3-array";
@@ -27,19 +28,25 @@ export const categoryLabels = {
   [CATEGORIES.EQUALITY]: [
     "Equality and non-discrimination ",
     "Equality & non-discrimination ",
+    "Equality & non-discrimination",
   ],
-  [CATEGORIES.FAMILY]: ["Family "],
-  [CATEGORIES.HATE]: ["Hate crime & hate speech "],
+  [CATEGORIES.FAMILY]: ["Family ", "Family"],
+  [CATEGORIES.HATE]: ["Hate crime & hate speech ", "Hate crime & hate speech"],
   [CATEGORIES.GENDER]: [
     "Legal gender recognition & bodily integrity ",
     "Legal gender recognition ",
+    "Legal gender recognition",
   ],
-  [CATEGORIES.INTERSEX]: ["Intersex bodily integrity "],
+  [CATEGORIES.INTERSEX]: [
+    "Intersex bodily integrity ",
+    "Intersex bodily integrity",
+  ],
   [CATEGORIES.CIVIL]: [
     "Civil society space ",
+    "Civil society space",
     "Freedom of assembly, association & expression ",
   ],
-  [CATEGORIES.ASYLUM]: ["Asylum "],
+  [CATEGORIES.ASYLUM]: ["Asylum ", "Asylum"],
 };
 
 export const standardCategory = (category) => {
@@ -61,6 +68,7 @@ export const data = [
   ...data2021,
   ...data2022,
   ...data2023,
+  ...data2024,
 ];
 
 const wideData = tidy(
