@@ -25,17 +25,20 @@
     "@visx/visx": "^2.12.1",
     "colord": "^2.9.2",
     "country-emoji": "^1.5.6",
+    "d3": "^7.9.0",
     "d3-array": "^3.2.0",
     "d3-format": "^3.1.0",
     "framer-motion": "^7.0.0",
     "intersection-observer": "^0.12.2",
+    "jsdom": "^24.1.0",
     "lodash": "^4.17.21",
     "next": "12.2.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-scripts": "5.0.1",
     "react-scrollama": "^2.3.2",
-    "react-use": "^17.4.0"
+    "react-use": "^17.4.0",
+    "sharp": "^0.33.4"
   },
   "eslintConfig": {
     "extends": [
