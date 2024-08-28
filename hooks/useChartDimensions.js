@@ -53,9 +53,9 @@ export const useChartDimensions = (passedSettings) => {
         changeHeight(entry.contentRect.height);
     });
 
-    resizeObserver.observe(element);
+    element !== undefined && resizeObserver.observe(element);
 
-    return () => resizeObserver.unobserve(element);
+    return () => element !== undefined && resizeObserver.unobserve(element);
   }, []);
 
   const newSettings = combineChartDimensions({

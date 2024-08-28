@@ -20,6 +20,7 @@ export default function Flag({
   isTimeline,
   isInteractive = true,
   orientation = "horizontal",
+  isLastYear = "false",
 }) {
   const [chartWrapper, dimensions] = useChartDimensions({ marginBottom: 0 });
   const [hoveredStripe, setHoveredStripe] = useState(null);
@@ -72,141 +73,160 @@ export default function Flag({
     domain: CATEGORIES_ORDERED_LIST,
     range: RAINBOW_COLORS,
   });
-
   const flagDescription =
-    isTimeline == "true"
-      ? `In ${data[0].year}, the coverage of LGBTQ+ rights was at ${Math.round(
-          (data[0].asylum +
-            data[0].civil +
-            data[0].equality +
-            data[0].family +
-            data[0].gender +
-            data[0].hate) *
-            100
-        )} out of 600 possible points. ${
-          data[0].ranking
-        } in the global ranking. `
-      : `${data[0].country}. ${
-          data[0].ranking
-        } in the global ranking. The coverage of LGBTQ+ rights is at ${Math.round(
-          (data[0].asylum +
-            data[0].civil +
-            data[0].equality +
-            data[0].family +
-            data[0].gender +
-            data[0].hate) *
-            100
-        )} out of 600 possible points.`;
+    data[0] !== undefined
+      ? isTimeline == "true"
+        ? `In ${
+            data[0].year
+          }, the coverage of LGBTQ+ rights was at ${Math.round(
+            (data[0].asylum +
+              data[0].civil +
+              data[0].equality +
+              data[0].family +
+              data[0].gender +
+              data[0].hate) *
+              100
+          )} out of 600 possible points. ${
+            data[0].ranking
+          } in the global ranking. `
+        : `${data[0].country}. ${
+            data[0].ranking
+          } in the global ranking. The coverage of LGBTQ+ rights is at ${Math.round(
+            (data[0].asylum +
+              data[0].civil +
+              data[0].equality +
+              data[0].family +
+              data[0].gender +
+              data[0].hate) *
+              100
+          )} out of 600 possible points.`
+      : null;
 
-  return (
+  return data[0] !== undefined ? (
     <div
-      ref={chartWrapper}
-      style={{ width: "100%", height: "100%", overflow: "visible" }}
+      style={{
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        gap: "20px",
+      }}
     >
-      {dimensions.height > 0 && (
-        <svg
-          width={dimensions.width}
-          height={dimensions.height}
-          tabIndex={0}
-          aria-label={flagDescription}
-          role={"button"}
-        >
-          <Group top={dimensions.marginTop} left={dimensions.marginLeft}>
-            <rect
-              x={0}
-              y={0}
-              height={dimensions.boundedHeight}
-              width={dimensions.boundedWidth}
-              className="fill-slate-900"
-            />
+      <div
+        ref={chartWrapper}
+        style={{
+          width: "100%",
+          height: "100%",
+          overflow: "visible",
+        }}
+      >
+        {dimensions.height > 0 && (
+          <svg
+            width={dimensions.width}
+            height={dimensions.height}
+            tabIndex={0}
+            aria-label={flagDescription}
+            role={"button"}
+          >
+            <Group top={dimensions.marginTop} left={dimensions.marginLeft}>
+              <rect
+                x={0}
+                y={0}
+                height={dimensions.boundedHeight}
+                width={dimensions.boundedWidth}
+                className="fill-slate-900"
+              />
 
-            <FlagStripeStack
-              data={data}
-              keys={CATEGORIES_ORDERED_LIST.slice().reverse()}
-              color={colorScale}
-              {...stackProps}
-            >
-              {(stacks) =>
-                stacks.map((stack) =>
-                  stack.bars.map((bar, index) => (
-                    <Tippy
-                      key={index}
-                      offset={[0, -45]}
-                      placement="right"
-                      animation="shift-away"
-                      duration={100}
-                      content={
-                        isInteractive ? (
-                          <Annotation
-                            color={colorScale(bar.key)}
-                            value={data[0][bar.key]}
-                          />
-                        ) : null
-                      }
-                    >
-                      <motion.rect
-                        x={bar.x}
-                        y={bar.y}
-                        height={bar.height}
-                        width={bar.width}
-                        initial={{
-                          fillOpacity: 0.9,
-                        }}
-                        animate={{
-                          fill: bar.color,
-                          stroke: null,
-                          fillOpacity:
-                            bar.key === hoveredStripe ||
-                            isNull(hoveredStripe) ||
-                            !isInteractive
-                              ? 1
-                              : 0.75,
-                        }}
-                        whileFocus={{
-                          stroke: colord(bar.color).darken(0.25).toHex(),
-                          strokeWidth: 3,
-                          strokeLinecap: "square",
-                          transition: { duration: 0.5 },
-                        }}
-                        style={{ outline: "none" }}
-                        onMouseEnter={() => setHoveredStripe(bar.key)}
-                        onMouseLeave={() => setHoveredStripe(null)}
-                        className={`${isInteractive ? "cursor-pointer" : ""}`}
-                        aria-label={
-                          bar.key +
-                          " " +
-                          Math.round(data[0][bar.key] * 100) +
-                          "%"
+              <FlagStripeStack
+                data={data}
+                keys={CATEGORIES_ORDERED_LIST.slice().reverse()}
+                color={colorScale}
+                {...stackProps}
+              >
+                {(stacks) =>
+                  stacks.map((stack) =>
+                    stack.bars.map((bar, index) => (
+                      <Tippy
+                        key={index}
+                        offset={[0, -45]}
+                        placement="right"
+                        animation="shift-away"
+                        duration={100}
+                        content={
+                          isInteractive ? (
+                            <Annotation
+                              color={colorScale(bar.key)}
+                              value={data[0][bar.key]}
+                            />
+                          ) : null
                         }
-                      />
-                    </Tippy>
-                  ))
-                )
-              }
-            </FlagStripeStack>
-            <Line
-              from={{ x: 0, y: 0 }}
-              to={{ x: 0, y: dimensions.boundedHeight }}
-              className=" stroke-slate-300"
-            />
-            <Line
-              from={{ x: 0, y: dimensions.boundedHeight }}
-              to={{ x: dimensions.boundedWidth, y: dimensions.boundedHeight }}
-              className=" stroke-slate-300"
-            />
-            <Line
-              from={{ x: dimensions.boundedWidth, y: dimensions.boundedHeight }}
-              to={{ x: dimensions.boundedWidth, y: 0 }}
-              className=" stroke-slate-300"
-            />
-            <Line
-              from={{ x: dimensions.boundedWidth, y: 0 }}
-              to={{ x: 0, y: 0 }}
-              className=" stroke-slate-300"
-            />
-          </Group>
-        </svg>
-      )}
+                      >
+                        <motion.rect
+                          x={bar.x}
+                          y={bar.y}
+                          height={bar.height}
+                          width={bar.width}
+                          initial={{
+                            fillOpacity: 0.9,
+                          }}
+                          animate={{
+                            fill: bar.color,
+                            stroke: null,
+                            fillOpacity:
+                              bar.key === hoveredStripe ||
+                              isNull(hoveredStripe) ||
+                              !isInteractive
+                                ? 1
+                                : 0.75,
+                          }}
+                          whileFocus={{
+                            stroke: colord(bar.color).darken(0.25).toHex(),
+                            strokeWidth: 3,
+                            strokeLinecap: "square",
+                            transition: { duration: 0.5 },
+                          }}
+                          style={{ outline: "none" }}
+                          onMouseEnter={() => setHoveredStripe(bar.key)}
+                          onMouseLeave={() => setHoveredStripe(null)}
+                          className={`${isInteractive ? "cursor-pointer" : ""}`}
+                          aria-label={
+                            bar.key +
+                            " " +
+                            Math.round(data[0][bar.key] * 100) +
+                            "%"
+                          }
+                        />
+                      </Tippy>
+                    ))
+                  )
+                }
+              </FlagStripeStack>
+              <Line
+                from={{ x: 0, y: 0 }}
+                to={{ x: 0, y: dimensions.boundedHeight }}
+                className=" stroke-slate-300"
+              />
+              <Line
+                from={{ x: 0, y: dimensions.boundedHeight }}
+                to={{ x: dimensions.boundedWidth, y: dimensions.boundedHeight }}
+                className=" stroke-slate-300"
+              />
+              <Line
+                from={{
+                  x: dimensions.boundedWidth,
+                  y: dimensions.boundedHeight,
+                }}
+                to={{ x: dimensions.boundedWidth, y: 0 }}
+                className=" stroke-slate-300"
+              />
+              <Line
+                from={{ x: dimensions.boundedWidth, y: 0 }}
+                to={{ x: 0, y: 0 }}
+                className=" stroke-slate-300"
+              />
+            </Group>
+          </svg>
+        )}
+      </div>
     </div>
-  );
+  ) : null;
 }
