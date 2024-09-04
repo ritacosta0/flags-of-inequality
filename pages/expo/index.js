@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Header from "../components/Header";
+import Header from "../../components/Header";
 
 function Home() {
   return (
@@ -7,7 +7,7 @@ function Home() {
       <Head>
         <title>Flags of Inequality</title>
       </Head>
-      <Header type="regular" />
+      <Header type="expo" />
     </>
   );
 }

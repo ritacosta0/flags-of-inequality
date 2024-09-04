@@ -3,15 +3,15 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import React, { useEffect, useMemo, useState } from "react";
 
-import Controls from "../components/Controls";
-import { Flag } from "../components/Flag";
-import { Intro } from "../components/Intro";
-import Legend from "../components/Legend";
-import MessageUnsupportedBrowser from "../components/MessageUnsupportedBrowser";
-import { Methodology } from "../components/Methodology";
-import { getData } from "../data";
-import { useFlagDimensions } from "../hooks/useFlagDimensions";
-import { nth } from "../utils";
+import Controls from "../../components/Controls";
+import { Flag } from "../../components/Flag";
+import { Intro } from "../../components/Intro";
+import Legend from "../../components/Legend";
+import MessageUnsupportedBrowser from "../../components/MessageUnsupportedBrowser";
+import { Methodology } from "../../components/Methodology";
+import { getData } from "../../data";
+import { useFlagDimensions } from "../../hooks/useFlagDimensions";
+import { nth } from "../../utils";
 
 function Grid() {
   const [isSamsungBrowser, setIsSamsungBrowser] = useState(false);

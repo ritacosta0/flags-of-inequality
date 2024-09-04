@@ -37,8 +37,10 @@ const CountryNavigator = () => {
 
   const countries = data.map((d) => d.country);
   const [currentCountryIndex, setCurrentCountryIndex] = useState(0);
-  const dataCountry = useMemo(() => getData({ countries: countries }), [
-    countries,
+  const currentCountry = countries[currentCountryIndex];
+
+  const dataCountry = useMemo(() => getData({ countries: currentCountry }), [
+    currentCountry,
   ]);
   const [isRunning, setIsRunning] = useState(false);
 
@@ -56,12 +58,6 @@ const CountryNavigator = () => {
 
     return () => clearInterval(interval);
   }, [isRunning]);
-
-  const currentCountry = countries[currentCountryIndex];
-
-  const currentCountryData = dataCountry.filter(
-    (item) => item.country === currentCountry
-  );
 
   const years = dataCountry.map((d) => d.year).sort();
   const uniqueYears = [...new Set(years)];
@@ -116,15 +112,13 @@ const CountryNavigator = () => {
   return (
     <div className={`w-full mx-auto `}>
       <Head>
-        <title>{`${
-          countries[currentCountryIndex] ?? "Loading"
-        } - Flags of Inequality`}</title>
+        <title>{`${currentCountry ?? "Loading"} - Flags of Inequality`}</title>
       </Head>
-      <h2 className="sr-only">{`Timeline of ${countries[currentCountryIndex]} from 2015 to 2024`}</h2>
+      <h2 className="sr-only">{`Timeline of ${currentCountry} from 2015 to 2024`}</h2>
       <div className={`flex  gap-4 mt-10`} ref={allFlagsContainer}>
         {allButLast.map((year) => (
           <div
-            key={`${countries[currentCountryIndex]}-${year}`}
+            key={`${currentCountry}-${year}`}
             className={`flex flex-col gap-4 mt-4`}
             layout
           >
@@ -136,7 +130,7 @@ const CountryNavigator = () => {
                 }}
               >
                 <Flag
-                  country={countries[currentCountryIndex]}
+                  country={currentCountry}
                   year={year}
                   isTimeline={"true"}
                   orientation={"horizontal"}
@@ -144,14 +138,13 @@ const CountryNavigator = () => {
                 />
               </Box>
             </motion.div>
-            {currentCountryData.find((d) => d.year === year)?.ranking !==
-            undefined ? (
+            {dataCountry.find((d) => d.year === year)?.ranking !== undefined ? (
               <div className="flex gap-2 ">
                 <h3 aria-hidden>
                   {" "}
                   {year}{" "}
                   <span className="text-slate-400">{` | ${nth(
-                    currentCountryData.find((d) => d.year === year)?.ranking
+                    dataCountry.find((d) => d.year === year)?.ranking
                   )}`}</span>
                 </h3>
                 <h3></h3>
@@ -162,7 +155,7 @@ const CountryNavigator = () => {
       </div>
       <div className={`flex mt-10 gap-4 visible`} ref={flagsContainer}>
         {lastYear.map((year) => (
-          <div key={`${countries[currentCountryIndex]}-${year}`}>
+          <div key={`${currentCountry}-${year}`}>
             <motion.div key="flag">
               <Box
                 sx={{
@@ -171,7 +164,7 @@ const CountryNavigator = () => {
                 }}
               >
                 <Flag
-                  country={countries[currentCountryIndex]}
+                  country={currentCountry}
                   year={year}
                   isTimeline={"false"}
                   orientation={"horizontal"}
@@ -213,9 +206,9 @@ const CountryNavigator = () => {
         style={{ width: flagDimensions.width, justifyContent: "space-between" }}
       >
         <h2 tabIndex={0}>
-          {countries[currentCountryIndex]}{" "}
+          {currentCountry}{" "}
           <span className="text-slate-400">{` | ${nth(
-            currentCountryData.find((d) => d.year === year)?.ranking
+            dataCountry.find((d) => d.year === year)?.ranking
           )}`}</span>
         </h2>
         <div className="flex gap-2 text-slate-400">

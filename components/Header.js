@@ -7,11 +7,11 @@ import { Text } from "@visx/text";
 import { useIntersection } from "react-use";
 import { isNull, isUndefined } from "lodash";
 import { RainbowLink } from "./RainbowLink";
-import Link from "next/link";
 import Button from "@mui/material/Button";
+import Link from "next/link";
 import { styled } from "@mui/material/styles";
 
-export default function Header() {
+export default function Header({ type }) {
   const titleWrapper = useRef();
   const title = useRef();
   const [titleWidth, setTitleWidth] = useState(0);
@@ -21,6 +21,24 @@ export default function Header() {
     rootMargin: "0px",
     threshold: 1,
   });
+
+  const SortButton = styled(Button)(({ theme }) => ({
+    borderColor: " #cbd5e1",
+    color: " #cbd5e1",
+    "&:hover": {
+      borderColor: "#f8fafc",
+      color: "#f8fafc",
+      boxShadow: "none",
+    },
+    "&:active": {
+      boxShadow: "none",
+      color: "#f8fafc",
+      borderColor: "#f8fafc",
+    },
+    "&:focus": {
+      boxShadow: "0 0 0 0.2rem rgba(0,123,255,.5)",
+    },
+  }));
 
   useEffect(() => {
     const handleResize = () => {
@@ -56,24 +74,6 @@ export default function Header() {
     animate();
     title.current = svg;
   }, [title, isLargeScreen, intersection]);
-
-  const SortButton = styled(Button)(({ theme }) => ({
-    borderColor: " #cbd5e1",
-    color: " #cbd5e1",
-    "&:hover": {
-      borderColor: "#f8fafc",
-      color: "#f8fafc",
-      boxShadow: "none",
-    },
-    "&:active": {
-      boxShadow: "none",
-      color: "#f8fafc",
-      borderColor: "#f8fafc",
-    },
-    "&:focus": {
-      boxShadow: "0 0 0 0.2rem rgba(0,123,255,.5)",
-    },
-  }));
 
   return (
     <div className="flex flex-col justify-center h-screen ">
@@ -147,26 +147,28 @@ export default function Header() {
           Beatriz Malveiro
         </RainbowLink>
       </p>
-      <div className="mx-auto my-12 text-center">
-        <SortButton
-          className="w-full py-2 my-1 text-left lg:w-fit lg:ml-4 h-fit"
-          variant="outlined"
-          size="small"
-        >
-          <Link href="/grid">
-            <div>Grid</div>
-          </Link>
-        </SortButton>
-        <SortButton
-          className="w-full py-2 my-1 text-left lg:w-fit lg:ml-4 h-fit"
-          variant="outlined"
-          size="small"
-        >
-          <Link href={`/singleflag`}>
-            <div>Single flag</div>
-          </Link>
-        </SortButton>
-      </div>
+      {type === "expo" ? (
+        <div className="mx-auto text-center">
+          <SortButton
+            className="w-full py-2 my-1 text-left lg:w-fit lg:ml-4 h-fit"
+            variant="outlined"
+            size="small"
+          >
+            <Link href="expo/grid">
+              <div>Grid</div>
+            </Link>
+          </SortButton>
+          <SortButton
+            className="w-full py-2 my-1 text-left lg:w-fit lg:ml-4 h-fit"
+            variant="outlined"
+            size="small"
+          >
+            <Link href={`expo/singleflag`}>
+              <div>Single flag</div>
+            </Link>
+          </SortButton>
+        </div>
+      ) : null}
     </div>
   );
 }
