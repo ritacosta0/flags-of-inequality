@@ -13,17 +13,31 @@ import { CATEGORIES_ORDERED_LIST, RAINBOW_COLORS } from "../../constants";
 import { getData } from "../../data";
 import { useChartDimensions } from "../../hooks/useChartDimensions";
 import Annotation from "./Annotation";
+import { $FixMe } from "@/utils/defs";
 
 export default function Flag({
   country,
   year,
-  isTimeline,
+  width,
+  height,
+  isTimeline = false,
   isInteractive = true,
   orientation = "horizontal",
-  isLastYear = "false",
+}: {
+  country: string;
+  year: number;
+  width?: number;
+  height?: number;
+  isTimeline?: boolean;
+  isInteractive?: boolean;
+  orientation?: "horizontal" | "vertical";
 }) {
-  const [chartWrapper, dimensions] = useChartDimensions({ marginBottom: 0 });
-  const [hoveredStripe, setHoveredStripe] = useState(null);
+  const [chartWrapper, dimensions] = useChartDimensions({
+    marginBottom: 0,
+    width,
+    height,
+  });
+  const [hoveredStripe, setHoveredStripe] = useState<string | null>(null);
 
   const FlagStripeStack =
     orientation === "horizontal" ? BarStack : BarStackHorizontal;
@@ -33,8 +47,7 @@ export default function Flag({
       getData({
         countries: [country],
         years: [year],
-        CATEGORIES_ORDERED_LIST,
-      }),
+      }) as $FixMe[],
     [country, year]
   );
 
@@ -59,12 +72,12 @@ export default function Flag({
   const stackProps =
     orientation === "horizontal"
       ? {
-          x: (d) => d.country,
+          x: (d: $FixMe) => d.country,
           xScale: flagScale,
           yScale: stripeScale,
         }
       : {
-          y: (d) => d.country,
+          y: (d: $FixMe) => d.country,
           xScale: stripeScale,
           yScale: flagScale,
         };
@@ -75,7 +88,7 @@ export default function Flag({
   });
   const flagDescription =
     data[0] !== undefined
-      ? isTimeline == "true"
+      ? isTimeline
         ? `In ${
             data[0].year
           }, the coverage of LGBTQ+ rights was at ${Math.round(
@@ -100,7 +113,7 @@ export default function Flag({
               data[0].hate) *
               100
           )} out of 600 possible points.`
-      : null;
+      : undefined;
 
   return data[0] !== undefined ? (
     <div
@@ -136,6 +149,7 @@ export default function Flag({
                 className="fill-slate-900"
               />
 
+              {/* @ts-ignore */}
               <FlagStripeStack
                 data={data}
                 keys={CATEGORIES_ORDERED_LIST.slice().reverse()}
@@ -165,12 +179,12 @@ export default function Flag({
                           y={bar.y}
                           height={bar.height}
                           width={bar.width}
+                          stroke={"transparent"}
                           initial={{
                             fillOpacity: 0.9,
                           }}
                           animate={{
                             fill: bar.color,
-                            stroke: null,
                             fillOpacity:
                               bar.key === hoveredStripe ||
                               isNull(hoveredStripe) ||

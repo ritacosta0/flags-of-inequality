@@ -22,8 +22,6 @@ export default function Grid() {
           ascending: order === "ascending",
           type: selectedSort === "ranking" ? "ranking" : "country",
         },
-        countries: null,
-        keys: null,
       }) as $FixMe[],
     [year, order, selectedSort]
   );

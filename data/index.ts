@@ -22,7 +22,8 @@ import {
   select,
   filter,
 } from "@tidyjs/tidy";
-import { isUndefined } from "lodash";
+import { isNull, isUndefined } from "lodash";
+import { $FixMe } from "@/utils/defs";
 
 export const categoryLabels = {
   [CATEGORIES.EQUALITY]: [
@@ -49,7 +50,7 @@ export const categoryLabels = {
   [CATEGORIES.ASYLUM]: ["Asylum ", "Asylum"],
 };
 
-export const standardCategory = (category) => {
+export const standardCategory = (category: string) => {
   for (let categoryType in categoryLabels) {
     if (categoryLabels[categoryType].includes(category)) {
       return categoryType;
@@ -83,6 +84,8 @@ const wideData = tidy(
   ),
   mutate({
     category: (d) => standardCategory(d.category),
+    // Czech Republic is now Czechia, we need this to match data prev to 2023 with data from 2023 onwards for this country.
+    country: (d) => (d.country === "Czech Republic" ? "Czechia" : d.country),
   }),
   pivotWider({
     namesFrom: "category",
@@ -98,7 +101,11 @@ const wideData = tidy(
   select(["-intersex"])
 );
 
-const filterContext = (datum, countries, years) => {
+const filterContext = (
+  datum: $FixMe,
+  countries?: string[],
+  years?: number[]
+) => {
   const conditions = [
     !countries || countries.includes(datum.country),
     !years || years.includes(datum.year),
@@ -114,7 +121,17 @@ When no filter is passed, all values are returned. Examples:
 for all countries.
 - getData() returns full dataset.
  */
-export const getData = ({ countries, years, keys, sortingParams }) => {
+export const getData = ({
+  countries,
+  years,
+  keys,
+  sortingParams,
+}: {
+  countries?: string[];
+  years?: number[];
+  keys?: string[];
+  sortingParams?: { type: string; ascending: boolean };
+}) => {
   let transformedData = wideData.filter((d) =>
     filterContext(d, countries, years)
   );
@@ -125,12 +142,20 @@ export const getData = ({ countries, years, keys, sortingParams }) => {
         : descending(a[sortingParams.type], b[sortingParams.type])
     );
   }
-  if (!keys) return transformedData;
+  if (isUndefined(keys)) return transformedData;
 
   return tidy(transformedData, select(["country", "year", ...keys]));
 };
 
-export const getCategoryDetailData = ({ countries, years, category }) => {
+export const getCategoryDetailData = ({
+  countries,
+  years,
+  category,
+}: {
+  countries: string[];
+  years: number[];
+  category: string;
+}) => {
   return tidy(
     data,
     filter(
@@ -146,7 +171,7 @@ export const getCategoryDetailData = ({ countries, years, category }) => {
   );
 };
 
-const getUniqueValues = (dataset, accessor) =>
+const getUniqueValues = (dataset: $FixMe[], accessor: (d: $FixMe) => $FixMe) =>
   [...new Set(dataset.map(accessor))].sort();
 
 export const yearsList = getUniqueValues(wideData, (d) => d.year);

@@ -10,8 +10,12 @@ const flagsPerRowBreakpoints = {
 const GOLDEN_RATIO = 1.618;
 const FLAG_SPACING = 8;
 
-const getFlagWidth = (containerWidth, flagsPerRow, customWidthCalculation) => {
-  const calculateWidth = (flagCount) =>
+const getFlagWidth = (
+  containerWidth: number,
+  flagsPerRow?: number,
+  customWidthCalculation?: (w: number) => number
+) => {
+  const calculateWidth = (flagCount: number) =>
     Math.floor((containerWidth - (flagCount - 1) * FLAG_SPACING) / flagCount);
 
   if (customWidthCalculation) {
@@ -33,8 +37,11 @@ const getFlagWidth = (containerWidth, flagsPerRow, customWidthCalculation) => {
   return calculateWidth(flagsPerRowBreakpoints["default"]);
 };
 
-export const useFlagDimensions = (flagsPerRow, customWidthCalculation) => {
-  const ref = useRef();
+export const useFlagDimensions = (
+  flagsPerRow?: number,
+  customWidthCalculation?: (w: number) => number
+): [React.RefObject<HTMLDivElement>, { width: number; height: number }] => {
+  const ref = useRef<HTMLDivElement>(null);
   const [width, changeWidth] = useState(0);
 
   useEffect(() => {
