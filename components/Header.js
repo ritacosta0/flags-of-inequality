@@ -10,6 +10,7 @@ import { RainbowLink } from "./RainbowLink";
 import Button from "@mui/material/Button";
 import Link from "next/link";
 import { styled } from "@mui/material/styles";
+import { twMerge } from "tailwind-merge";
 
 export default function Header({ type }) {
   const titleWrapper = useRef();
@@ -124,15 +125,18 @@ export default function Header({ type }) {
         Flags of Inequality
       </h1>
       <p
-        className="mt-10 text-sm text-center md:text-base lg:text-lg text-slate-300"
+        className={twMerge(
+          "mt-10 text-sm text-center md:text-base lg:text-lg text-slate-300",
+          type === "expo" && "w-10/12 mx-auto"
+        )}
         tabIndex={0}
       >
         <span className="font-bold">
           If countries had equal rights for their LGBTQ+ citizens this
-          visualization would not exist
+          visualization would not exist.
         </span>
-        . We make use of the rainbow flag to portray to what extent different
-        dimensions of queer life are disregarded by state regulations.
+        <br /> We make use of the rainbow flag to portray to what extent
+        different dimensions of queer life are disregarded by state regulations.
       </p>
       <p
         className="m-5 text-xs text-center md:text-sm text-slate-300"
@@ -147,7 +151,7 @@ export default function Header({ type }) {
           Beatriz Malveiro
         </RainbowLink>
       </p>
-      {type === "expo" ? (
+      {type === "expo" && (
         <div className="mx-auto text-center">
           <SortButton
             className="w-full py-2 my-1 text-left lg:w-fit lg:ml-4 h-fit"
@@ -168,7 +172,12 @@ export default function Header({ type }) {
             </Link>
           </SortButton>
         </div>
-      ) : null}
+      )}
+      {type === "main" && (
+        <div className="mx-auto my-12 text-center">
+          <ArrowDownwardIcon className=" fill-slate-400 animate-bounce" />
+        </div>
+      )}
     </div>
   );
 }
