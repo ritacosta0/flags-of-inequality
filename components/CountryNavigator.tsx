@@ -7,11 +7,11 @@ import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
 import { scaleLinear, scaleOrdinal } from "@visx/scale";
 import { colord, extend } from "colord";
+import a11yPlugin from "colord/plugins/a11y";
 import { format } from "d3-format";
 import { AnimatePresence, motion } from "framer-motion";
 import Head from "next/head";
 import { useEffect, useMemo, useState } from "react";
-import a11yPlugin from "colord/plugins/a11y";
 
 import { $FixMe } from "@/utils/defs";
 import { stack as d3Stack } from "d3-shape";
@@ -27,22 +27,16 @@ import { nth } from "../utils";
 
 extend([a11yPlugin]);
 
-const CountryNavigator = () => {
-  const [year, setYear] = useState(2024);
-  const [sortDict, setSortDict] = useState({
+const YEAR = 2024;
+const data = getData({
+  years: [YEAR],
+  sortingParams: {
     type: "ranking",
     ascending: true,
-  });
+  },
+}) as $FixMe[];
 
-  const data = useMemo(
-    () =>
-      getData({
-        years: [year],
-        sortingParams: sortDict,
-      }) as $FixMe[],
-    [year, sortDict]
-  );
-
+const CountryNavigator = () => {
   const countries = data.map((d) => d.country);
   const [currentCountryIndex, setCurrentCountryIndex] = useState(0);
   const currentCountry = countries[currentCountryIndex];
@@ -217,7 +211,7 @@ const CountryNavigator = () => {
         <h2 tabIndex={0}>
           {currentCountry}{" "}
           <span className="text-slate-400">{` | ${nth(
-            dataCountry.find((d) => d.year === year)?.ranking
+            dataCountry.find((d) => d.year === YEAR)?.ranking
           )}`}</span>
         </h2>
         <div className="flex gap-2 text-slate-400">
