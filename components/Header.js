@@ -135,8 +135,9 @@ export default function Header({ type }) {
           If countries had equal rights for their LGBTQ+ citizens this
           visualization would not exist.
         </span>
-        <br /> We make use of the rainbow flag to portray to what extent
-        different dimensions of queer life are disregarded by state regulations.
+        {type === "expo" && <br />} We make use of the rainbow flag to portray
+        to what extent different dimensions of queer life are disregarded by
+        state regulations.
       </p>
       <p
         className="m-5 text-xs text-center md:text-sm text-slate-300"
@@ -158,18 +159,14 @@ export default function Header({ type }) {
             variant="outlined"
             size="small"
           >
-            <Link href="expo/grid">
-              <div>Grid</div>
-            </Link>
+            <Link href="expo/grid">Grid</Link>
           </SortButton>
           <SortButton
             className="w-full py-2 my-1 text-left lg:w-fit lg:ml-4 h-fit"
             variant="outlined"
             size="small"
           >
-            <Link href={`expo/singleflag`}>
-              <div>Single flag</div>
-            </Link>
+            <Link href={`expo/singleflag`}>Single flag</Link>
           </SortButton>
         </div>
       )}

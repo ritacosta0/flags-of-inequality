@@ -119,14 +119,13 @@ export const getData = ({ countries, years, keys, sortingParams }) => {
     filterContext(d, countries, years)
   );
   if (!isUndefined(sortingParams)) {
-    transformedData.sort((a, b) =>
+    transformedData = transformedData.sort((a, b) =>
       sortingParams.ascending
         ? ascending(a[sortingParams.type], b[sortingParams.type])
         : descending(a[sortingParams.type], b[sortingParams.type])
     );
   }
-
-  if (isUndefined(keys)) return transformedData;
+  if (!keys) return transformedData;
 
   return tidy(transformedData, select(["country", "year", ...keys]));
 };

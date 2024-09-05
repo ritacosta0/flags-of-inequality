@@ -43,15 +43,13 @@ export default function Timeline() {
       <Head>
         <title>{`${country ?? "Loading"} - Flags of Inequality`}</title>
       </Head>
-      <Link href="/#flags">
-        <a
-          role={"button"}
-          className="font-medium cursor-pointer text-slate-300 hover:text-slate-100"
-          aria-label="Press to go back to main page."
-          tabIndex={0}
-        >
-          <ArrowBack /> Back
-        </a>
+      <Link
+        href="/#flags"
+        className="font-medium cursor-pointer text-slate-300 hover:text-slate-100"
+        aria-label="Press to go back to main page."
+        tabIndex={0}
+      >
+        <ArrowBack /> Back
       </Link>
       <h2 className="mt-8 text-4xl font-medium " tabIndex={0}>{`${
         flag(country) || ""
