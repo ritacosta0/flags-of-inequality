@@ -1,7 +1,7 @@
 import { Text } from "@visx/text";
 import { format } from "d3-format";
 
-const Annotation = ({ value, color }) => (
+const Annotation = ({ value, color }: { value: number; color: string }) => (
   <svg width={42} height={16}>
     <Text
       x={21}

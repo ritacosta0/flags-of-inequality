@@ -6,7 +6,7 @@ export const CATEGORIES = {
   GENDER: "gender",
   ASYLUM: "asylum",
   INTERSEX: "intersex",
-};
+} as const;
 
 export const CATEGORIES_ORDERED_LIST = [
   CATEGORIES.EQUALITY,
@@ -17,14 +17,14 @@ export const CATEGORIES_ORDERED_LIST = [
   CATEGORIES.ASYLUM,
 ];
 
-export const CATEGORIES_FULL_NAME = [
-  "Equality and non-discrimination",
-  "Family",
-  "Hate crime and hate speech",
-  "Legal gender recognition & Intersex bodily integrity",
-  "Civil society space",
-  "Asylum",
-];
+export const CATEGORIES_FULL_NAME = {
+  [CATEGORIES.EQUALITY]: "Equality and non-discrimination",
+  [CATEGORIES.FAMILY]: "Family",
+  [CATEGORIES.HATE]: "Hate crime and hate speech",
+  [CATEGORIES.GENDER]: "Legal gender recognition & Intersex bodily integrity",
+  [CATEGORIES.CIVIL]: "Civil society space",
+  [CATEGORIES.ASYLUM]: "Asylum",
+};
 
 export const RAINBOW_COLORS = [
   "#E94A40",

@@ -1,16 +1,20 @@
-import React, { useEffect, useRef, useState } from "react";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-import * as Warp from "warpjs";
-import TextPath from "./TextPath";
-import { RAINBOW_COLORS } from "../constants";
 import { Text } from "@visx/text";
-import { useIntersection } from "react-use";
 import { isNull, isUndefined } from "lodash";
-import { RainbowLink } from "./RainbowLink";
+import Link from "next/link";
+import React, { useEffect, useRef, useState } from "react";
+import { useIntersection } from "react-use";
+import { twMerge } from "tailwind-merge";
+// @ts-expect-error - Warpjs is not typed
+import * as Warp from "warpjs";
+import { RAINBOW_COLORS } from "../constants";
+import RainbowLink from "@/components/RainbowLink";
+import TextPath from "@/components/TextPath";
+import OutlineButton from "./OutlineButton";
 
-export default function Header() {
-  const titleWrapper = useRef();
-  const title = useRef();
+export default function Header({ type }: { type: "main" | "expo" }) {
+  const titleWrapper = useRef<HTMLDivElement | null>(null);
+  const title = useRef<SVGSVGElement | null>(null);
   const [titleWidth, setTitleWidth] = useState(0);
   const [isLargeScreen, setIsLargeScreen] = useState(true);
   const intersection = useIntersection(titleWrapper, {
@@ -22,6 +26,7 @@ export default function Header() {
   useEffect(() => {
     const handleResize = () => {
       setIsLargeScreen(window.innerWidth > 860);
+      if (titleWrapper.current === null) return;
       setTitleWidth(titleWrapper.current?.clientWidth);
     };
     window.addEventListener("resize", handleResize);
@@ -37,11 +42,12 @@ export default function Header() {
     const warp = new Warp(svg);
 
     warp.interpolate(2);
-    warp.transform(([x, y]) => [x, y, y]);
+    warp.transform(([x, y]: [number, number]) => [x, y, y]);
 
     let offset = 0;
     function animate() {
-      warp.transform(([x, y, oy]) => [
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      warp.transform(([x, y, oy]: [number, number, number]) => [
         x,
         oy + 4 * Math.sin(x / 28 + offset),
         oy,
@@ -72,7 +78,7 @@ export default function Header() {
             </defs>
             <g transform={`translate(0,${titleWidth * 0})`}>
               <TextPath
-                width={title}
+                width={title.current?.clientWidth}
                 fill="transparent"
                 stroke="white"
                 strokeWidth={2}
@@ -80,7 +86,7 @@ export default function Header() {
                 isLargeScreen={isLargeScreen}
               />
               <TextPath
-                width={title}
+                width={title.current?.clientWidth}
                 fill="transparent"
                 stroke="url(#rainbow)"
                 strokeWidth={2}
@@ -103,15 +109,19 @@ export default function Header() {
         Flags of Inequality
       </h1>
       <p
-        className="mt-10 text-sm text-center md:text-base lg:text-lg text-slate-300"
+        className={twMerge(
+          "mt-10 text-sm text-center md:text-base lg:text-lg text-slate-300",
+          type === "expo" && "w-10/12 mx-auto"
+        )}
         tabIndex={0}
       >
         <span className="font-bold">
           If countries had equal rights for their LGBTQ+ citizens this
-          visualization would not exist
+          visualization would not exist.
         </span>
-        . We make use of the rainbow flag to portray to what extent different
-        dimensions of queer life are disregarded by state regulations.
+        {type === "expo" && <br />} We make use of the rainbow flag to portray
+        to what extent different dimensions of queer life are disregarded by
+        state regulations.
       </p>
       <p
         className="m-5 text-xs text-center md:text-sm text-slate-300"
@@ -126,9 +136,29 @@ export default function Header() {
           Beatriz Malveiro
         </RainbowLink>
       </p>
-      <div className="mx-auto my-12 text-center">
-        <ArrowDownwardIcon className=" fill-slate-400 animate-bounce" />
-      </div>
+      {type === "expo" && (
+        <div className="mx-auto text-center">
+          <OutlineButton
+            className="w-full py-2 my-1 text-left lg:w-fit lg:ml-4 h-fit"
+            variant="outlined"
+            size="small"
+          >
+            <Link href="expo/grid">Grid</Link>
+          </OutlineButton>
+          <OutlineButton
+            className="w-full py-2 my-1 text-left lg:w-fit lg:ml-4 h-fit"
+            variant="outlined"
+            size="small"
+          >
+            <Link href={`expo/singleflag`}>Single flag</Link>
+          </OutlineButton>
+        </div>
+      )}
+      {type === "main" && (
+        <div className="mx-auto my-12 text-center">
+          <ArrowDownwardIcon className=" fill-slate-400 animate-bounce" />
+        </div>
+      )}
     </div>
   );
 }

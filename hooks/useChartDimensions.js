@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react";
+import { isUndefined } from "lodash";
 
 /* useChartDimensionsHook
  from: https://wattenberger.com/blog/react-hooks
@@ -53,9 +54,11 @@ export const useChartDimensions = (passedSettings) => {
         changeHeight(entry.contentRect.height);
     });
 
-    resizeObserver.observe(element);
+    if (!isUndefined(element)) {
+      resizeObserver.observe(element);
+    }
 
-    return () => resizeObserver.unobserve(element);
+    return () => element !== undefined && resizeObserver.unobserve(element);
   }, []);
 
   const newSettings = combineChartDimensions({

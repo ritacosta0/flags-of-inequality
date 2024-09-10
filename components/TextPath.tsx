@@ -1,6 +1,9 @@
-import React from "react";
-
-export default function TextPath({ isLargeScreen, ...props }) {
+function TextPath({
+  isLargeScreen,
+  ...props
+}: {
+  isLargeScreen: boolean;
+} & React.SVGProps<SVGPathElement>) {
   if (isLargeScreen) {
     return (
       <svg
@@ -32,3 +35,5 @@ export default function TextPath({ isLargeScreen, ...props }) {
     </svg>
   );
 }
+
+export default TextPath;

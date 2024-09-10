@@ -1,28 +1,30 @@
-import { useRouter } from "next/router";
-import React, { useMemo, useState, useEffect } from "react";
 import LinkIcon from "@mui/icons-material/Link";
 import Box from "@mui/material/Box";
 import { flag } from "country-emoji";
+import { useEffect, useMemo, useState } from "react";
 
-import { getData } from "../../data";
-import { useFlagDimensions } from "../../hooks/useFlagDimensions";
-import { Flag } from "../../components/Flag";
-import Link from "next/link";
+import Flag from "@/components/Flag";
+import Legend from "@/components/Legend";
+import RainbowLink from "@/components/RainbowLink";
+import { getData } from "@/data";
+import { useFlagDimensions } from "@/hooks/useFlagDimensions";
+import { nth } from "@/utils";
 import { ArrowBack } from "@mui/icons-material";
-import { nth } from "../../utils";
+import { uniq } from "lodash";
 import Head from "next/head";
-import { RainbowLink } from "../../components/RainbowLink";
-import Legend from "../../components/Legend";
+import Link from "next/link";
+import { notFound } from "next/navigation";
 
-export default function Timeline() {
-  const router = useRouter();
-  const { country } = router.query;
+export default function Timeline({ country }: { country: string }) {
   const [isVertical, setIsVertical] = useState(false);
-  const data = useMemo(() => getData({ countries: [country] }), [country]);
+  const data = useMemo(
+    () => getData({ countries: country ? [country as string] : undefined }),
+    [country]
+  );
   const years = data.map((d) => d.year).sort();
   const [flagsContainer, flagDimensions] = useFlagDimensions(
     isVertical ? 1 : years.length,
-    isVertical ? (containerWidth) => containerWidth * 0.8 : null
+    isVertical ? (containerWidth) => containerWidth * 0.8 : undefined
   );
 
   const url = data.find((d) => d.year === 2024)?.url;
@@ -38,20 +40,22 @@ export default function Timeline() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  if (!country || data.length === 0) {
+    return notFound();
+  }
+
   return (
     <div className={`w-full mx-auto ${isVertical ? "mt-4" : "mt-[30vh]"}`}>
       <Head>
         <title>{`${country ?? "Loading"} - Flags of Inequality`}</title>
       </Head>
-      <Link href="/#flags">
-        <a
-          role={"button"}
-          className="font-medium cursor-pointer text-slate-300 hover:text-slate-100"
-          aria-label="Press to go back to main page."
-          tabIndex={0}
-        >
-          <ArrowBack /> Back
-        </a>
+      <Link
+        href="/#flags"
+        className="font-medium cursor-pointer text-slate-300 hover:text-slate-100"
+        aria-label="Press to go back to main page."
+        tabIndex={0}
+      >
+        <ArrowBack /> Back
       </Link>
       <h2 className="mt-8 text-4xl font-medium " tabIndex={0}>{`${
         flag(country) || ""
@@ -87,7 +91,7 @@ export default function Timeline() {
               <Flag
                 country={country}
                 year={year}
-                isTimeline={"true"}
+                isTimeline={true}
                 orientation={isVertical ? "vertical" : "horizontal"}
               />
             </Box>
@@ -105,8 +109,31 @@ export default function Timeline() {
         ))}
       </div>
       <div className="mt-20">
-        <Legend position="start" />
+        <Legend />
       </div>
     </div>
   );
+}
+
+export async function getStaticPaths() {
+  const data = getData({});
+  const countries = uniq(data.map((d) => d.country));
+
+  const paths = countries.map((country) => ({
+    params: { country },
+  }));
+
+  return { paths, fallback: false };
+}
+
+export async function getStaticProps({
+  params,
+}: {
+  params: { country: string };
+}) {
+  return {
+    props: {
+      country: params.country,
+    },
+  };
 }

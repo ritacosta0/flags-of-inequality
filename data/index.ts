@@ -9,49 +9,47 @@ import data2022 from "./rainbow_2022_with_percentages.json";
 import data2023 from "./rainbow_2023_with_percentages.json";
 import data2024 from "./rainbow_2024_with_percentages.json";
 
-import { CATEGORIES } from "../constants";
 import { ascending, descending } from "d3-array";
+import { CATEGORIES } from "../constants";
 
+import { $FixMe } from "@/utils/defs";
 import {
+  filter,
+  first,
   groupBy,
+  mutate,
   pivotWider,
+  select,
   summarize,
   tidy,
-  first,
-  mutate,
-  select,
-  filter,
 } from "@tidyjs/tidy";
 import { isUndefined } from "lodash";
 
-export const categoryLabels = {
-  [CATEGORIES.EQUALITY]: [
+export const categoryLabels: Record<Category, string[]> = {
+  equality: [
     "Equality and non-discrimination ",
     "Equality & non-discrimination ",
     "Equality & non-discrimination",
   ],
-  [CATEGORIES.FAMILY]: ["Family ", "Family"],
-  [CATEGORIES.HATE]: ["Hate crime & hate speech ", "Hate crime & hate speech"],
-  [CATEGORIES.GENDER]: [
+  family: ["Family ", "Family"],
+  hate: ["Hate crime & hate speech ", "Hate crime & hate speech"],
+  gender: [
     "Legal gender recognition & bodily integrity ",
     "Legal gender recognition ",
     "Legal gender recognition",
   ],
-  [CATEGORIES.INTERSEX]: [
-    "Intersex bodily integrity ",
-    "Intersex bodily integrity",
-  ],
-  [CATEGORIES.CIVIL]: [
+  intersex: ["Intersex bodily integrity ", "Intersex bodily integrity"],
+  civil: [
     "Civil society space ",
     "Civil society space",
     "Freedom of assembly, association & expression ",
   ],
-  [CATEGORIES.ASYLUM]: ["Asylum ", "Asylum"],
+  asylum: ["Asylum ", "Asylum"],
 };
 
-export const standardCategory = (category) => {
-  for (let categoryType in categoryLabels) {
-    if (categoryLabels[categoryType].includes(category)) {
+export const standardCategory = (category: string) => {
+  for (const categoryType in categoryLabels) {
+    if (categoryLabels[categoryType as Category].includes(category)) {
       return categoryType;
     }
   }
@@ -71,6 +69,16 @@ export const data = [
   ...data2024,
 ];
 
+export type CategoryKey = keyof typeof CATEGORIES;
+export type Category = (typeof CATEGORIES)[CategoryKey];
+
+export type Datum = {
+  country: string;
+  year: number;
+  url: string;
+  ranking: number;
+} & Record<Category, number>;
+
 const wideData = tidy(
   data,
   groupBy(
@@ -83,6 +91,8 @@ const wideData = tidy(
   ),
   mutate({
     category: (d) => standardCategory(d.category),
+    // Czech Republic is now Czechia, we need this to match data prev to 2023 with data from 2023 onwards for this country.
+    country: (d) => (d.country === "Czech Republic" ? "Czechia" : d.country),
   }),
   pivotWider({
     namesFrom: "category",
@@ -96,9 +106,13 @@ const wideData = tidy(
         : d.gender,
   }),
   select(["-intersex"])
-);
+) as Datum[];
 
-const filterContext = (datum, countries, years) => {
+const filterContext = (
+  datum: $FixMe,
+  countries?: string[],
+  years?: number[]
+) => {
   const conditions = [
     !countries || countries.includes(datum.country),
     !years || years.includes(datum.year),
@@ -114,24 +128,41 @@ When no filter is passed, all values are returned. Examples:
 for all countries.
 - getData() returns full dataset.
  */
-export const getData = ({ countries, years, keys, sortingParams }) => {
+export const getData = ({
+  countries,
+  years,
+  keys,
+  sortingParams,
+}: {
+  countries?: string[];
+  years?: number[];
+  keys?: string[];
+  sortingParams?: { type: keyof Datum; ascending: boolean };
+}) => {
   let transformedData = wideData.filter((d) =>
     filterContext(d, countries, years)
   );
   if (!isUndefined(sortingParams)) {
-    transformedData.sort((a, b) =>
+    transformedData = transformedData.sort((a, b) =>
       sortingParams.ascending
         ? ascending(a[sortingParams.type], b[sortingParams.type])
         : descending(a[sortingParams.type], b[sortingParams.type])
     );
   }
-
   if (isUndefined(keys)) return transformedData;
 
   return tidy(transformedData, select(["country", "year", ...keys]));
 };
 
-export const getCategoryDetailData = ({ countries, years, category }) => {
+export const getCategoryDetailData = ({
+  countries,
+  years,
+  category,
+}: {
+  countries: string[];
+  years: number[];
+  category: string;
+}) => {
   return tidy(
     data,
     filter(
@@ -147,7 +178,7 @@ export const getCategoryDetailData = ({ countries, years, category }) => {
   );
 };
 
-const getUniqueValues = (dataset, accessor) =>
+const getUniqueValues = (dataset: $FixMe[], accessor: (d: $FixMe) => $FixMe) =>
   [...new Set(dataset.map(accessor))].sort();
 
 export const yearsList = getUniqueValues(wideData, (d) => d.year);
