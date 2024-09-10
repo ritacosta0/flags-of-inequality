@@ -5,9 +5,9 @@ import SortIcon from "@mui/icons-material/Sort";
 import SortByAlphaIcon from "@mui/icons-material/SortByAlpha";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Slider, { SliderProps } from "@mui/material/Slider";
+import Slider from "@mui/material/Slider";
 import Stack from "@mui/material/Stack";
-import { MouseEventHandler, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { create } from "zustand";
 
 import { styled } from "@mui/material/styles";
