@@ -1,16 +1,15 @@
-import React, { useEffect, useRef, useState } from "react";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-import * as Warp from "warpjs";
-import TextPath from "./TextPath";
-import { RAINBOW_COLORS } from "../constants";
 import { Text } from "@visx/text";
-import { useIntersection } from "react-use";
 import { isNull, isUndefined } from "lodash";
-import { RainbowLink } from "./RainbowLink";
-import Button from "@mui/material/Button";
 import Link from "next/link";
-import { styled } from "@mui/material/styles";
+import React, { useEffect, useRef, useState } from "react";
+import { useIntersection } from "react-use";
 import { twMerge } from "tailwind-merge";
+import * as Warp from "warpjs";
+import { RAINBOW_COLORS } from "../constants";
+import { RainbowLink } from "./RainbowLink";
+import TextPath from "./TextPath";
+import { OutlineButton } from "./OutlineButton";
 
 export default function Header({ type }) {
   const titleWrapper = useRef();
@@ -22,24 +21,6 @@ export default function Header({ type }) {
     rootMargin: "0px",
     threshold: 1,
   });
-
-  const SortButton = styled(Button)(({ theme }) => ({
-    borderColor: " #cbd5e1",
-    color: " #cbd5e1",
-    "&:hover": {
-      borderColor: "#f8fafc",
-      color: "#f8fafc",
-      boxShadow: "none",
-    },
-    "&:active": {
-      boxShadow: "none",
-      color: "#f8fafc",
-      borderColor: "#f8fafc",
-    },
-    "&:focus": {
-      boxShadow: "0 0 0 0.2rem rgba(0,123,255,.5)",
-    },
-  }));
 
   useEffect(() => {
     const handleResize = () => {
@@ -63,6 +44,7 @@ export default function Header({ type }) {
 
     let offset = 0;
     function animate() {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       warp.transform(([x, y, oy]) => [
         x,
         oy + 4 * Math.sin(x / 28 + offset),
@@ -154,20 +136,20 @@ export default function Header({ type }) {
       </p>
       {type === "expo" && (
         <div className="mx-auto text-center">
-          <SortButton
+          <OutlineButton
             className="w-full py-2 my-1 text-left lg:w-fit lg:ml-4 h-fit"
             variant="outlined"
             size="small"
           >
             <Link href="expo/grid">Grid</Link>
-          </SortButton>
-          <SortButton
+          </OutlineButton>
+          <OutlineButton
             className="w-full py-2 my-1 text-left lg:w-fit lg:ml-4 h-fit"
             variant="outlined"
             size="small"
           >
             <Link href={`expo/singleflag`}>Single flag</Link>
-          </SortButton>
+          </OutlineButton>
         </div>
       )}
       {type === "main" && (

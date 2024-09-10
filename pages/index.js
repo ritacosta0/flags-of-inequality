@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Grid from "@/components/Grid";
 import Head from "next/head";
@@ -8,32 +8,15 @@ import Intro from "../components/Intro";
 import Legend from "../components/Legend";
 import MessageUnsupportedBrowser from "../components/MessageUnsupportedBrowser";
 import { Methodology } from "../components/Methodology";
-import { getData } from "../data";
-import { useFlagDimensions } from "../hooks/useFlagDimensions";
 
 function Home() {
   const [isSamsungBrowser, setIsSamsungBrowser] = useState(false);
-  const [year, setYear] = useState(2024);
-  const [orderAlphabetical, setOrderAlphabetical] = useState(true);
-  const [orderRanking, setOrderRanking] = useState(true);
-  const [sortDict, setSortDict] = useState({
-    type: "ranking",
-    ascending: true,
-  });
-  const [flagsContainer, flagDimensions] = useFlagDimensions();
-
-  const data = useMemo(
-    () => getData({ years: [year], sortingParams: sortDict }),
-    [year, sortDict]
-  );
 
   useEffect(() => {
     if (navigator && navigator.userAgent.match(/SamsungBrowser/i)) {
       setIsSamsungBrowser(true);
     }
   }, []);
-
-  const countries = data.map((d) => d.country);
 
   return (
     <>

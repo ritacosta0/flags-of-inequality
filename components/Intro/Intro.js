@@ -1,12 +1,12 @@
-import React, { useRef, useState } from "react";
-import { Scrollama, Step } from "react-scrollama";
-import { useFlagDimensions } from "../../hooks/useFlagDimensions";
-import { RAINBOW_COLORS } from "../../constants";
-import { Steps } from "./steps";
-import { isNull } from "lodash";
-import { Flag } from "../Flag";
 import { AnimatePresence, motion } from "framer-motion";
+import { isNull } from "lodash";
+import React, { useState } from "react";
+import { Scrollama, Step } from "react-scrollama";
+import { RAINBOW_COLORS } from "../../constants";
+import { useFlagDimensions } from "../../hooks/useFlagDimensions";
+import { Flag } from "../Flag";
 import Header from "../Header";
+import { Steps } from "./steps";
 
 import styles from "./Intro.module.css";
 

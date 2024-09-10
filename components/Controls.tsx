@@ -14,7 +14,7 @@ import { styled } from "@mui/material/styles";
 import { max, min } from "d3-array";
 import { yearsList } from "../data";
 
-const YearsSlider = styled(Slider)(({ theme }) => ({
+const YearsSlider = styled(Slider)(() => ({
   color: "#cbd5e1",
   height: 4,
   "& .MuiSlider-thumb": {
@@ -40,7 +40,7 @@ const YearsSlider = styled(Slider)(({ theme }) => ({
   },
 }));
 
-const SortButton = styled(Button)(({ theme }) => ({
+const SortButton = styled(Button)(() => ({
   borderColor: " #cbd5e1",
   color: " #cbd5e1",
   "&:hover": {

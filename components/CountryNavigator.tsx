@@ -51,7 +51,7 @@ const CountryNavigator = () => {
   const [isRunning, setIsRunning] = useState(false);
 
   useEffect(() => {
-    let interval: NodeJS.Timer;
+    let interval: ReturnType<typeof setInterval>;
     if (isRunning) {
       const updateCountry = () => {
         setCurrentCountryIndex(
@@ -83,7 +83,7 @@ const CountryNavigator = () => {
       prevIndex === 0 ? countries.length - 1 : prevIndex - 1
     );
   };
-  const SortButton = styled(Button)(({ theme }) => ({
+  const SortButton = styled(Button)(() => ({
     borderColor: " #cbd5e1",
     color: " #cbd5e1",
     "&:hover": {

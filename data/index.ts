@@ -9,21 +9,21 @@ import data2022 from "./rainbow_2022_with_percentages.json";
 import data2023 from "./rainbow_2023_with_percentages.json";
 import data2024 from "./rainbow_2024_with_percentages.json";
 
-import { CATEGORIES } from "../constants";
 import { ascending, descending } from "d3-array";
+import { CATEGORIES } from "../constants";
 
+import { $FixMe } from "@/utils/defs";
 import {
+  filter,
+  first,
   groupBy,
+  mutate,
   pivotWider,
+  select,
   summarize,
   tidy,
-  first,
-  mutate,
-  select,
-  filter,
 } from "@tidyjs/tidy";
-import { isNull, isUndefined } from "lodash";
-import { $FixMe } from "@/utils/defs";
+import { isUndefined } from "lodash";
 
 export const categoryLabels = {
   [CATEGORIES.EQUALITY]: [
@@ -51,7 +51,7 @@ export const categoryLabels = {
 };
 
 export const standardCategory = (category: string) => {
-  for (let categoryType in categoryLabels) {
+  for (const categoryType in categoryLabels) {
     if (categoryLabels[categoryType].includes(category)) {
       return categoryType;
     }

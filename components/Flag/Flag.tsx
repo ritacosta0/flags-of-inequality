@@ -149,7 +149,7 @@ export default function Flag({
                 className="fill-slate-900"
               />
 
-              {/* @ts-ignore */}
+              {/* @ts-expect-error: TS2322 */}
               <FlagStripeStack
                 data={data}
                 keys={CATEGORIES_ORDERED_LIST.slice().reverse()}
