@@ -1,6 +1,6 @@
-import { RAINBOW_COLORS } from "../../constants";
-import Highlight from "../Highlight";
-import Underline from "../Underline";
+import { RAINBOW_COLORS } from "@/constants";
+import Highlight from "@/components/Highlight";
+import Underline from "@/components/Underline";
 import { flag } from "country-emoji";
 
 export const Steps = [

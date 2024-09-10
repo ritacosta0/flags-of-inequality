@@ -1,6 +1,6 @@
-import { RainbowLink } from "../RainbowLink";
+import RainbowLink from "@/components/RainbowLink";
 
-function Methodology() {
+const Methodology = () => {
   return (
     <div className="mx-auto mt-20 mb-10 text-slate-400 ">
       <hr className=" border-slate-600" />
@@ -36,5 +36,6 @@ function Methodology() {
       </div>
     </div>
   );
-}
+};
+
 export default Methodology;

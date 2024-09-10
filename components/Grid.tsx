@@ -1,4 +1,4 @@
-import { Flag } from "@/components/Flag";
+import Flag from "@/components/Flag";
 import { getData } from "@/data";
 import { useFlagDimensions } from "@/hooks/useFlagDimensions";
 import { nth } from "@/utils";
@@ -22,7 +22,7 @@ export default function Grid() {
           ascending: order === "ascending",
           type: selectedSort === "ranking" ? "ranking" : "country",
         },
-      }) as $FixMe[],
+      }),
     [year, order, selectedSort]
   );
 

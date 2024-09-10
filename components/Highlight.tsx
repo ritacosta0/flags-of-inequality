@@ -1,10 +1,14 @@
 import { colord, extend } from "colord";
 import a11yPlugin from "colord/plugins/a11y";
+import { PropsWithChildren } from "react";
 import colors from "tailwindcss/colors";
 
 extend([a11yPlugin]);
 
-const Highlight = ({ color, children }) => {
+const Highlight = ({
+  color,
+  children,
+}: PropsWithChildren & { color: string }) => {
   const textColor = colord(colors.white).isReadable(color, {
     level: "AA",
     size: "large",

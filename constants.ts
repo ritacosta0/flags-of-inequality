@@ -6,7 +6,7 @@ export const CATEGORIES = {
   GENDER: "gender",
   ASYLUM: "asylum",
   INTERSEX: "intersex",
-};
+} as const;
 
 export const CATEGORIES_ORDERED_LIST = [
   CATEGORIES.EQUALITY,

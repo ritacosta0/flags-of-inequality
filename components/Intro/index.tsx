@@ -1,19 +1,21 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { isNull } from "lodash";
-import React, { useState } from "react";
+import { useState } from "react";
+// @ts-expect-error - react-scrollama is not typed
 import { Scrollama, Step } from "react-scrollama";
 import { RAINBOW_COLORS } from "../../constants";
 import { useFlagDimensions } from "../../hooks/useFlagDimensions";
-import { Flag } from "../Flag";
+import Flag from "@/components/Flag";
 import { Steps } from "./steps";
 
 import styles from "./Intro.module.css";
+import { $FixMe } from "@/utils/defs";
 
 function Intro() {
-  const [currentStepIndex, setCurrentStepIndex] = useState(null);
+  const [currentStepIndex, setCurrentStepIndex] = useState<number>(0);
   const [flagsContainer, flagDimensions] = useFlagDimensions(1);
 
-  const onStepEnter = ({ data }) => {
+  const onStepEnter = ({ data }: { data: $FixMe }) => {
     setCurrentStepIndex(data);
   };
 

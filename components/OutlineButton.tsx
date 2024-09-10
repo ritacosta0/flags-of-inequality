@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import Button from "@mui/material/Button";
 
-export const OutlineButton = styled(Button)(() => ({
+const OutlineButton = styled(Button)(() => ({
   borderColor: " #cbd5e1",
   color: " #cbd5e1",
   "&:hover": {
@@ -18,3 +18,5 @@ export const OutlineButton = styled(Button)(() => ({
     boxShadow: "0 0 0 0.2rem rgba(0,123,255,.5)",
   },
 }));
+
+export default OutlineButton;

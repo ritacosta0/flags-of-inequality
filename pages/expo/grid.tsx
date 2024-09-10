@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Grid from "@/components/Grid";
 import Legend from "@/components/Legend";
 import MessageUnsupportedBrowser from "@/components/MessageUnsupportedBrowser";
-import { Methodology } from "@/components/Methodology";
+import Methodology from "@/components/Methodology";
 import { useHotkeys } from "react-hotkeys-hook";
 import Controls from "@/components/Controls";
 

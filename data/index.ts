@@ -25,34 +25,31 @@ import {
 } from "@tidyjs/tidy";
 import { isUndefined } from "lodash";
 
-export const categoryLabels = {
-  [CATEGORIES.EQUALITY]: [
+export const categoryLabels: Record<Category, string[]> = {
+  equality: [
     "Equality and non-discrimination ",
     "Equality & non-discrimination ",
     "Equality & non-discrimination",
   ],
-  [CATEGORIES.FAMILY]: ["Family ", "Family"],
-  [CATEGORIES.HATE]: ["Hate crime & hate speech ", "Hate crime & hate speech"],
-  [CATEGORIES.GENDER]: [
+  family: ["Family ", "Family"],
+  hate: ["Hate crime & hate speech ", "Hate crime & hate speech"],
+  gender: [
     "Legal gender recognition & bodily integrity ",
     "Legal gender recognition ",
     "Legal gender recognition",
   ],
-  [CATEGORIES.INTERSEX]: [
-    "Intersex bodily integrity ",
-    "Intersex bodily integrity",
-  ],
-  [CATEGORIES.CIVIL]: [
+  intersex: ["Intersex bodily integrity ", "Intersex bodily integrity"],
+  civil: [
     "Civil society space ",
     "Civil society space",
     "Freedom of assembly, association & expression ",
   ],
-  [CATEGORIES.ASYLUM]: ["Asylum ", "Asylum"],
+  asylum: ["Asylum ", "Asylum"],
 };
 
 export const standardCategory = (category: string) => {
   for (const categoryType in categoryLabels) {
-    if (categoryLabels[categoryType].includes(category)) {
+    if (categoryLabels[categoryType as Category].includes(category)) {
       return categoryType;
     }
   }
@@ -71,6 +68,16 @@ export const data = [
   ...data2023,
   ...data2024,
 ];
+
+export type CategoryKey = keyof typeof CATEGORIES;
+export type Category = (typeof CATEGORIES)[CategoryKey];
+
+export type Datum = {
+  country: string;
+  year: number;
+  url: string;
+  ranking: number;
+} & Record<Category, number>;
 
 const wideData = tidy(
   data,
@@ -99,7 +106,7 @@ const wideData = tidy(
         : d.gender,
   }),
   select(["-intersex"])
-);
+) as Datum[];
 
 const filterContext = (
   datum: $FixMe,
@@ -130,7 +137,7 @@ export const getData = ({
   countries?: string[];
   years?: number[];
   keys?: string[];
-  sortingParams?: { type: string; ascending: boolean };
+  sortingParams?: { type: keyof Datum; ascending: boolean };
 }) => {
   let transformedData = wideData.filter((d) =>
     filterContext(d, countries, years)

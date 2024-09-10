@@ -1,19 +1,18 @@
 import Tippy from "@tippyjs/react";
 import { Group } from "@visx/group";
-import { scaleLinear, scaleBand, scaleOrdinal } from "@visx/scale";
+import { scaleBand, scaleLinear, scaleOrdinal } from "@visx/scale";
 import { BarStack, BarStackHorizontal, Line } from "@visx/shape";
 import { colord } from "colord";
 import { motion } from "framer-motion";
 import { isNull } from "lodash";
-import React, { useMemo, useState } from "react";
-
+import { useMemo, useState } from "react";
 import "tippy.js/animations/shift-away.css";
 
-import { CATEGORIES_ORDERED_LIST, RAINBOW_COLORS } from "../../constants";
-import { getData } from "../../data";
-import { useChartDimensions } from "../../hooks/useChartDimensions";
-import Annotation from "./Annotation";
+import { CATEGORIES_ORDERED_LIST, RAINBOW_COLORS } from "@/constants";
+import { getData } from "@/data";
+import { useChartDimensions } from "@/hooks/useChartDimensions";
 import { $FixMe } from "@/utils/defs";
+import Annotation from "./Annotation";
 
 export default function Flag({
   country,
@@ -47,7 +46,7 @@ export default function Flag({
       getData({
         countries: [country],
         years: [year],
-      }) as $FixMe[],
+      }),
     [country, year]
   );
 

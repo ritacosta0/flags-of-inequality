@@ -4,7 +4,6 @@ import MouseIcon from "@mui/icons-material/Mouse";
 import SortIcon from "@mui/icons-material/Sort";
 import SortByAlphaIcon from "@mui/icons-material/SortByAlpha";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Slider from "@mui/material/Slider";
 import Stack from "@mui/material/Stack";
 import { useEffect, useState } from "react";
@@ -12,7 +11,8 @@ import { create } from "zustand";
 
 import { styled } from "@mui/material/styles";
 import { max, min } from "d3-array";
-import { yearsList } from "../data";
+import { yearsList } from "@/data";
+import OutlineButton from "@/components/OutlineButton";
 
 const YearsSlider = styled(Slider)(() => ({
   color: "#cbd5e1",
@@ -37,24 +37,6 @@ const YearsSlider = styled(Slider)(() => ({
   },
   "& .MuiSlider-markLabelActive": {
     color: "#f1f5f9",
-  },
-}));
-
-const SortButton = styled(Button)(() => ({
-  borderColor: " #cbd5e1",
-  color: " #cbd5e1",
-  "&:hover": {
-    borderColor: "#f8fafc",
-    color: "#f8fafc",
-    boxShadow: "none",
-  },
-  "&:active": {
-    boxShadow: "none",
-    color: "#f8fafc",
-    borderColor: "#f8fafc",
-  },
-  "&:focus": {
-    boxShadow: "0 0 0 0.2rem rgba(0,123,255,.5)",
   },
 }));
 
@@ -130,7 +112,7 @@ export default function Controls() {
         className="justify-center xl:justify-between"
       >
         <div className="flex flex-row flex-wrap gap-1 lg:gap-2">
-          <SortButton
+          <OutlineButton
             aria-label={`Sort by global ranking in ${sort["ranking"]} order.`}
             className="w-full py-2 my-1 text-left lg:w-fit h-fit"
             onClick={() => handleClick("ranking")}
@@ -148,8 +130,8 @@ export default function Controls() {
             }
           >
             Sort by global ranking
-          </SortButton>
-          <SortButton
+          </OutlineButton>
+          <OutlineButton
             aria-label={`Sort alphabetically in ${sort["alphabetical"]} order.`}
             className="w-full py-2 my-1 text-left lg:w-fit lg:ml-4 h-fit"
             onClick={() => handleClick("alphabetical")}
@@ -167,7 +149,7 @@ export default function Controls() {
             }
           >
             Sort alphabetically
-          </SortButton>
+          </OutlineButton>
         </div>
         <Box className="w-full lg:w-1/2 xl:w-1/3">
           <YearsSlider

@@ -5,15 +5,16 @@ import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import { useIntersection } from "react-use";
 import { twMerge } from "tailwind-merge";
+// @ts-expect-error - Warpjs is not typed
 import * as Warp from "warpjs";
 import { RAINBOW_COLORS } from "../constants";
-import { RainbowLink } from "./RainbowLink";
-import TextPath from "./TextPath";
-import { OutlineButton } from "./OutlineButton";
+import RainbowLink from "@/components/RainbowLink";
+import TextPath from "@/components/TextPath";
+import OutlineButton from "./OutlineButton";
 
-export default function Header({ type }) {
-  const titleWrapper = useRef();
-  const title = useRef();
+export default function Header({ type }: { type: "main" | "expo" }) {
+  const titleWrapper = useRef<HTMLDivElement | null>(null);
+  const title = useRef<SVGSVGElement | null>(null);
   const [titleWidth, setTitleWidth] = useState(0);
   const [isLargeScreen, setIsLargeScreen] = useState(true);
   const intersection = useIntersection(titleWrapper, {
@@ -25,6 +26,7 @@ export default function Header({ type }) {
   useEffect(() => {
     const handleResize = () => {
       setIsLargeScreen(window.innerWidth > 860);
+      if (titleWrapper.current === null) return;
       setTitleWidth(titleWrapper.current?.clientWidth);
     };
     window.addEventListener("resize", handleResize);
@@ -40,12 +42,12 @@ export default function Header({ type }) {
     const warp = new Warp(svg);
 
     warp.interpolate(2);
-    warp.transform(([x, y]) => [x, y, y]);
+    warp.transform(([x, y]: [number, number]) => [x, y, y]);
 
     let offset = 0;
     function animate() {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      warp.transform(([x, y, oy]) => [
+      warp.transform(([x, y, oy]: [number, number, number]) => [
         x,
         oy + 4 * Math.sin(x / 28 + offset),
         oy,
@@ -76,7 +78,7 @@ export default function Header({ type }) {
             </defs>
             <g transform={`translate(0,${titleWidth * 0})`}>
               <TextPath
-                width={title}
+                width={title.current?.clientWidth}
                 fill="transparent"
                 stroke="white"
                 strokeWidth={2}
@@ -84,7 +86,7 @@ export default function Header({ type }) {
                 isLargeScreen={isLargeScreen}
               />
               <TextPath
-                width={title}
+                width={title.current?.clientWidth}
                 fill="transparent"
                 stroke="url(#rainbow)"
                 strokeWidth={2}

@@ -3,8 +3,6 @@ import ArrowCircleRightOutlinedIcon from "@mui/icons-material/ArrowCircleRightOu
 import PauseCircleOutlineIcon from "@mui/icons-material/PauseCircleOutline";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import { styled } from "@mui/material/styles";
 import { scaleLinear, scaleOrdinal } from "@visx/scale";
 import { colord, extend } from "colord";
 import a11yPlugin from "colord/plugins/a11y";
@@ -13,17 +11,18 @@ import { AnimatePresence, motion } from "framer-motion";
 import Head from "next/head";
 import { useEffect, useMemo, useState } from "react";
 
-import { $FixMe } from "@/utils/defs";
-import { stack as d3Stack } from "d3-shape";
-import { Flag } from "../components/Flag";
+import Flag from "@/components/Flag";
+import OutlineButton from "@/components/OutlineButton";
 import {
   CATEGORIES_FULL_NAME,
   CATEGORIES_ORDERED_LIST,
   RAINBOW_COLORS,
-} from "../constants";
-import { getData } from "../data";
-import { useFlagDimensions } from "../hooks/useFlagDimensions";
-import { nth } from "../utils";
+} from "@/constants";
+import { getData } from "@/data";
+import { useFlagDimensions } from "@/hooks/useFlagDimensions";
+import { nth } from "@/utils";
+import { $FixMe } from "@/utils/defs";
+import { stack as d3Stack } from "d3-shape";
 
 extend([a11yPlugin]);
 
@@ -34,7 +33,7 @@ const data = getData({
     type: "ranking",
     ascending: true,
   },
-}) as $FixMe[];
+});
 
 const CountryNavigator = () => {
   const countries = data.map((d) => d.country);
@@ -44,8 +43,8 @@ const CountryNavigator = () => {
   const dataCountry = useMemo(
     () =>
       getData({
-        countries: currentCountry,
-      }) as $FixMe[],
+        countries: [currentCountry],
+      }),
     [currentCountry]
   );
   const [isRunning, setIsRunning] = useState(false);
@@ -83,23 +82,7 @@ const CountryNavigator = () => {
       prevIndex === 0 ? countries.length - 1 : prevIndex - 1
     );
   };
-  const SortButton = styled(Button)(() => ({
-    borderColor: " #cbd5e1",
-    color: " #cbd5e1",
-    "&:hover": {
-      borderColor: "#f8fafc",
-      color: "#f8fafc",
-      boxShadow: "none",
-    },
-    "&:active": {
-      boxShadow: "none",
-      color: "#f8fafc",
-      borderColor: "#f8fafc",
-    },
-    "&:focus": {
-      boxShadow: "0 0 0 0.2rem rgba(0,123,255,.5)",
-    },
-  }));
+
   const colorScale = scaleOrdinal({
     domain: CATEGORIES_ORDERED_LIST,
     range: RAINBOW_COLORS,
@@ -215,15 +198,15 @@ const CountryNavigator = () => {
           )}`}</span>
         </h2>
         <div className="flex gap-2 text-slate-400">
-          <SortButton
+          <OutlineButton
             onClick={handlePreviousCountry}
             variant="outlined"
             size="small"
             aria-label="Previous country"
           >
             <ArrowCircleLeftOutlinedIcon />
-          </SortButton>
-          <SortButton
+          </OutlineButton>
+          <OutlineButton
             onClick={() => setIsRunning(!isRunning)}
             variant="outlined"
             size="small"
@@ -234,16 +217,16 @@ const CountryNavigator = () => {
             ) : (
               <PlayCircleOutlineIcon aria-hidden />
             )}
-          </SortButton>
+          </OutlineButton>
 
-          <SortButton
+          <OutlineButton
             onClick={handleNextCountry}
             variant="outlined"
             size="small"
             aria-label="Next country"
           >
             <ArrowCircleRightOutlinedIcon />
-          </SortButton>
+          </OutlineButton>
         </div>
       </div>
     </div>
