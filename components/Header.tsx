@@ -138,20 +138,24 @@ export default function Header({ type }: { type: "main" | "expo" }) {
       </p>
       {type === "expo" && (
         <div className="mx-auto text-center">
-          <OutlineButton
-            className="w-full py-2 my-1 text-left lg:w-fit lg:ml-4 h-fit"
-            variant="outlined"
-            size="small"
-          >
-            <Link href="expo/grid">Grid</Link>
-          </OutlineButton>
-          <OutlineButton
-            className="w-full py-2 my-1 text-left lg:w-fit lg:ml-4 h-fit"
-            variant="outlined"
-            size="small"
-          >
-            <Link href={`expo/singleflag`}>Single flag</Link>
-          </OutlineButton>
+          <Link href="expo/grid">
+            <OutlineButton
+              className="w-full py-2 my-1 text-left lg:w-fit lg:ml-4 h-fit"
+              variant="outlined"
+              size="small"
+            >
+              Grid
+            </OutlineButton>
+          </Link>
+          <Link href="expo/singleflag">
+            <OutlineButton
+              className="w-full py-2 my-1 text-left lg:w-fit lg:ml-4 h-fit"
+              variant="outlined"
+              size="small"
+            >
+              Single flag
+            </OutlineButton>
+          </Link>
         </div>
       )}
       {type === "main" && (

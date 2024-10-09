@@ -47,6 +47,7 @@ const CountryNavigator = () => {
       }),
     [currentCountry]
   );
+
   const [isRunning, setIsRunning] = useState(false);
 
   useEffect(() => {
@@ -157,7 +158,7 @@ const CountryNavigator = () => {
             }}
           >
             <AnimatedFlag
-              data={dataCountry}
+              data={dataCountry.filter((d) => d.year === YEAR)}
               width={flagDimensions.width}
               height={flagDimensions.height}
             />
