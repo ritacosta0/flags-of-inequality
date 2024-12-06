@@ -53,7 +53,7 @@ export default function Grid() {
                     {`${flag(country) || ""} ${country}`}{" "}
                     <span className="text-slate-400">{` | ${nth(
                       data.find((d) => d.country === country && d.year === year)
-                        ?.ranking
+                        ?.ranking as number
                     )}`}</span>
                   </h3>
                 </div>

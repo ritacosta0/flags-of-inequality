@@ -100,7 +100,7 @@ export default function Timeline({ country }: { country: string }) {
                 {" "}
                 {year}{" "}
                 <span className="text-slate-400">{` | ${nth(
-                  data.find((d) => d.year === year)?.ranking
+                  data.find((d) => d.year === year)?.ranking as number
                 )}`}</span>
               </h3>
               <h3></h3>

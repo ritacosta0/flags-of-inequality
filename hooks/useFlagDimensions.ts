@@ -39,7 +39,8 @@ const getFlagWidth = (
 
 export const useFlagDimensions = (
   flagsPerRow?: number,
-  customWidthCalculation?: (w: number) => number
+  customWidthCalculation?: (w: number) => number,
+  ratio = GOLDEN_RATIO
 ): [React.RefObject<HTMLDivElement>, { width: number; height: number }] => {
   const ref = useRef<HTMLDivElement>(null);
   const [width, changeWidth] = useState(0);
@@ -68,7 +69,7 @@ export const useFlagDimensions = (
 
   const newDimensions = {
     width,
-    height: width / GOLDEN_RATIO,
+    height: width / ratio,
   };
 
   return [ref, newDimensions];

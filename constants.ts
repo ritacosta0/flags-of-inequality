@@ -34,3 +34,12 @@ export const RAINBOW_COLORS = [
   "#2F4AB7",
   "#8849B3",
 ];
+
+export const RAINBOW_COLORS_CLASSIC = [
+  "#E40303",
+  "#FF8C00",
+  "#FFED00",
+  "#008026",
+  "#004CFF",
+  "#732982",
+];
