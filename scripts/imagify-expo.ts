@@ -1,14 +1,9 @@
 import { getData } from "../data";
 import * as d3 from "d3";
-import {
-  CATEGORIES_ORDERED_LIST,
-  RAINBOW_COLORS,
-  RAINBOW_COLORS_CLASSIC,
-} from "../constants";
-const jsdom = require("jsdom");
-const { JSDOM } = jsdom;
-const fs = require("fs");
-const sharp = require("sharp");
+import { CATEGORIES_ORDERED_LIST, RAINBOW_COLORS_CLASSIC } from "../constants";
+import { JSDOM } from "jsdom";
+// @ts-expect-error weird error even with esModuleInterop set to true
+import sharp from "sharp";
 
 const data2024 = getData({
   years: [2024],
@@ -27,8 +22,6 @@ const colorScale = d3
   .domain(CATEGORIES_ORDERED_LIST)
   .range(RAINBOW_COLORS_CLASSIC);
 
-let emptyFabricMeasure = 0;
-
 const renderChart = async (data) => {
   const dom = new JSDOM(
     '<!DOCTYPE html><body><svg id="flag"></svg></body></html>'
@@ -41,8 +34,6 @@ const renderChart = async (data) => {
     0
   );
 
-  emptyFabricMeasure += HEIGHT - totalHeight;
-
   svg.attr("width", `${WIDTH}px`).attr("height", `${totalHeight}px`);
 
   let pos = totalHeight;
@@ -52,7 +43,7 @@ const renderChart = async (data) => {
       .attr("width", WIDTH)
       .attr("height", stripeScale(data[category]))
       .attr("y", pos - stripeScale(data[category]))
-      .attr("fill", colorScale(category));
+      .attr("fill", colorScale(category) as string);
     pos -= stripeScale(data[category]);
   });
   const svgAsText = svgElement.outerHTML;
@@ -76,5 +67,3 @@ renderChart({
     return acc;
   }, {}),
 });
-
-console.log(emptyFabricMeasure);

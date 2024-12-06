@@ -1,15 +1,7 @@
 import { getData } from "../data";
 import * as d3 from "d3";
-import {
-  CATEGORIES,
-  CATEGORIES_ORDERED_LIST,
-  RAINBOW_COLORS,
-  RAINBOW_COLORS_CLASSIC,
-} from "../constants";
+import { CATEGORIES_ORDERED_LIST, RAINBOW_COLORS_CLASSIC } from "../constants";
 import { useEffect } from "react";
-import { Group } from "@visx/group";
-import { BarStack } from "@visx/shape";
-import { scaleBand, scaleLinear } from "@visx/scale";
 
 const data2024 = getData({
   years: [2024],
@@ -17,7 +9,6 @@ const data2024 = getData({
 
 const WIDTH = 350;
 const HEIGHT = 200;
-const MARGIN = 20;
 
 const stripeScale = d3
   .scaleLinear()
