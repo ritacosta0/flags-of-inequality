@@ -128,9 +128,7 @@ export default function Header({ type }: { type: "main" | "expo" }) {
         tabIndex={0}
       >
         By
-        <RainbowLink href="https://twitter.com/_ritacosta_">
-          Rita Costa
-        </RainbowLink>
+        <RainbowLink>Rita Costa</RainbowLink>
         and
         <RainbowLink href="https://twitter.com/biased_bia">
           Beatriz Malveiro
