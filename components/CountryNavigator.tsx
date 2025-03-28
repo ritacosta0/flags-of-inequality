@@ -139,7 +139,8 @@ const CountryNavigator = () => {
                     <h3 aria-hidden>
                       {year}
                       <span className="text-slate-400">{` | ${nth(
-                        dataCountry.find((d) => d.year === year)?.ranking
+                        dataCountry.find((d) => d.year === year)
+                          ?.ranking as number
                       )}`}</span>
                     </h3>
                   </div>
@@ -195,9 +196,10 @@ const CountryNavigator = () => {
         <h2 tabIndex={0}>
           {currentCountry}{" "}
           <span className="text-slate-400">{` | ${nth(
-            dataCountry.find((d) => d.year === YEAR)?.ranking
+            dataCountry.find((d) => d.year === YEAR)?.ranking as number
           )}`}</span>
         </h2>
+        []
         <div className="flex gap-2 text-slate-400">
           <OutlineButton
             onClick={handlePreviousCountry}
