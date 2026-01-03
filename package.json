@@ -44,7 +44,7 @@
     "react-scrollama": "^2.3.3",
     "react-use": "^17.5.1",
     "tailwind": "^4.0.0",
-    "tailwind-merge": "^2.5.2",
+    "tailwind-merge": "^3.4.0",
     "typescript": "^5.0.1",
     "zustand": "^4.5.5"
   },
